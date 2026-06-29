@@ -1,10 +1,14 @@
 {{ define "main" }}
-<div class="register-intro">
-  <span class="eyebrow">Record 000 · Index</span>
-  <h1>{{ .Site.Params.name }}</h1>
-  <p>{{ .Site.Params.tagline }}</p>
-  <p>Ten years in retail banking, a rebuilt career in cloud and security architecture, and a working habit of writing decisions down before defending them out loud. This site is that record — architecture decision records, portfolio projects, and the reasoning behind both.</p>
-</div>
+<section class="hero">
+  <h1 class="hero-name">{{ .Site.Params.name }}</h1>
+  <p class="hero-credentials">{{ .Site.Params.role }} · {{ .Site.Params.location }}</p>
+  <div class="hero-rule"></div>
+  <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
+  <div class="hero-links">
+    <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">LinkedIn ↗</a>
+  </div>
+</section>
 
 {{ $adrs := where .Site.RegularPages "Section" "adrs" }}
 {{ $projects := where .Site.RegularPages "Section" "projects" }}
@@ -30,7 +34,7 @@
 {{ end }}
 
 {{ if $adrs }}
-<span class="eyebrow" style="margin-top:40px; display:block;">Architecture Decision Records</span>
+<span class="eyebrow">Architecture Decision Records</span>
 <div class="register">
   {{ range $adrs.ByTitle }}
     {{ $status := .Params.status | default "Accepted" }}

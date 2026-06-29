@@ -1,9 +1,9 @@
 {{ define "main" }}
-<header style="margin-bottom: 36px;">
+<div class="list-header">
   <span class="eyebrow">{{ .Section }}</span>
   <h1>{{ .Title }}</h1>
-  {{ with .Content }}<div>{{ . }}</div>{{ end }}
-</header>
+  {{ with .Content }}<div class="doc-body">{{ . }}</div>{{ end }}
+</div>
 <div class="register">
   {{ range .Pages.ByTitle }}
     {{ $status := .Params.status | default "Accepted" }}
