@@ -24,5 +24,3 @@ This decision is still open between the two — documented here as in-progress r
 ## Consequences
 
 If polling is chosen: lower setup cost, no org dependency, but findings latency becomes a function of polling interval rather than near-instant. If Cloud Identity is chosen: the original architecture survives intact, but it adds organizational overhead disproportionate to a single-account portfolio project.
-
-*Status note: this record needs a verb-tense pass and a final decision before the remaining seven ADRs in this project can be written against a stable trigger design.*
