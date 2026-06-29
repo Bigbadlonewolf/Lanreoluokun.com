@@ -1,0 +1,13 @@
+{{ $status := .Params.status | default "Accepted" }}
+{{ $statusClass := "status-accepted" }}
+{{ if eq $status "Proposed" }}{{ $statusClass = "status-proposed" }}{{ end }}
+{{ if eq $status "In Review" }}{{ $statusClass = "status-review" }}{{ end }}
+<header class="doc-header">
+  <div class="doc-meta-row">
+    {{ with .Params.recordID }}<span class="doc-record-id">{{ . }}</span>{{ end }}
+    <span class="status-badge {{ $statusClass }}">{{ $status }}</span>
+    {{ if not .Date.IsZero }}<span>{{ .Date.Format "2006-01-02" }}</span>{{ end }}
+  </div>
+  <h1>{{ .Title }}</h1>
+  {{ with .Params.summary }}<p class="doc-summary">{{ . }}</p>{{ end }}
+</header>

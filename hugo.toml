@@ -1,0 +1,33 @@
+baseURL = "https://lanreoluokun.com/"
+languageCode = "en-us"
+title = "Lanre Oluokun — Security Architecture"
+
+[params]
+  name = "Lanre Oluokun"
+  role = "Security Architect · Cloud Security · GRC"
+  tagline = "Architecture decisions, security engineering, and governance work — written down, not just talked about."
+  github = "https://github.com/Bigbadlonewolf"
+  linkedin = "https://linkedin.com/in/lanre-oluokun-04256040"
+  location = "New York, NY"
+
+[markup.goldmark.renderer]
+  unsafe = true
+
+[markup.highlight]
+  style = "monokai"
+  lineNos = false
+
+[[menu.main]]
+  name = "Records"
+  url = "/adrs/"
+  weight = 1
+
+[[menu.main]]
+  name = "Projects"
+  url = "/projects/"
+  weight = 2
+
+[[menu.main]]
+  name = "About"
+  url = "/about/"
+  weight = 3

@@ -1,0 +1,301 @@
+/* ============================================================
+   Design tokens
+   ============================================================ */
+:root {
+  --ink: #14181C;
+  --paper: #F7F6F3;
+  --slate: #2A2F36;
+  --slate-soft: #5B6470;
+  --brass: #A8631E;
+  --teal: #2E4756;
+  --hairline: #D9D5CC;
+  --hairline-dark: #2E343B;
+
+  --mono: "IBM Plex Mono", "SFMono-Regular", monospace;
+  --sans: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+
+  --max-width: 720px;
+  --rail-width: 220px;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--slate);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--teal);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+a:hover { border-color: var(--teal); color: var(--brass); }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+img { max-width: 100%; }
+
+/* ============================================================
+   Shell layout — fixed metadata rail + centered document column
+   ============================================================ */
+.shell {
+  max-width: calc(var(--max-width) + var(--rail-width) + 64px);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.rail {
+  width: var(--rail-width);
+  flex-shrink: 0;
+  position: sticky;
+  top: 48px;
+  padding-top: 56px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--slate-soft);
+}
+
+.rail .rail-name {
+  font-size: 15px;
+  color: var(--ink);
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+
+.rail .rail-role {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--slate-soft);
+  line-height: 1.5;
+}
+
+.rail nav { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.rail nav a {
+  border-bottom: none;
+  color: var(--slate);
+  position: relative;
+  padding-left: 14px;
+}
+.rail nav a::before {
+  content: "·";
+  position: absolute;
+  left: 0;
+  color: var(--hairline);
+}
+.rail nav a:hover { color: var(--brass); }
+.rail nav a:hover::before { color: var(--brass); }
+
+.rail .rail-meta {
+  border-top: 1px solid var(--hairline);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.rail .rail-meta a { color: var(--slate-soft); border-bottom: none; }
+.rail .rail-meta a:hover { color: var(--brass); }
+
+.main {
+  flex: 1;
+  min-width: 0;
+  max-width: var(--max-width);
+  padding: 56px 0 96px;
+}
+
+/* Mobile: rail collapses to a top bar */
+@media (max-width: 860px) {
+  .shell { flex-direction: column; gap: 0; padding: 0 20px; }
+  .rail {
+    position: static;
+    width: 100%;
+    padding-top: 28px;
+    border-bottom: 1px solid var(--hairline);
+    padding-bottom: 20px;
+    margin-bottom: 8px;
+  }
+  .rail nav { flex-direction: row; flex-wrap: wrap; gap: 16px; margin-bottom: 16px; }
+  .rail .rail-meta { flex-direction: row; gap: 16px; border-top: none; padding-top: 0; }
+  .main { padding: 28px 0 72px; max-width: 100%; }
+}
+
+/* ============================================================
+   Typography
+   ============================================================ */
+h1, h2, h3, h4 {
+  font-family: var(--mono);
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+h1 { font-size: 28px; margin: 0 0 8px; }
+h2 { font-size: 19px; margin: 40px 0 14px; padding-top: 24px; border-top: 1px solid var(--hairline); }
+h3 { font-size: 16px; margin: 28px 0 10px; }
+
+p { margin: 0 0 18px; }
+ul, ol { margin: 0 0 18px; padding-left: 22px; }
+li { margin-bottom: 6px; }
+
+code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: rgba(168, 99, 30, 0.08);
+  color: var(--brass);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+pre {
+  background: var(--ink);
+  color: #E8E6E1;
+  padding: 18px 20px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.55;
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+blockquote {
+  margin: 0 0 18px;
+  padding-left: 16px;
+  border-left: 2px solid var(--brass);
+  color: var(--slate-soft);
+}
+
+/* ============================================================
+   Document header — the signature element
+   Renders every record (ADR / project / post) like a real
+   architecture decision record header block.
+   ============================================================ */
+.doc-header {
+  margin-bottom: 36px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.doc-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate-soft);
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.status-badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 3px;
+  border: 1px solid currentColor;
+}
+.status-accepted { color: #2F6B3C; background: rgba(47,107,60,0.07); }
+.status-proposed { color: var(--brass); background: rgba(168,99,30,0.07); }
+.status-review    { color: var(--teal); background: rgba(46,71,86,0.07); }
+
+.doc-record-id {
+  color: var(--slate-soft);
+}
+
+.doc-header h1 { margin-bottom: 6px; }
+.doc-summary { color: var(--slate-soft); font-size: 16px; margin: 0; }
+
+/* ============================================================
+   Register — the homepage / list index of records
+   ============================================================ */
+.register-intro {
+  margin-bottom: 40px;
+}
+.register-intro p { font-size: 17px; }
+
+.register {
+  border-top: 1px solid var(--hairline);
+}
+
+.register-entry {
+  display: grid;
+  grid-template-columns: 92px 1fr auto;
+  gap: 16px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.register-entry .entry-id {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate-soft);
+}
+
+.register-entry .entry-title a {
+  font-family: var(--mono);
+  font-size: 15.5px;
+  color: var(--ink);
+  border-bottom: none;
+  font-weight: 500;
+}
+.register-entry .entry-title a:hover { color: var(--brass); }
+.register-entry .entry-desc {
+  display: block;
+  font-family: var(--sans);
+  font-size: 14.5px;
+  color: var(--slate-soft);
+  margin-top: 4px;
+}
+
+@media (max-width: 600px) {
+  .register-entry { grid-template-columns: 1fr; gap: 4px; }
+  .register-entry .entry-id { order: -1; }
+}
+
+/* ============================================================
+   Section heading (eyebrow above register groups)
+   ============================================================ */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brass);
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer {
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--mono);
+  font-size: 12.5px;
+  color: var(--slate-soft);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

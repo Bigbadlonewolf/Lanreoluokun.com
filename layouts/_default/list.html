@@ -1,0 +1,23 @@
+{{ define "main" }}
+<header style="margin-bottom: 36px;">
+  <span class="eyebrow">{{ .Section }}</span>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div>{{ . }}</div>{{ end }}
+</header>
+<div class="register">
+  {{ range .Pages.ByTitle }}
+    {{ $status := .Params.status | default "Accepted" }}
+    {{ $statusClass := "status-accepted" }}
+    {{ if eq $status "Proposed" }}{{ $statusClass = "status-proposed" }}{{ end }}
+    {{ if eq $status "In Review" }}{{ $statusClass = "status-review" }}{{ end }}
+    <div class="register-entry">
+      <span class="entry-id">{{ .Params.recordID | default "—" }}</span>
+      <span class="entry-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Params.summary }}<span class="entry-desc">{{ . }}</span>{{ end }}
+      </span>
+      <span class="status-badge {{ $statusClass }}">{{ $status }}</span>
+    </div>
+  {{ end }}
+</div>
+{{ end }}
