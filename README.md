@@ -1,26 +1,44 @@
-# lanreoluokun.com
+# Lanre Oluokun — Security Architecture
 
-Personal site — security architecture portfolio, ADRs, and projects. Built with Hugo (no theme; custom layouts in `/layouts`).
+**Live site:** [bigbadlonewolf.github.io/Lanreoluokun.com](https://bigbadlonewolf.github.io/Lanreoluokun.com/)
+
+Architecture decisions, security engineering, and governance work — written down, not just talked about.
+
+This is my working notebook: architecture decision records, portfolio projects, and the reasoning behind both. Ten years in retail banking, a rebuilt career in cloud and security architecture, and a habit of documenting decisions before defending them in a room.
+
+---
+
+## What's here
+
+| Section | Description |
+| --- | --- |
+| **ADRs** | Architecture Decision Records with status (`Accepted` / `Proposed` / `In Review`). Written before the meeting, not after. |
+| **Projects** | Portfolio work with real constraints, real blockers, and real trade-offs. |
+| **About** | The arc: Lagos banker → security guard → cloud security architect. |
+
+---
+
+## Current portfolio
+
+| Project | Description | Status |
+| --- | --- | --- |
+| **PRJ-001 — Compliance as Code** | OPA/Rego policy enforcement mapped to PCI DSS v4.0, SOC 2, and NIST 800-53. Gated CI pipeline. 50/50 passing policy tests. | ✅ Accepted |
+| **PRJ-002 — SecureVault** | Event-driven GCP misconfiguration detection (SCC SHA → Pub/Sub → Cloud Function → email alerts). Currently blocked on trigger-source redesign. | 🔄 In Review |
+
+---
+
+## Tech stack
+
+- **Generator:** Hugo (no theme; custom layouts in `/layouts`)
+- **CI/CD:** GitHub Actions → GitHub Pages
+- **Domain:** `lanreoluokun.com` (pending DNS cutover)
+
+---
 
 ## Run locally
-```
+
+```bash
 hugo server
 ```
-Visit http://localhost:1313
 
-## Deploy
-Push to `main`. GitHub Actions (`.github/workflows/hugo.yml`) builds and deploys to GitHub Pages automatically.
-
-In repo Settings → Pages, set Source to "GitHub Actions" (one-time setup).
-
-## Custom domain
-Add a `static/CNAME` file containing `lanreoluokun.com`, then point your domain's DNS:
-- A records → GitHub Pages IPs (185.199.108.153, .109.153, .110.153, .111.153)
-- or CNAME → <username>.github.io
-
-## Add a new ADR or project
-```
-hugo new content adrs/adr-002-something.md
-hugo new content projects/new-project.md
-```
-Set `recordID`, `status` (Accepted / Proposed / In Review), and `summary` in the front matter.
+Site available at `http://localhost:1313`.
