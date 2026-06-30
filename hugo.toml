@@ -10,7 +10,7 @@ title = "Lanre Oluokun — Security Architecture"
   linkedin = "https://linkedin.com/in/lanre-oluokun-04256040"
   location = "New York, NY"
   certifications = ["CISSP", "CCSP", "CISM", "ISSAP", "GCP Professional Cloud Architect"]
-  employers = ["First Bank of Nigeria", "BAT", "ATBOD", "LOG(N) Pacific"]
+  employers = ["British American Tobacco", "First Bank of Nigeria Ltd", "ATBOD", "LOG(N) Pacific"]
 
 [markup.goldmark.renderer]
   unsafe = true
