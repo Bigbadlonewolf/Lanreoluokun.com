@@ -1,14 +1,16 @@
 {{ define "main" }}
 <section class="hero">
-  <h1 class="hero-name">{{ .Site.Params.name }}</h1>
-  <p class="hero-credentials">{{ .Site.Params.role }} · {{ .Site.Params.location }}</p>
+  <h1 class="hero-name js-anim" data-anim="hero">{{ .Site.Params.name }}</h1>
+  <p class="hero-credentials js-anim" data-anim="hero">{{ .Site.Params.role }} · {{ .Site.Params.location }}</p>
   <div class="hero-rule"></div>
-  <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
-  <div class="hero-links">
+  <p class="hero-tagline js-anim" data-anim="hero">{{ .Site.Params.tagline }}</p>
+  <div class="hero-links js-anim" data-anim="hero">
     <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub ↗</a>
     <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">LinkedIn ↗</a>
   </div>
 </section>
+
+{{ partial "credibility.html" . }}
 
 {{ $adrs := where .Site.RegularPages "Section" "adrs" }}
 {{ $projects := where .Site.RegularPages "Section" "projects" }}
@@ -16,16 +18,16 @@
 {{ if $projects }}
 <span class="eyebrow">Projects</span>
 <div class="register">
-  {{ range $projects.ByTitle }}
-    {{ $status := .Params.status | default "Accepted" }}
+  {{ range $i, $p := $projects.ByTitle }}
+    {{ $status := $p.Params.status | default "Accepted" }}
     {{ $statusClass := "status-accepted" }}
     {{ if eq $status "Proposed" }}{{ $statusClass = "status-proposed" }}{{ end }}
     {{ if eq $status "In Review" }}{{ $statusClass = "status-review" }}{{ end }}
-    <div class="register-entry">
-      <span class="entry-id">{{ .Params.recordID | default "—" }}</span>
+    <div class="register-entry js-anim" data-anim="card">
+      <span class="entry-id">{{ $p.Params.recordID | default "—" }}</span>
       <span class="entry-title">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        {{ with .Params.summary }}<span class="entry-desc">{{ . }}</span>{{ end }}
+        <a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a>
+        {{ with $p.Params.summary }}<span class="entry-desc">{{ . }}</span>{{ end }}
       </span>
       <span class="status-badge {{ $statusClass }}">{{ $status }}</span>
     </div>
@@ -36,16 +38,16 @@
 {{ if $adrs }}
 <span class="eyebrow">Architecture Decision Records</span>
 <div class="register">
-  {{ range $adrs.ByTitle }}
-    {{ $status := .Params.status | default "Accepted" }}
+  {{ range $i, $a := $adrs.ByTitle }}
+    {{ $status := $a.Params.status | default "Accepted" }}
     {{ $statusClass := "status-accepted" }}
     {{ if eq $status "Proposed" }}{{ $statusClass = "status-proposed" }}{{ end }}
     {{ if eq $status "In Review" }}{{ $statusClass = "status-review" }}{{ end }}
-    <div class="register-entry">
-      <span class="entry-id">{{ .Params.recordID | default "—" }}</span>
+    <div class="register-entry js-anim" data-anim="card">
+      <span class="entry-id">{{ $a.Params.recordID | default "—" }}</span>
       <span class="entry-title">
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-        {{ with .Params.summary }}<span class="entry-desc">{{ . }}</span>{{ end }}
+        <a href="{{ $a.RelPermalink }}">{{ $a.Title }}</a>
+        {{ with $a.Params.summary }}<span class="entry-desc">{{ . }}</span>{{ end }}
       </span>
       <span class="status-badge {{ $statusClass }}">{{ $status }}</span>
     </div>

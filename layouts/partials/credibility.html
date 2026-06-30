@@ -1,0 +1,10 @@
+<div class="credibility js-anim" data-anim="fade">
+  <div class="credibility-row">
+    <span class="credibility-label">Certified</span>
+    {{ range $i, $c := .Site.Params.certifications }}{{ if $i }}<span class="credibility-sep">·</span>{{ end }}<span class="credibility-item">{{ $c }}</span>{{ end }}
+  </div>
+  <div class="credibility-row">
+    <span class="credibility-label">Career</span>
+    {{ range $i, $e := .Site.Params.employers }}{{ if $i }}<span class="credibility-sep">→</span>{{ end }}<span class="credibility-item">{{ $e }}</span>{{ end }}
+  </div>
+</div>

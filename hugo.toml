@@ -9,6 +9,8 @@ title = "Lanre Oluokun — Security Architecture"
   github = "https://github.com/Bigbadlonewolf"
   linkedin = "https://linkedin.com/in/lanre-oluokun-04256040"
   location = "New York, NY"
+  certifications = ["CISSP", "CCSP", "CISM", "ISSAP", "GCP Professional Cloud Architect"]
+  employers = ["First Bank of Nigeria", "BAT", "ATBOD", "LOG(N) Pacific"]
 
 [markup.goldmark.renderer]
   unsafe = true
