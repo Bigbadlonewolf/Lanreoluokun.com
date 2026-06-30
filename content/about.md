@@ -6,12 +6,14 @@ date: 2026-06-29
 summary: "Security Architect. Ten years in retail banking before a self-funded rebuild into cloud and security architecture."
 ---
 
-I came to security architecture by way of retail banking, not the other way around — ten-plus years at First Bank of Nigeria, including measurable branch-growth work in 2016–2017, followed by IT support at BAT supporting 150+ workstations. I ran a logistics business, Bloominglo Limited, to roughly $650,000 in annual turnover.
+I didn't come up through a SOC. I ran a branch network.
 
-I moved to the US and rebuilt the technical side of that background from the ground up: CISSP, CCSP, CISM, ISSAP, and GCP Professional Cloud Architect, earned while working full-time outside the industry to fund the rebuild. The certification strategy has been deliberate — governance and architecture credentials first, hands-on engineering second — because the gap I'm closing is the one between "compliance officer" and "architect," not between "analyst" and "engineer."
+Ten years in retail banking at First Bank of Nigeria — including measurable revenue growth in 2016–2017 — then IT infrastructure at BAT, then a logistics business I scaled to $650K in annual turnover. That background is the reason I think about security the way architects do: risk, governance, and what breaks at scale, not just what triggers an alert.
 
-Most recently: Cloud Security Architect at ATBOD, Cloud Vulnerability Engineer at LOG(N) Pacific. Currently targeting Security Architect and Executive Architect roles at financial institutions in New York.
+I moved to the US and rebuilt the technical side deliberately: CISSP, CCSP, CISM, ISSAP, and GCP Professional Cloud Architect — self-funded, earned while working outside the industry. The sequencing was intentional. Governance and architecture credentials first, because the role I'm closing in on sits between "compliance officer" and "architect," not between "analyst" and "engineer."
 
-This site is where the actual work lives — the ADRs, the projects, the reasoning — rather than a list of claims about it.
+Most recently: Cloud Security Architect at ATBOD. Cloud Vulnerability Engineer at LOG(N) Pacific. Currently targeting Security Architect and Executive Architect roles at financial institutions in New York.
 
-**Find me:** [GitHub](https://github.com/Bigbadlonewolf) · [LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040)
+This site is where the work lives — ADRs, projects, and the reasoning behind the decisions — not a list of claims about it.
+
+[GitHub](https://github.com/Bigbadlonewolf) · [LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040)
