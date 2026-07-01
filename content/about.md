@@ -3,19 +3,19 @@ title: "About"
 recordID: "REC-000"
 status: "Accepted"
 date: 2026-06-29
-summary: "Security Architect. Ten years in retail banking before a self-funded rebuild into cloud and security architecture."
+summary: "Security Architect with ten years in retail banking, then a self-funded rebuild into cloud and security architecture."
 ---
 
-I didn't come up through a SOC. I came up through a branch network.
+I came up through a branch network, not a SOC.
 
-I started in IT infrastructure at British American Tobacco — entry-level, ticket-driven work that taught me systems but not judgment. The judgment came later, over ten years in retail banking at First Bank of Nigeria, including measurable revenue growth across deposits, FX, and digital banking in 2016-2017. That's where I learned where security actually breaks in a financial institution: not at the firewall, but in the gap between a policy on paper and what a branch manager does under pressure on a Friday afternoon.
+IT infrastructure at British American Tobacco was entry-level and ticket-driven — it taught me systems, not judgment. The judgment came from ten years at First Bank of Nigeria, where I drove measurable growth across deposits and loans (23%), transaction revenue (8%), FX (7%), and digital banking (18%) in 2016-2017. That's also where I learned where security actually breaks in a financial institution: not at the firewall, but in the gap between a policy on paper and what a branch manager does under pressure on a Friday afternoon.
 
-After banking, I built and ran a logistics company — Bloominglo — to $650K in annual turnover. Running a P&L changes how you think about risk. You stop treating it as a checklist and start treating it as a tradeoff against time, cost, and what the business can actually absorb.
+After banking, I built and ran Bloominglo, a logistics company, to roughly $650K in annual turnover at peak. Running a P&L changes how you think about risk — it's no longer a checklist, it's a tradeoff against time, cost, and what the business can actually absorb.
 
-When I moved to the US, I rebuilt the technical side on purpose. CISSP, CCSP, CISM, ISSAP, and GCP Professional Cloud Architect — self-funded, earned while rebuilding from zero outside the industry. I sequenced governance and architecture credentials ahead of anything hands-on, because the role I'm aiming for sits between compliance officer and architect, not on the analyst-to-engineer ladder most people climb.
+In the US I rebuilt the technical side on purpose: CISSP, CCSP, CISM, ISSAP, GCP Professional Cloud Architect, earned while starting over outside the industry. I prioritized governance and architecture credentials because the role I'm aiming for sits between compliance officer and architect — not on the standard analyst-to-engineer ladder. That ladder works for a lot of people. It wasn't the one I needed.
 
-Most recently: Cloud Security Architect at ATBOD, focused on GCP. Before that, Cloud Vulnerability Engineer at LOG(N) Pacific. Now I'm targeting Security Architect and Executive Architect roles at financial institutions in New York — the same intersection of risk, governance, and architecture that a decade in banking trained into me before I ever touched a cloud console.
+Most recently: Cloud Security Architect at ATBOD (GCP-focused), and before that Cloud Vulnerability Engineer at LOG(N) Pacific. I'm now targeting Security Architect and Executive Architect roles at financial institutions in New York. A decade in banking put me at the intersection of risk, governance, and architecture before I ever opened a cloud console — that's not something a certification can show.
 
-This site isn't a list of claims. It's where the ADRs live, the projects, and the actual reasoning behind the decisions — including the ones I got wrong on the first pass.
+The ADRs, the projects, and the reasoning behind the decisions live here. Including the ones I got wrong on the first pass.
 
 [GitHub](https://github.com/Bigbadlonewolf) · [LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040)
