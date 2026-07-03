@@ -1,15 +1,72 @@
 ---
 title: "SecureVault"
 recordID: "PRJ-002"
-status: "In Review"
-date: 2026-05-12
-summary: "Event-driven, alert-only GCP misconfiguration detection — three checks, currently blocked on a trigger-source redesign."
+status: "Shipped"
+date: 2026-07-03
+summary: "A cloud-native GCP security detection and response pipeline. It consumes Security Command Center findings, classifies them by severity, auto-remediates critical misconfigurations, alerts on high-severity issues, and logs everything for audit."
 ---
 
-An event-driven, alert-only detection system for three named GCP misconfiguration classes: publicly exposed Cloud Storage buckets, overpermissive IAM service account keys, and unrestricted firewall rules. SendGrid handles alert delivery; Terraform and Cloud Functions v2 are scaffolded and ready to deploy.
+In my work with banks and other financial companies, I keep seeing the same problem: Google Cloud’s Security Command Center flags misconfigurations every day, but the alerts pile up unread. Public storage buckets, firewall rules open to the internet, and over-privileged service accounts are the kind of findings that should be fixed immediately, yet they often wait for a manual review that never comes.
 
-The project is currently blocked at deployment, not design: my GCP account has no Organization resource, which the originally specified Security Command Center → Pub/Sub trigger requires. See [ADR 001](/adrs/adr-001-trigger-source/) for the redesign decision in progress — Cloud Scheduler polling against the SCC `findings.list` API versus standing up a real Cloud Identity organization.
+I built SecureVault to close that gap. It is a small, event-driven pipeline that reads SCC findings, decides how serious each one is, and acts automatically when the risk is clear.
 
-**Stack:** GCP (SCC, IAM, Cloud Storage, VPC Firewall), Terraform, Cloud Functions v2, SendGrid, Pub/Sub
+## What It Does
 
-[View on GitHub →](https://github.com/Bigbadlonewolf)
+SecureVault consumes SCC findings from a Pub/Sub topic, classifies each one, and takes one of three actions:
+
+- **Critical findings in a known class** are fixed automatically and an alert is sent.
+- **High-severity findings** are escalated to a human by email.
+- **Medium-severity findings** are logged for trend analysis.
+
+The classes that get automatic remediation today are public Cloud Storage buckets, open VPC firewall rules, and over-privileged service accounts. These are high-impact and low-risk to fix. If SecureVault sees a critical finding it does not recognize, it alerts instead of acting, so automation never runs blind.
+
+```mermaid
+flowchart TD
+    SCC[Security Command Center] -->|finding| PS[Pub/Sub: scc-findings]
+    PS -->|event| CF[Cloud Function: scc-processor]
+    CF --> CL[Classifier]
+    CL --> DE{Decision engine}
+    DE -->|CRITICAL + known| REM[Auto-remediate]
+    DE -->|CRITICAL + unknown| ALT[Alert only]
+    DE -->|HIGH| A[Email alert]
+    DE -->|MEDIUM| L[Log to Firestore]
+    REM --> BQ[BigQuery findings_history]
+    A --> BQ
+    L --> BQ
+```
+
+Every action is written to Firestore for fast operational lookups and to BigQuery for long-term analysis. Cloud Audit Logs capture IAM changes, so there is a built-in third layer of evidence.
+
+## Stack and Rationale
+
+I kept the stack small. Each service solves one problem and stays inside GCP’s free tier at low volume.
+
+- **Security Command Center** is the native findings source. No extra license, no data egress.
+- **Cloud Pub/Sub** decouples SCC from the processor and buffers messages if the function is redeploying or busy.
+- **Cloud Functions Gen 2** runs the single-purpose event handler with automatic scaling and a generous free tier.
+- **Firestore** holds the remediation log for fast lookups.
+- **BigQuery** stores historical findings in a date-partitioned table, keeping trend queries cheap.
+- **Brevo** sends email alerts on its free tier. If Brevo is unavailable, the function logs the failure and continues.
+- **Terraform** defines every resource, so the environment is reproducible and CI can run `terraform plan` on every change.
+
+## How I Built It
+
+I designed every part of SecureVault: service selection, threat model, response matrix, IAM model, compliance mapping, and cost ceiling. Once the design was clear, I used an AI coding assistant as an implementation engineer. It wrote the Terraform, Python, tests, and documentation, then ran security scanners and fixed the issues it found.
+
+That split let me focus on the parts that matter: least-privilege permissions, what happens when a finding is poisoned, and how to keep monthly cost under five dollars. Every source file carries an attribution header that reads **“Architect: Lanre Oluokun | Implementation: AI-assisted.”**
+
+## Cost and Security
+
+The target operating cost is under five dollars per month, with a hard ceiling of twenty dollars. At roughly one hundred findings per month, the projected cost is a few cents. At one hundred times that volume, it is still under the ceiling.
+
+Security was not an afterthought. The Pub/Sub topic only allows the SCC notification service account to publish. The Cloud Function runs under a dedicated service account with a custom role that only permits the three supported remediation actions. The Brevo API key lives in Secret Manager, never in code. CI runs Bandit, pip-audit, Checkov, and truffleHog on every push.
+
+## What Is Next
+
+SecureVault is deliberately scoped for a first release. The next phase includes multi-source ingestion from Cloud Armor and VPC Flow Logs, SOAR connectors, analyst tiering, expanded remediation handlers, and multi-region backup.
+
+## Explore the Code
+
+The full source, Terraform, tests, and documentation are on GitHub:
+
+**[github.com/Bigbadlonewolf/SecureVault](https://github.com/Bigbadlonewolf/SecureVault)**
