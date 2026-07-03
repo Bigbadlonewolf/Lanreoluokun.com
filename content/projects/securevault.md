@@ -68,6 +68,8 @@ Security was not an afterthought. The Pub/Sub topic only allows the SCC notifica
 > **Update (2026-07-03):** Fixed Node.js 20 deprecation warnings in CI by bumping `actions/checkout` and `actions/setup-python` to their latest patches, and resolved a Terraform Plan step showing 0s duration by removing the `pull_request`-only guard so the plan runs on every push/PR. Details: [Fixing two CI gremlins in SecureVault](/notes/ci-fix-securevault/).
 >
 > **Update (2026-07-03):** Gated Terraform Plan on the presence of `secrets.GCP_TERRAFORM_SA_KEY` so `fmt`/`init`/`validate` still run when the credential is absent, while `plan` and the PR comment are skipped cleanly with an explicit log message. Details: [Gating Terraform Plan on a live GCP credential](/notes/ci-terraform-secret-gate/).
+>
+> **Update (2026-07-03):** Consolidated CI/CD workflows: deleted the redundant `security-scan.yml` and zombie `terraform-plan.yml`, pinned all CI tool versions, and replaced the fake deploy `verify` job with a real GitHub Checks API gate. Details: [Consolidating SecureVault’s CI/CD workflows](/notes/ci-workflow-consolidation/).
 
 ## What Is Next
 
