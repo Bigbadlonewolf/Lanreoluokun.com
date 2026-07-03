@@ -1,7 +1,7 @@
 ---
 title: "Compliance as Code"
 recordID: "PRJ-001"
-status: "Accepted"
+status: "Shipped"
 date: 2026-04-01
 summary: "OPA/Rego policy enforcement mapped to PCI DSS v4.0, SOC 2, and NIST 800-53 — with a gated CI pipeline and 50/50 passing policy tests."
 ---

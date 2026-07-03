@@ -1,7 +1,7 @@
 ---
 title: "SecureVault"
 recordID: "PRJ-002"
-status: "Shipped"
+status: "Architecture complete — deployment pending"
 date: 2026-07-03
 summary: "A cloud-native GCP security detection and response pipeline. It consumes Security Command Center findings, classifies them by severity, auto-remediates critical misconfigurations, alerts on high-severity issues, and logs everything for audit."
 ---
@@ -76,6 +76,19 @@ Security was not an afterthought. The Pub/Sub topic only allows the SCC notifica
 ## What Is Next
 
 SecureVault is deliberately scoped for a first release. The next phase includes multi-source ingestion from Cloud Armor and VPC Flow Logs, SOAR connectors, analyst tiering, expanded remediation handlers, and multi-region backup.
+
+## Architecture Decision Records
+
+The decisions behind SecureVault are written down before they're defended out loud. All eight ADRs are published here:
+
+- [ADR-001: Security Command Center over Third-Party CSPM](/adrs/adr-001-scc-over-cspm/)
+- [ADR-002: Event-Driven Ingestion over Polling](/adrs/adr-002-event-driven-architecture/)
+- [ADR-003: Cloud Functions Gen 2 over Cloud Run over GKE](/adrs/adr-003-cloud-functions-gen2/)
+- [ADR-004: Severity Classification and Response Matrix](/adrs/adr-004-severity-response-matrix/)
+- [ADR-005: BigQuery + Firestore over a Single Database](/adrs/adr-005-bigquery-plus-firestore/)
+- [ADR-006: Brevo Free Tier over PagerDuty / SNS / Slack](/adrs/adr-006-brevo-free-tier-alerting/)
+- [ADR-007: Threat Model and Trust Boundaries](/adrs/adr-007-threat-model-and-trust-boundaries/)
+- [ADR-008: Cost Strategy for Continuous Operation Under $20/Month](/adrs/adr-008-cost-strategy-under-20-usd/)
 
 ## Explore the Code
 

@@ -1,10 +1,10 @@
 baseURL = "https://bigbadlonewolf.github.io/Lanreoluokun.com/"
 languageCode = "en-us"
-title = "Lanre Oluokun — Security Architecture"
+title = "Lanre Oluokun — Cloud Security"
 
 [params]
   name = "Lanre Oluokun"
-  role = "Security Architect · Cloud Security · GRC"
+  role = "Senior Cloud Security Engineer · GCP & Cloud Security · GRC"
   tagline = "Architecture decisions, security engineering, and governance work — written down, not just talked about."
   github = "https://github.com/Bigbadlonewolf"
   linkedin = "https://linkedin.com/in/lanre-oluokun-04256040"
