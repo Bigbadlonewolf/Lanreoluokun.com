@@ -1,7 +1,9 @@
 {{ $status := .Params.status | default "Accepted" }}
-{{ $statusClass := "status-accepted" }}
-{{ if eq $status "Proposed" }}{{ $statusClass = "status-proposed" }}{{ end }}
-{{ if eq $status "In Review" }}{{ $statusClass = "status-review" }}{{ end }}
+{{ $statusLower := lower $status }}
+{{ $statusClass := "" }}
+{{ if or (in $statusLower "proposed") (in $statusLower "draft") }}{{ $statusClass = "status-proposed" }}{{ end }}
+{{ if or (in $statusLower "review") (in $statusLower "pending") }}{{ $statusClass = "status-review" }}{{ end }}
+{{ if or (in $statusLower "accepted") (in $statusLower "shipped") (in $statusLower "complete") }}{{ $statusClass = "status-accepted" }}{{ end }}
 <header class="doc-header">
   <div class="doc-meta-row">
     {{ with .Params.recordID }}<span class="doc-record-id">{{ . }}</span>{{ end }}

@@ -7,7 +7,7 @@
   <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.tagline }}{{ end }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
   <script defer src="{{ "js/animate.js" | relURL }}"></script>
 </head>
@@ -16,7 +16,7 @@
   <main class="main">
     {{ block "main" . }}{{ end }}
     <footer class="site-footer">
-      © {{ now.Year }} {{ .Site.Params.name }}. Built with Hugo, deployed on GitHub Pages.
+      © {{ now.Year }} {{ .Site.Params.name }}. Built with Hugo.
     </footer>
   </main>
 </body>
