@@ -1,7 +1,7 @@
 ---
 title: "SecureVault"
 recordID: "PRJ-002"
-status: "Architecture complete — deployment pending"
+status: "Architecture complete - deployment pending"
 date: 2026-07-03
 summary: "A GCP security detection and response pipeline. It consumes Security Command Center findings, classifies them by severity, auto-remediates critical misconfigurations, alerts on high-severity issues, and logs everything for audit."
 ---
