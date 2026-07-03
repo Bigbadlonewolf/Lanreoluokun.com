@@ -43,7 +43,7 @@ I kept the stack small. Each service solves one problem and stays inside GCP’s
 
 - **Security Command Center** is the native findings source. No extra license, no data egress.
 - **Cloud Pub/Sub** decouples SCC from the processor and buffers messages if the function is redeploying or busy.
-- **Cloud Functions Gen 2** runs the single-purpose event handler with automatic scaling and a generous free tier.
+- **Cloud Functions Gen 2** runs the single-purpose event handler with automatic scaling and a generous free tier, restricted to internal-only ingress and connected to a private VPC.
 - **Firestore** holds the remediation log for fast lookups.
 - **BigQuery** stores historical findings in a date-partitioned table, keeping trend queries cheap.
 - **Brevo** sends email alerts on its free tier. If Brevo is unavailable, the function logs the failure and continues.
@@ -55,11 +55,13 @@ I designed every part of SecureVault: service selection, threat model, response 
 
 That split let me focus on the parts that matter: least-privilege permissions, what happens when a finding is poisoned, and how to keep monthly cost under five dollars. Every source file carries an attribution header that reads **“Architect: Lanre Oluokun | Implementation: AI-assisted.”**
 
+A recent hardening pass added production-grade controls: a VPC with Cloud NAT, customer-managed encryption keys via Cloud KMS, access logging, deletion protection, secret environment variables, and a Checkov-clean Terraform baseline (62 passed, 0 failed, 1 documented skip).
+
 ## Cost and Security
 
-The target operating cost is under five dollars per month, with a hard ceiling of twenty dollars. At roughly one hundred findings per month, the projected cost is a few cents. At one hundred times that volume, it is still under the ceiling.
+The target operating cost is under five dollars per month, with a hard ceiling of twenty dollars. At roughly one hundred findings per month, the projected cost is a few cents. At one hundred times that volume, it is still under the ceiling. The hardening pass intentionally trades the strict under-\$5 target for production-grade security controls.
 
-Security was not an afterthought. The Pub/Sub topic only allows the SCC notification service account to publish. The Cloud Function runs under a dedicated service account with a custom role that only permits the three supported remediation actions. The Brevo API key lives in Secret Manager, never in code. CI runs Bandit, pip-audit, Checkov, and truffleHog on every push.
+Security was not an afterthought. The Pub/Sub topic only allows the SCC notification service account to publish. The Cloud Function runs under a dedicated service account with a custom role that only permits the three supported remediation actions. The Brevo API key lives in Secret Manager, never in code. CI runs Bandit, pip-audit, Checkov, and truffleHog on every push, and Checkov results are uploaded to the GitHub Security tab as SARIF.
 
 ## What Is Next
 
