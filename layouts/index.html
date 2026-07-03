@@ -12,6 +12,10 @@
 
 {{ partial "credibility.html" . }}
 
+<div class="doc-body">
+  {{ .Content }}
+</div>
+
 {{ $adrs := where .Site.RegularPages "Section" "adrs" }}
 {{ $projects := where .Site.RegularPages "Section" "projects" }}
 
