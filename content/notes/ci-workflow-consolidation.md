@@ -1,5 +1,5 @@
 ---
-title: "Consolidating SecureVault’s CI/CD workflows"
+title: "Consolidating SecureVault's CI/CD workflows"
 date: 2026-07-03
 summary: "Why I deleted two workflow files, pinned every CI tool, and replaced a fake deploy gate with a real Checks API verification."
 status: "Note"
@@ -11,8 +11,8 @@ SecureVault had four workflow files with overlapping responsibilities. That prod
 
 ### Deleted
 
-- `.github/workflows/security-scan.yml` — duplicated the `security` job already in `ci.yml`.
-- `.github/workflows/terraform-plan.yml` — claimed to be superseded by `ci.yml` but remained manually dispatchable, creating an ungated second plan path.
+- `.github/workflows/security-scan.yml`: duplicated the `security` job already in `ci.yml`.
+- `.github/workflows/terraform-plan.yml`: claimed to be superseded by `ci.yml` but remained manually dispatchable, creating an ungated second plan path.
 
 ### Updated `.github/workflows/ci.yml`
 

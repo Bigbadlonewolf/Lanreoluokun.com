@@ -6,7 +6,7 @@ date: 2026-07-03
 summary: "Severity-driven response matrix and why OVER_PRIVILEGED_SA is alert-only."
 ---
 
-# ADR-004: Severity Classification and Response Matrix
+# ADR-004: Severity classification and response matrix
 
 - **Decision Owner:** Lanre Oluokun
 - **Date:** 2026-07-03
@@ -31,10 +31,10 @@ Adopt a severity-driven response matrix:
 
 Mapped auto-remediation classes in v0.1.0:
 
-- `PUBLIC_BUCKET_ACL` — remove `allUsers` / `allAuthenticatedUsers` from bucket IAM.
-- `OPEN_FIREWALL` — disable firewall rule with `0.0.0.0/0` on sensitive ports.
+- `PUBLIC_BUCKET_ACL`: remove `allUsers` / `allAuthenticatedUsers` from bucket IAM.
+- `OPEN_FIREWALL`: disable firewall rule with `0.0.0.0/0` on sensitive ports.
 
-`OVER_PRIVILEGED_SA` is deliberately **not** auto-remediated. SCC's finding identifies that a service account is over-privileged, not which specific role is excessive. A handler with no way to target the bad grant can only strip every predefined role on the account — a wider blast radius than the finding itself, on a CRITICAL-severity trigger with no human in the loop. It is treated as CRITICAL + unmapped: alert only, no remediation.
+`OVER_PRIVILEGED_SA` is deliberately not auto-remediated. SCC's finding identifies that a service account is over-privileged, not which specific role is excessive. A handler with no way to target the bad grant can only strip every predefined role on the account, a wider blast radius than the finding itself, on a CRITICAL-severity trigger with no human in the loop. It is treated as CRITICAL + unmapped: alert only, no remediation.
 
 ## Consequences
 
@@ -49,7 +49,7 @@ Mapped auto-remediation classes in v0.1.0:
 - Requires maintenance as new finding classes are added.
 - A misclassified MEDIUM finding may not be reviewed quickly.
 
-## Alternatives Considered
+## Alternatives considered
 
 | Alternative | Pros | Cons | Verdict |
 |---|---|---|---|

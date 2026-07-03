@@ -6,7 +6,7 @@ date: 2026-07-03
 summary: "Cost ceiling of $20/month and the target of under $5/month."
 ---
 
-# ADR-008: Cost Strategy for Continuous Operation Under $20/Month
+# ADR-008: Cost strategy for continuous operation under $20/month
 
 - **Decision Owner:** Lanre Oluokun
 - **Date:** 2026-07-03
@@ -15,21 +15,21 @@ summary: "Cost ceiling of $20/month and the target of under $5/month."
 
 ## Context
 
-SecureVault is intended to be a continuously running, portfolio-grade security pipeline without the budget of an enterprise SOC. A hard cost ceiling of **$20/month** is set, with a target operating cost of **under $5/month**. Every architectural choice must respect this constraint.
+SecureVault is intended to be a continuously running, portfolio-grade security pipeline without the budget of an enterprise SOC. A hard cost ceiling of $20/month is set, with a target operating cost of under $5/month. Every architectural choice must respect this constraint.
 
 ## Decision
 
 Optimize each component for the free tier and low-volume usage:
 
-- **Cloud Function:** 256 MB memory, Gen 2, `min_instance_count = 0`.
-- **Pub/Sub:** 1-day message retention on `scc-findings`.
-- **Firestore:** One small document per finding; no hot indexes.
-- **BigQuery:** Date-partitioned `findings_history` table; streaming inserts only.
-- **Secret Manager:** Single active secret version.
-- **Monitoring:** Native dashboard + one email alert policy.
-- **Alerting:** Brevo free tier.
+- Cloud Function: 256 MB memory, Gen 2, `min_instance_count = 0`.
+- Pub/Sub: 1-day message retention on `scc-findings`.
+- Firestore: One small document per finding; no hot indexes.
+- BigQuery: Date-partitioned `findings_history` table; streaming inserts only.
+- Secret Manager: Single active secret version.
+- Monitoring: Native dashboard + one email alert policy.
+- Alerting: Brevo free tier.
 
-Set a billing alert at **$15/month** so there is time to react before the $20 ceiling is reached.
+Set a billing alert at $15/month so there is time to react before the $20 ceiling is reached.
 
 ## Consequences
 
@@ -45,7 +45,7 @@ Set a billing alert at **$15/month** so there is time to react before the $20 ce
 - Brevo free tier has no SLA.
 - Longer Pub/Sub retention and higher function memory would improve resilience but increase cost.
 
-## Scaling Plan
+## Scaling plan
 
 | Scale | Cost Expectation | Triggered Change |
 |---|---|---|
@@ -55,7 +55,7 @@ Set a billing alert at **$15/month** so there is time to react before the $20 ce
 | > 50,000 findings/mo | Re-evaluate | Add Pub/Sub filtering; consider Cloud Run for finer cost control. |
 | > $15/mo | Billing alert | Architect review before any ceiling breach. |
 
-## Alternatives Considered
+## Alternatives considered
 
 | Alternative | Pros | Cons | Verdict |
 |---|---|---|---|

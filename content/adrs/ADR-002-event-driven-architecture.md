@@ -6,7 +6,7 @@ date: 2026-07-03
 summary: "Why the pipeline uses SCC Pub/Sub event triggers instead of polling the findings API."
 ---
 
-# ADR-002: Event-Driven Ingestion over Polling
+# ADR-002: Event-driven ingestion over polling
 
 - **Decision Owner:** Lanre Oluokun
 - **Date:** 2026-07-03
@@ -19,7 +19,7 @@ Once SCC is selected, findings must be delivered to the SecureVault processor. T
 
 ## Decision
 
-Use an **event-driven pipeline** built on Cloud Pub/Sub. SCC is configured to publish findings to the `scc-findings` topic, and the Cloud Function is triggered by new messages.
+Use an event-driven pipeline built on Cloud Pub/Sub. SCC is configured to publish findings to the `scc-findings` topic, and the Cloud Function is triggered by new messages.
 
 ## Consequences
 
@@ -36,7 +36,7 @@ Use an **event-driven pipeline** built on Cloud Pub/Sub. SCC is configured to pu
 - Requires understanding of Pub/Sub retry and dead-letter semantics.
 - Slightly more complex to test locally than a simple cron job.
 
-## Alternatives Considered
+## Alternatives considered
 
 | Alternative | Pros | Cons | Verdict |
 |---|---|---|---|

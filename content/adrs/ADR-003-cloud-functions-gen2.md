@@ -15,11 +15,11 @@ summary: "Why Cloud Functions Gen 2 was chosen over Cloud Run or GKE for the pro
 
 ## Context
 
-The SecureVault processor is a single-purpose event handler: receive a Pub/Sub message, classify it, take one action, log the result. The compute layer must be operationally simple, automatically scalable, and cost-effective at low volume.
+The SecureVault processor is a single-purpose event handler: receive a Pub/Sub message, classify it, take one action, log the result. The compute layer must be operationally simple, automatically scalable, and cheap at low volume.
 
 ## Decision
 
-Deploy the processor as a **Cloud Functions Gen 2** function running Python 3.11, with a Pub/Sub event trigger, 256 MB memory, and a dedicated service account.
+Deploy the processor as a Cloud Functions Gen 2 function running Python 3.11, with a Pub/Sub event trigger, 256 MB memory, and a dedicated service account.
 
 ## Consequences
 
@@ -36,7 +36,7 @@ Deploy the processor as a **Cloud Functions Gen 2** function running Python 3.11
 - Not suitable if the pipeline later grows into a multi-service application.
 - Cold-start latency may be noticeable for very infrequent findings.
 
-## Alternatives Considered
+## Alternatives considered
 
 | Alternative | Pros | Cons | Verdict |
 |---|---|---|---|

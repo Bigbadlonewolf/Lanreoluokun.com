@@ -24,7 +24,7 @@ After fixing those, a second run flagged `labels` on additional Compute resource
 
 ## Root cause
 
-The arguments were not exposed by the installed `hashicorp/google` provider schema in this environment. Some resources support `labels`; others do not, and `google_logging_metric` expects `description` at the top level rather than inside `metric_descriptor`.
+The arguments were not exposed by the installed `hashicorp/google` provider schema in this environment. Some resources support `labels`; others do not, and `google_logging_metric` expects `description` at the top level instead of inside `metric_descriptor`.
 
 ## The fix
 

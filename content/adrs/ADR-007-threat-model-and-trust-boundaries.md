@@ -6,7 +6,7 @@ date: 2026-07-03
 summary: "Trust boundaries, least-privilege IAM, and the custom remediation role."
 ---
 
-# ADR-007: Threat Model and Trust Boundaries
+# ADR-007: Threat model and trust boundaries
 
 - **Decision Owner:** Lanre Oluokun
 - **Date:** 2026-07-03
@@ -21,11 +21,11 @@ A detection and response pipeline is an attractive target: if an attacker can in
 
 Adopt the following trust-boundary design:
 
-1. **SCC control plane → Pub/Sub:** Only the SCC notification service account may publish to `scc-findings`.
-2. **Pub/Sub → Cloud Function:** The function runs under a dedicated service account (`scc-processor`) with no project-level Editor/Owner roles.
-3. **Function → GCP APIs:** The function uses a custom IAM role (`securevault.remediator`) scoped to remediation-adjacent permissions. Only two are currently exercised (`PUBLIC_BUCKET_ACL`, `OPEN_FIREWALL`); permissions for a third, excluded handler remain provisioned as documented technical debt (see ADR-004, `context/THREAT_MODEL.md`).
-4. **Function → secrets:** The function may access only the single Secret Manager secret for the Brevo API key.
-5. **Function → alerting:** External alerting uses HTTPS to Brevo; failures are logged locally.
+1. SCC control plane → Pub/Sub: Only the SCC notification service account may publish to `scc-findings`.
+2. Pub/Sub → Cloud Function: The function runs under a dedicated service account (`scc-processor`) with no project-level Editor/Owner roles.
+3. Function → GCP APIs: The function uses a custom IAM role (`securevault.remediator`) scoped to remediation-adjacent permissions. Only two are currently exercised (`PUBLIC_BUCKET_ACL`, `OPEN_FIREWALL`); permissions for a third, excluded handler remain provisioned as documented technical debt (see ADR-004, `context/THREAT_MODEL.md`).
+4. Function → secrets: The function may access only the single Secret Manager secret for the Brevo API key.
+5. Function → alerting: External alerting uses HTTPS to Brevo; failures are logged locally.
 
 ## Consequences
 
@@ -40,7 +40,7 @@ Adopt the following trust-boundary design:
 - More IAM policies to manage and review.
 - Adding new remediation classes requires updating the custom role.
 
-## Threat Model Diagram
+## Threat model diagram
 
 ```mermaid
 flowchart LR
@@ -73,7 +73,7 @@ flowchart LR
     FN -->|metricWriter| MON
 ```
 
-## Alternatives Considered
+## Alternatives considered
 
 | Alternative | Pros | Cons | Verdict |
 |---|---|---|---|

@@ -11,10 +11,10 @@ The SecureVault CI pipeline has a `terraform` job that used to fail hard wheneve
 
 I split the job into credential-aware and credential-free steps:
 
-1. **Early detection.** A `Check for GCP credentials` step writes `available=true|false` to `$GITHUB_OUTPUT`.
-2. **Gate only the credential-hungry steps.** `Authenticate to GCP`, `Terraform Plan`, and `Post Plan to PR` now run only when the secret is present.
-3. **Keep the free verification unconditional.** `Terraform Format Check`, `Terraform Init`, and `Terraform Validate` always run, so a missing secret never hides syntax or formatting problems.
-4. **Explicit skip message.** An unconditional final step prints either:
+1. Detect credentials early. A `Check for GCP credentials` step writes `available=true|false` to `$GITHUB_OUTPUT`.
+2. Gate only the credential-hungry steps. `Authenticate to GCP`, `Terraform Plan`, and `Post Plan to PR` now run only when the secret is present.
+3. Keep the free verification unconditional. `Terraform Format Check`, `Terraform Init`, and `Terraform Validate` always run, so a missing secret never hides syntax or formatting problems.
+4. Add an explicit skip message. An unconditional final step prints either:
    - `GCP_TERRAFORM_SA_KEY is configured; terraform plan ran (or attempted to run).`
    - `GCP_TERRAFORM_SA_KEY not configured; skipped terraform plan (fmt/init/validate still ran).`
 
