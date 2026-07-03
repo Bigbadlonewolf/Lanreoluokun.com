@@ -64,6 +64,8 @@ The target operating cost is under five dollars per month, with a hard ceiling o
 Security was not an afterthought. The Pub/Sub topic only allows the SCC notification service account to publish. The Cloud Function runs under a dedicated service account with a custom role that only permits the three supported remediation actions. The Brevo API key lives in Secret Manager, never in code. CI runs Bandit, pip-audit, Checkov, and truffleHog on every push, and Checkov results are uploaded to the GitHub Security tab as SARIF.
 
 > **Update (2026-07-03):** Fixed a TruffleHog configuration bug in the CI pipeline. The secret scanner was failing on every `push` to `main` because `base` and `head` both pointed to the same commit. The fix uses conditional expressions so TruffleHog scans the full history on push and the diff on pull requests.
+>
+> **Update (2026-07-03):** Fixed Node.js 20 deprecation warnings in CI by bumping `actions/checkout` and `actions/setup-python` to their latest patches, and resolved a Terraform Plan step showing 0s duration by removing the `pull_request`-only guard so the plan runs on every push/PR. Details: [Fixing two CI gremlins in SecureVault](/notes/ci-fix-securevault/).
 
 ## What Is Next
 

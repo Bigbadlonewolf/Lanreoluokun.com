@@ -33,3 +33,8 @@ title = "Lanre Oluokun — Security Architecture"
   name = "About"
   url = "/about/"
   weight = 3
+
+[[menu.main]]
+  name = "Notes"
+  url = "/notes/"
+  weight = 4
