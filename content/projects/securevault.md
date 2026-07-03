@@ -18,7 +18,7 @@ SecureVault consumes SCC findings from a Pub/Sub topic, classifies each one, and
 - **High-severity findings** are escalated to a human by email.
 - **Medium-severity findings** are logged for trend analysis.
 
-The classes that get automatic remediation today are public Cloud Storage buckets, open VPC firewall rules, and over-privileged service accounts. These are high-impact and low-risk to fix. If SecureVault sees a critical finding it does not recognize, it alerts instead of acting, so automation never runs blind.
+The classes that get automatic remediation today are public Cloud Storage buckets and open VPC firewall rules. These are high-impact and low-risk to fix. Over-privileged service accounts are deliberately alert-only: SCC identifies that an account is over-privileged, but not which role is excessive, so a blind handler would strip every predefined role and could cause a larger outage than the finding itself. If SecureVault sees a critical finding it does not recognize, it alerts instead of acting, so automation never runs blind.
 
 ```mermaid
 flowchart TD
@@ -61,7 +61,7 @@ A recent hardening pass added production-grade controls: a VPC with Cloud NAT, c
 
 The target operating cost is under five dollars per month, with a hard ceiling of twenty dollars. At roughly one hundred findings per month, the projected cost is a few cents. At one hundred times that volume, it is still under the ceiling. The hardening pass intentionally trades the strict under-\$5 target for production-grade security controls.
 
-Security was not an afterthought. The Pub/Sub topic only allows the SCC notification service account to publish. The Cloud Function runs under a dedicated service account with a custom role that only permits the three supported remediation actions. The Brevo API key lives in Secret Manager, never in code. CI runs Bandit, pip-audit, Checkov, and truffleHog on every push, and Checkov results are uploaded to the GitHub Security tab as SARIF.
+Security was not an afterthought. The Pub/Sub topic only allows the SCC notification service account to publish. The Cloud Function runs under a dedicated service account with a custom role scoped to remediation-adjacent permissions. Only the storage and compute permissions are exercised today; IAM/resourcemanager permissions for the excluded service-account handler remain provisioned as documented technical debt. The Brevo API key lives in Secret Manager, never in code. CI runs Bandit, pip-audit, Checkov, and truffleHog on every push, and Checkov results are uploaded to the GitHub Security tab as SARIF.
 
 > **Update (2026-07-03):** Fixed a TruffleHog configuration bug in the CI pipeline. The secret scanner was failing on every `push` to `main` because `base` and `head` both pointed to the same commit. The fix uses conditional expressions so TruffleHog scans the full history on push and the diff on pull requests.
 >
@@ -70,6 +70,8 @@ Security was not an afterthought. The Pub/Sub topic only allows the SCC notifica
 > **Update (2026-07-03):** Gated Terraform Plan on the presence of `secrets.GCP_TERRAFORM_SA_KEY` so `fmt`/`init`/`validate` still run when the credential is absent, while `plan` and the PR comment are skipped cleanly with an explicit log message. Details: [Gating Terraform Plan on a live GCP credential](/notes/ci-terraform-secret-gate/).
 >
 > **Update (2026-07-03):** Consolidated CI/CD workflows: deleted the redundant `security-scan.yml` and zombie `terraform-plan.yml`, pinned all CI tool versions, and replaced the fake deploy `verify` job with a real GitHub Checks API gate. Details: [Consolidating SecureVault’s CI/CD workflows](/notes/ci-workflow-consolidation/).
+>
+> **Update (2026-07-03):** Corrected the documentation across `README.md`, ADR-004, ADR-007, and `context/THREAT_MODEL.md` to reflect that only two finding classes (`PUBLIC_BUCKET_ACL`, `OPEN_FIREWALL`) are auto-remediated; `OVER_PRIVILEGED_SA` is alert-only by design, and the unused IAM-mutation permissions in the `securevault.remediator` role are flagged as technical debt.
 
 ## What Is Next
 
