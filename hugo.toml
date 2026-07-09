@@ -38,3 +38,8 @@ title = "Lanre Oluokun - Cloud Security Architect"
   name = "Notes"
   url = "/notes/"
   weight = 4
+
+[[menu.main]]
+  name = "Posts"
+  url = "/posts/"
+  weight = 5

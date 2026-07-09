@@ -1,0 +1,20 @@
+{{ define "main" }}
+<div class="list-header">
+  <span class="eyebrow">{{ .Section }}</span>
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="doc-body">{{ . }}</div>{{ end }}
+</div>
+<div class="register">
+  {{ range .Pages.ByDate.Reverse }}
+    <div class="register-entry js-anim" data-anim="card">
+      <div class="entry-meta">
+        {{ if not .Date.IsZero }}<span class="entry-id">{{ .Date.Format "2006-01-02" }}</span>{{ end }}
+      </div>
+      <span class="entry-title">
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+        {{ with .Description }}<span class="entry-desc">{{ . }}</span>{{ end }}
+      </span>
+    </div>
+  {{ end }}
+</div>
+{{ end }}

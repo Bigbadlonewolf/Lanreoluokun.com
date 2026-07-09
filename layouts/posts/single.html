@@ -1,0 +1,20 @@
+{{ define "main" }}
+<article class="post">
+  <header class="doc-header">
+    <div class="doc-meta-row">
+      {{ if not .Date.IsZero }}<span>{{ .Date.Format "2006-01-02" }}</span>{{ end }}
+      {{ with .Params.categories }}<span>{{ delimit . ", " }}</span>{{ end }}
+    </div>
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="doc-summary">{{ . }}</p>{{ end }}
+  </header>
+  <div class="doc-body">
+    {{ .Content }}
+  </div>
+  {{ with .Params.tags }}
+  <footer class="doc-body post-tags">
+    <p><em>Tags: {{ delimit . ", " }}</em></p>
+  </footer>
+  {{ end }}
+</article>
+{{ end }}
