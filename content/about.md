@@ -19,14 +19,14 @@ I own architecture decisions, map controls to PCI DSS, SOC 2, and NIST 800-53, a
 ## What I do
 
 - Cloud security engineering on GCP: IAM, Zero Trust access design, policy enforcement
-- Architecture decision records — documenting why, not just what
+- Architecture decision records: documenting why, not just what
 - GRC: PCI DSS, SOC 2, NIST 800-53 mapped to technical controls
 - Policy-as-code with OPA/Rego, enforced in CI
 - Compliance automation in GitHub Actions and CI pipelines
 
 ## Career
 
-**Enterprise Architect — Go Cloud Careers**  
+**Enterprise Architect · Go Cloud Careers**  
 Sep 2024 – Present (Contract, Remote)
 
 - Architect cloud security solutions across AWS, Azure, and GCP for financial services, healthcare, and SaaS clients.
@@ -35,7 +35,7 @@ Sep 2024 – Present (Contract, Remote)
 - Guide cloud migration programs from legacy on-prem to cloud-native, Zero Trust-aligned architectures.
 - Bridge technical security requirements with business outcomes across architecture, engineering, compliance, and executive teams.
 
-**Cloud Vulnerability Engineer — LOG(N) Pacific**  
+**Cloud Vulnerability Engineer · LOG(N) Pacific**  
 Sep 2023 – Aug 2024 (Contract, Remote)
 
 - Hardened Azure environments using CIS Benchmarks and Azure Security Center.
@@ -44,7 +44,7 @@ Sep 2023 – Aug 2024 (Contract, Remote)
 - Administered Microsoft Defender for Endpoint, configured detection policies, and maintained device compliance.
 - Wrote security operations runbooks for alert triage, vulnerability prioritization, and patch coordination.
 
-**Cloud Security Architect — ATBOD**  
+**Cloud Security Architect · ATBOD**  
 Sep 2022 – Aug 2023 (Full-time, New Jersey)
 
 - Designed cloud security architectures for hybrid and GCP-focused multi-cloud deployments.
@@ -54,19 +54,19 @@ Sep 2022 – Aug 2023 (Full-time, New Jersey)
 - Designed SSO and MFA strategies aligned to NIST SP 800-63.
 - Built data classification and encryption strategies using cloud KMS with customer-managed keys.
 
-**Founder & Managing Director — Bloominglo Limited**  
+**Founder & Managing Director · Bloominglo Limited**  
 2017 – 2021 (Lagos, Nigeria)
 
 - Built an FMCG logistics business from zero to $500K+ annual revenue.
 - Managed vendor contracts, regulatory compliance (NDPA, CBN), and cross-functional teams.
 
-**Senior Retail Banking Officer — First Bank of Nigeria**  
+**Senior Retail Banking Officer · First Bank of Nigeria**  
 Feb 2008 – Jun 2017 (Full-time, Lagos, Nigeria)
 
 - Enforced AML/CTF compliance under CBN regulations, NDPA, and NFIU mandates.
 - Ran KYC/CDD across individual, SME, and mass-market portfolios.
 
-**IT Help Desk Officer — British American Tobacco**  
+**IT Help Desk Officer · British American Tobacco**  
 Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 
 - Delivered first- and second-line support across 150+ workstations.
@@ -80,7 +80,7 @@ Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 
 **Solution:** I architected an OPA/Rego policy repository with automated control mapping. I defined which controls were machine-enforceable, wrote the policy logic, and set up a GitHub Actions CI pipeline with Conftest to block non-compliant infrastructure before it merged.
 
-**Outcome:** 50/50 passing OPA unit tests. All three CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence — not a spreadsheet.
+**Outcome:** 50/50 passing OPA unit tests. All three CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
 
 [View on GitHub](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE)
 
@@ -106,18 +106,18 @@ Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 
 ## Selected writing
 
-- "Why Cloud Security Architects Still Need to Understand Banking Risk" — On the gap between technical controls and business context in regulated environments. (Draft, Q3 2026)
-- "From Lagos to GCP: What a Decade in Retail Banking Taught Me About Zero Trust" — How KYC/CDD workflows map to modern identity and access management. (Draft, Q3 2026)
-- "Compliance-as-Code Is Not a CI Badge" — Why passing OPA tests is the start, not the finish, of audit-ready policy enforcement. (Draft, Q3 2026)
+- "Why Cloud Security Architects Still Need to Understand Banking Risk." On the gap between technical controls and business context in regulated environments. (Draft, Q3 2026)
+- "From Lagos to GCP: What a Decade in Retail Banking Taught Me About Zero Trust." How KYC/CDD workflows map to modern identity and access management. (Draft, Q3 2026)
+- "Compliance-as-Code Is Not a CI Badge." Why passing OPA tests is the start, not the finish, of audit-ready policy enforcement. (Draft, Q3 2026)
 
 ## Certifications
 
-- CISSP — Certified Information Systems Security Professional (ISC²)
-- CCSP — Certified Cloud Security Professional (ISC²)
-- CISM — Certified Information Security Manager (ISACA)
-- ISSAP — Information Systems Security Architecture Professional (ISC²)
-- GCP Professional Cloud Architect — Google Cloud
-- CHCSS 310 — Certified Hands-On Cybersecurity Specialist (KERNELiOS, 2024)
+- CISSP: Certified Information Systems Security Professional (ISC²)
+- CCSP: Certified Cloud Security Professional (ISC²)
+- CISM: Certified Information Security Manager (ISACA)
+- ISSAP: Information Systems Security Architecture Professional (ISC²)
+- GCP Professional Cloud Architect (Google Cloud)
+- CHCSS 310: Certified Hands-On Cybersecurity Specialist (KERNELiOS, 2024)
 
 ## Technical skills
 
@@ -132,6 +132,6 @@ Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 
 ## Education
 
-**BTech, Computer Science** — Ladoke Akintola University of Technology (LAUTECH), 1998–2004
+**BTech, Computer Science** · Ladoke Akintola University of Technology (LAUTECH), 1998–2004
 
 *Last updated: July 2026*
