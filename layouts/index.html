@@ -7,6 +7,7 @@
   <div class="hero-links js-anim" data-anim="hero">
     <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener">GitHub ↗</a>
     <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">LinkedIn ↗</a>
+    {{ with .Site.Params.email }}<a href="mailto:{{ . }}">Email ↗</a>{{ end }}
   </div>
 </section>
 
@@ -64,11 +65,12 @@
 {{ end }}
 
 <section class="engage-card js-anim" data-anim="fade">
-  <h2>Get in touch</h2>
-  <p>Targeting Security Architect and Enterprise Security Architect roles at banks, fintechs, and regulated financial institutions. Open to conversations about cloud security strategy, GRC program design, and privileged access architecture.</p>
+  <h2>Hiring a Security Architect for a regulated shop?</h2>
+  <p>You need someone who can defend a control decision to an auditor and a skeptical engineer in the same meeting. That is the job I want, at banks, fintechs, and other regulated financial institutions. Cloud security strategy, GRC program design, privileged access architecture. Start a conversation and I will walk you through any decision on this site.</p>
   <div class="engage-actions">
-    <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
-    <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener" class="secondary">View GitHub ↗</a>
+    {{ with .Site.Params.email }}<a href="mailto:{{ . }}">Email me ↗</a>{{ end }}
+    <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener" class="secondary">LinkedIn ↗</a>
+    <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener" class="secondary">GitHub ↗</a>
   </div>
 </section>
 {{ end }}

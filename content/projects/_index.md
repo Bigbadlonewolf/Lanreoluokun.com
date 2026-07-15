@@ -1,4 +1,4 @@
 ---
 title: "Projects"
 ---
-Three builds. Real repos, real CI, real ADRs. Each one lists its blockers and trade-offs instead of hiding them behind a polished case study.
+Three builds, three live repos, green CI on every one. Click any title and read the code. Each page lists its own blockers and trade-offs instead of burying them under a polished case study.

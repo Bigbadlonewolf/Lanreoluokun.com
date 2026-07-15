@@ -1,3 +1,16 @@
+// Dark mode toggle. Initial theme is set in <head> before paint;
+// this only wires the button and persists the choice.
+(function () {
+  var toggle = document.querySelector('.theme-toggle');
+  if (!toggle) return;
+  toggle.addEventListener('click', function () {
+    var current = document.documentElement.getAttribute('data-theme') || 'light';
+    var next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+})();
+
 (function () {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

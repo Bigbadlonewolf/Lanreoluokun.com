@@ -12,7 +12,7 @@ New York, NY · Open to Remote
 
 Targeting Security Architect and Enterprise Security Architect roles at banks, fintechs, and regulated financial institutions.
 
-[LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040) · [GitHub](https://github.com/Bigbadlonewolf)
+[LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040) · [GitHub](https://github.com/Bigbadlonewolf) · [Email](mailto:lanreolu88@googlemail.com)
 
 I design cloud security architecture for regulated industries, mostly financial services, with GCP, Zero Trust, and compliance-as-code. I have 4+ years in architecture-titled roles, plus a decade in retail banking and a few years running my own logistics business in Lagos.
 

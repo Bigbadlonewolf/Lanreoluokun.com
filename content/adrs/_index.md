@@ -1,4 +1,4 @@
 ---
 title: "Architecture Decision Records"
 ---
-The decisions behind the projects, written down before they're defended out loud: context, options considered, what was chosen, and why.
+Eight decisions, written down before they get defended out loud. One of them I reversed in the open. Each record gives the context, the options I weighed, what I chose, and why.
