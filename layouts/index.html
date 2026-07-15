@@ -18,7 +18,7 @@
 {{ if $projects }}
 <span class="eyebrow">Projects</span>
 <div class="register">
-  {{ range $i, $p := $projects.ByTitle }}
+  {{ range $i, $p := $projects.ByWeight }}
     {{ $status := $p.Params.status | default "Accepted" }}
     {{ $statusLower := lower $status }}
     {{ $statusClass := "" }}
@@ -65,7 +65,7 @@
 
 <section class="engage-card js-anim" data-anim="fade">
   <h2>Get in touch</h2>
-  <p>Open to Senior Cloud Security Engineer and Security Engineer roles at banks and fintechs. Let us talk about cloud, risk, and governance.</p>
+  <p>Targeting Security Architect and Enterprise Security Architect roles at banks, fintechs, and regulated financial institutions. Open to conversations about cloud security strategy, GRC program design, and privileged access architecture.</p>
   <div class="engage-actions">
     <a href="{{ .Site.Params.linkedin }}" target="_blank" rel="noopener">Connect on LinkedIn ↗</a>
     <a href="{{ .Site.Params.github }}" target="_blank" rel="noopener" class="secondary">View GitHub ↗</a>

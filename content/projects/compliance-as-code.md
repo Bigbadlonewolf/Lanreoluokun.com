@@ -3,8 +3,11 @@ title: "Compliance as Code"
 recordID: "PRJ-001"
 status: "Shipped"
 date: 2026-04-01
-summary: "OPA/Rego policy enforcement mapped to PCI DSS v4.0, SOC 2, and NIST 800-53, with a gated CI pipeline and 50/50 passing policy tests."
+weight: 1
+summary: "50 OPA policy tests, all passing, wired into a CI gate that blocks non-compliant infrastructure before it merges. Every rule maps to a PCI DSS v4.0, SOC 2, or NIST 800-53 control."
 ---
+
+**Repo:** [github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE) · **CI:** ![OPA Policy Unit Tests](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE/actions/workflows/opa-tests.yml/badge.svg) ![policy-check](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE/actions/workflows/policy-check.yml/badge.svg)
 
 A published, completed portfolio artifact: Open Policy Agent (OPA) and Rego policy enforcement mapped explicitly to PCI DSS v4.0, SOC 2 (CC6/CC7), and NIST 800-53 control families. 50 of 50 OPA unit tests pass; CI runs green on a five-job gated GitHub Actions pipeline.
 

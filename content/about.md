@@ -6,9 +6,11 @@ date: 2026-07-03
 summary: "Cloud Security Architect with 4+ years in architecture roles, plus a decade in retail banking and a logistics business in Lagos."
 ---
 
-**Senior Cloud Security Engineer · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
+**Security Architect · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
 
 New York, NY · Open to Remote
+
+Targeting Security Architect and Enterprise Security Architect roles at banks, fintechs, and regulated financial institutions.
 
 [LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040) · [GitHub](https://github.com/Bigbadlonewolf)
 
@@ -25,15 +27,6 @@ I own architecture decisions, map controls to PCI DSS, SOC 2, and NIST 800-53, a
 - Compliance automation in GitHub Actions and CI pipelines
 
 ## Career
-
-**Enterprise Architect · Go Cloud Careers**  
-Sep 2024 – Present (Contract, Remote)
-
-- Architect cloud security solutions across AWS, Azure, and GCP for financial services, healthcare, and SaaS clients.
-- Present technology roadmaps and security recommendations to C-suite stakeholders.
-- Design reusable security patterns adopted across multiple engagements.
-- Guide cloud migration programs from legacy on-prem to cloud-native, Zero Trust-aligned architectures.
-- Bridge technical security requirements with business outcomes across architecture, engineering, compliance, and executive teams.
 
 **Cloud Vulnerability Engineer · LOG(N) Pacific**  
 Sep 2023 – Aug 2024 (Contract, Remote)
@@ -90,9 +83,9 @@ Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 
 **Solution:** I designed a GCP-native JIT access broker using Cloud Functions, IAM conditional bindings, and audit logging. Access requests route through an approval workflow; grants expire automatically; every action is logged to BigQuery for audit.
 
-**Outcome:** Eliminated standing privileged access for loan officers. Audit trail is queryable in real time. Architecture is documented with ADRs and ready for production hardening.
+**Outcome:** Reference architecture with no standing privileged access anywhere in the design. Audit trail is queryable in real time. Five ADRs document the decisions, including one reversed in the open. Implementation is partial and the gaps are listed on the project page, not glossed.
 
-[View on GitHub](https://github.com/Bigbadlonewolf/BankVault)
+[View on GitHub](https://github.com/Bigbadlonewolf/bankvault)
 
 ### SecureVault: GCP Security Command Center alerting
 
@@ -130,7 +123,14 @@ Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 - Data protection: encryption at rest and in transit, AWS KMS, Azure Key Vault, CMK, data classification
 - Compliance: PCI DSS v4.0, SOC 2, NIST SP 800-53, CIS Benchmarks, ISO 27001, AML/CTF, KYC/CDD
 
-## Education
+## Education & Training
+
+**Go Cloud Careers · Executive Architect Program**  
+Sep 2024 – Present (scenario-based training, no live client engagements)
+
+- Design cloud security architectures across AWS, Azure, and GCP against scenario briefs modeled on financial services, healthcare, and SaaS environments.
+- Present technology roadmaps and security recommendations to executive review panels.
+- The BankVault, SecureVault, and Compliance-as-Code builds on this site are the working output of this program plus independent work: real repos, real CI, real ADRs.
 
 **BTech, Computer Science** · Ladoke Akintola University of Technology (LAUTECH), 1998–2004
 

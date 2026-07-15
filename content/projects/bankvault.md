@@ -3,8 +3,11 @@ title: "BankVault"
 recordID: "PRJ-003"
 status: "In progress - architecture accepted, implementation partial"
 date: 2026-07-08
-summary: "A just-in-time privilege elevation broker for a mortgage lender's loan pipeline. An underwriter gets 30 minutes of access to exactly one credit report, gated on a fresh MFA event, with every grant, denial, and revocation written to an append-only ledger."
+weight: 2
+summary: "Reference architecture for a just-in-time privilege elevation broker in a mortgage lender's loan pipeline. An underwriter gets 30 minutes of access to exactly one credit report, gated on a fresh MFA event, with every grant, denial, and revocation written to an append-only ledger."
 ---
+
+**Repo:** [github.com/Bigbadlonewolf/bankvault](https://github.com/Bigbadlonewolf/bankvault) · **CI:** ![Pytest](https://github.com/Bigbadlonewolf/bankvault/actions/workflows/pytest.yml/badge.svg) ![Terraform Validate](https://github.com/Bigbadlonewolf/bankvault/actions/workflows/terraform-validate.yml/badge.svg)
 
 Ask a lender who can read a borrower's credit file today and you will usually get a list of roles rather than a list of people. Standing access is the default almost everywhere, and it survives quarterly review cycles that were never designed to catch a reassignment made in week two.
 

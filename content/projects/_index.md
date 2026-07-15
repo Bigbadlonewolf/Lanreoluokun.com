@@ -1,4 +1,4 @@
 ---
 title: "Projects"
 ---
-Portfolio work demonstrating architecture, governance, and hands-on cloud security delivery.
+Three builds. Real repos, real CI, real ADRs. Each one lists its blockers and trade-offs instead of hiding them behind a polished case study.

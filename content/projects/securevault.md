@@ -3,8 +3,11 @@ title: "SecureVault"
 recordID: "PRJ-002"
 status: "Architecture complete - deployment pending"
 date: 2026-07-03
-summary: "A GCP security detection and response pipeline. It consumes Security Command Center findings, classifies them by severity, auto-remediates critical misconfigurations, alerts on high-severity issues, and logs everything for audit."
+weight: 3
+summary: "Security Command Center flags misconfigurations every day and the alerts pile up unread. SecureVault reads each finding, auto-remediates public buckets and open firewalls, escalates the rest to a human, and refuses to act on any finding it does not recognize."
 ---
+
+**Repo:** [github.com/Bigbadlonewolf/SecureVault](https://github.com/Bigbadlonewolf/SecureVault) · **CI:** ![CI](https://github.com/Bigbadlonewolf/SecureVault/actions/workflows/ci.yml/badge.svg)
 
 In my work with banks and other financial companies, I keep seeing the same problem: Google Cloud's Security Command Center flags misconfigurations every day, but the alerts pile up unread. Public storage buckets, firewall rules open to the internet, and over-privileged service accounts are the kind of findings that should be fixed immediately, yet they often wait for a manual review that never comes.
 
