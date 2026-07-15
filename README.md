@@ -1,6 +1,6 @@
 # Lanre Oluokun — Security Architecture
 
-**Live site:** [bigbadlonewolf.github.io/Lanreoluokun.com](https://bigbadlonewolf.github.io/Lanreoluokun.com/)
+**Live site:** [lanreoluokun.com](https://lanreoluokun.com/)
 
 Architecture decisions, security engineering, and governance work — written down, not just talked about.
 
