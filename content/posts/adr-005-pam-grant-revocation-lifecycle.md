@@ -16,7 +16,7 @@ Approving access is the easy part. The hard part is making sure it goes away on 
 > - **Owner:** Lanre Oluokun
 > - **Date:** 2026-07-08
 
-**Implementation:** in progress (`main.py` identity validation stubbed; reconciliation job and key-creation org policy not yet built).
+**Implementation:** the reconciliation job and its viewer-only service account are built; `verify_mfa_freshness` reads `auth_time`, but JWKS signature verification is still stubbed. Validated with `terraform validate` and a mocked pytest suite, not deployed.
 
 ## Context
 
@@ -55,12 +55,13 @@ A separate service account, holding only `roles/privilegedaccessmanager.viewer` 
 
 ## Residual Risk
 
-This is a detection bound, not an exposure bound. If PAM's expiry silently fails, the overrun is flagged within ~15 minutes, but access remains active until a person acts on that log entry. There is no automatic revoke. The honest claim is "detected within ~45 minutes" (30-minute grant + up to 15-minute detection lag), not "contained within ~45 minutes." Acceptable for portfolio scope, since PAM's expiry is expected to work and this is a backstop for an undocumented failure mode rather than a primary control. Would need tightening before any real deployment.
+This is a detection bound, not an exposure bound. If PAM's expiry silently fails, the overrun is flagged within roughly one 15-minute sweep of the window closing, but access remains active until a person acts on that log entry. There is no automatic revoke. The honest claim is "detected within ~15 minutes of the window closing," not "contained within 15 minutes." Acceptable for portfolio scope, since PAM's expiry is expected to work and this is a backstop for an undocumented failure mode rather than a primary control. Would need tightening before any real deployment.
 
 ## Known Gaps (Implementation, Not Architecture)
 
-- `main.py` identity-validation stub not implemented.
-- Reconciliation job, its dedicated service account, and any automatic-revoke action not yet built.
+- `verify_mfa_freshness` reads `auth_time` but does not yet verify the token signature against the live IdP JWKS.
+- Automatic-revoke (containment) is deliberately not built: it needs its own alerting and rollback story before running unattended against the access plane.
+- PAM grant-request API semantics (grantee when a broker service account requests on an underwriter's behalf) to be confirmed against the live API before deploy.
 - `iam.disableServiceAccountKeyCreation` org policy not yet applied or confirmed.
 
 ## Prerequisites / Assumptions Requiring Verification
