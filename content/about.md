@@ -75,7 +75,7 @@ These are scenario-based training projects and independent portfolio work, not c
 
 **Solution:** I architected an OPA/Rego policy repository with automated control mapping. I defined which controls were machine-enforceable, wrote the policy logic, and set up a GitHub Actions CI pipeline with Conftest to block non-compliant infrastructure before it merged.
 
-**Outcome:** 50/50 passing OPA unit tests. All five CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
+**Outcome:** 113/113 passing OPA unit tests. All five CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
 
 [View on GitHub](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE)
 
@@ -93,7 +93,7 @@ These are scenario-based training projects and independent portfolio work, not c
 
 **Problem:** The scenario: Security Command Center findings sit unread. There is no automated alerting for high-risk misconfigurations like public buckets or open firewalls.
 
-**Solution:** I built a lightweight pipeline: SCC SHA findings → Pub/Sub → Cloud Function → email alerts. It targets specific high-severity findings and is designed to stay under $5/month on free tiers.
+**Solution:** I built a lightweight pipeline: SCC SHA findings → Pub/Sub → Cloud Function → email alerts. It targets specific high-severity findings, with free-tier usage as a design constraint. I have not run it against a real project, so I have no measured monthly cost to quote.
 
 **Outcome:** Designed to alert on PUBLIC_BUCKET_ACL, OPEN_FIREWALL, and OVER_PRIVILEGED_SERVICE_ACCOUNT findings, and to auto-remediate the first two. The pipeline is built and CI is green, but it is not deployed yet — so removing manual monitoring is the design goal, not a measured result.
 
