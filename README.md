@@ -25,7 +25,6 @@ This is my working notebook: architecture decision records, portfolio projects, 
 | **PRJ-001 — Compliance as Code** | OPA/Rego policy enforcement mapped to PCI DSS v4.0, SOC 2, and NIST 800-53. Gated CI pipeline. 116/116 passing policy tests. | ✅ Shipped |
 | **PRJ-002 — SecureVault** | Event-driven GCP misconfiguration detection (SCC SHA → Pub/Sub → Cloud Function → email alerts). Architecture complete; deployment pending. | 🔄 In Review |
 | **PRJ-003 — BankVault** | Just-in-time privilege elevation broker on GCP Privileged Access Manager. Validated with `terraform validate` and a green pytest suite; not deployed. | ✅ Architecture accepted, not deployed |
-| **GCP Hardened Landing Zone** | Terraform landing zone for GCP financial workloads with OPA policy gates, mapped to PCI DSS v4.0, NIST 800-53, and SOC 2. | ✅ Deployed in a test GCP project (per repo README) |
 
 ---
 
