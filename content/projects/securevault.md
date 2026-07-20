@@ -9,7 +9,7 @@ summary: "Security Command Center flags misconfigurations every day and the aler
 
 **Repo:** [github.com/Bigbadlonewolf/SecureVault](https://github.com/Bigbadlonewolf/SecureVault) · **CI:** ![CI](https://github.com/Bigbadlonewolf/SecureVault/actions/workflows/ci.yml/badge.svg)
 
-In my work with banks and other financial companies, I keep seeing the same problem: Google Cloud's Security Command Center flags misconfigurations every day, but the alerts pile up unread. Public storage buckets, firewall rules open to the internet, and over-privileged service accounts are the kind of findings that should be fixed immediately, yet they often wait for a manual review that never comes.
+Google Cloud's Security Command Center flags misconfigurations every day, and in many environments the alerts pile up unread. Public storage buckets, firewall rules open to the internet, and over-privileged service accounts are the kind of findings that should be fixed immediately, yet they often wait for a manual review that never comes.
 
 I built SecureVault to close that gap. It is a small, event-driven pipeline that reads SCC findings, decides how serious each one is, and acts automatically when the risk is clear.
 

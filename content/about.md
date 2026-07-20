@@ -3,7 +3,7 @@ title: "About"
 recordID: "REC-000"
 status: "Accepted"
 date: 2026-07-03
-summary: "Cloud Security Architect with 4+ years in architecture roles, plus a decade in retail banking and a logistics business in Lagos."
+summary: "Cloud Security Architect. One year in an architecture-titled role at ATBOD, ongoing scenario-based architecture training, plus a decade in retail banking and a logistics business in Lagos."
 ---
 
 **Security Architect · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
@@ -14,7 +14,7 @@ Targeting Security Architect and Enterprise Security Architect roles at banks, f
 
 [LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040) · [GitHub](https://github.com/Bigbadlonewolf) · [Email](mailto:lanreolu88@googlemail.com)
 
-I design cloud security architecture for regulated industries, mostly financial services, with GCP, Zero Trust, and compliance-as-code. I have 4+ years in architecture-titled roles, plus a decade in retail banking and a few years running my own logistics business in Lagos.
+I design cloud security architecture for regulated industries, mostly financial services, with GCP, Zero Trust, and compliance-as-code. My architecture-titled experience is one year as a Cloud Security Architect at ATBOD (Sep 2022 – Aug 2023), and since September 2024 I have been in the Go Cloud Careers Executive Architect Program, a scenario-based architecture training program. Alongside that: a decade in retail banking and a few years running my own logistics business in Lagos.
 
 I own architecture decisions, map controls to PCI DSS, SOC 2, and NIST 800-53, and run adversarial review cycles. I do not write every line of code, but I direct the build, catch the gaps, and sign off on what ships.
 
@@ -67,33 +67,35 @@ Apr 2006 – Feb 2008 (Contract, Ibadan, Nigeria)
 
 ## Case studies
 
+These are scenario-based training projects and independent portfolio work, not client engagements. The scenarios are set in financial services because that is the industry I know best and the one I am targeting.
+
 ### Compliance-as-code: OPA/Rego policy pipeline
 
-**Problem:** A financial services client needed to prove PCI DSS v4.0, SOC 2, and NIST 800-53 compliance without manual audit trails. Controls were documented in spreadsheets; enforcement was inconsistent.
+**Problem:** The scenario: a financial services firm needs to prove PCI DSS v4.0, SOC 2, and NIST 800-53 compliance without manual audit trails. Controls are documented in spreadsheets; enforcement is inconsistent.
 
 **Solution:** I architected an OPA/Rego policy repository with automated control mapping. I defined which controls were machine-enforceable, wrote the policy logic, and set up a GitHub Actions CI pipeline with Conftest to block non-compliant infrastructure before it merged.
 
-**Outcome:** 50/50 passing OPA unit tests. All three CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
+**Outcome:** 50/50 passing OPA unit tests. All five CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
 
 [View on GitHub](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE)
 
 ### GCP Zero Trust access broker for lending operations
 
-**Problem:** A bank's loan officers needed time-bound, just-in-time access to sensitive customer data. Standing access violated least-privilege principles and created audit risk.
+**Problem:** The scenario: a bank's loan officers need time-bound, just-in-time access to sensitive customer data. Standing access violates least-privilege principles and creates audit risk.
 
 **Solution:** I designed a GCP-native JIT access broker using Cloud Functions, IAM conditional bindings, and audit logging. Access requests route through an approval workflow; grants expire automatically; every action is logged to BigQuery for audit.
 
-**Outcome:** Reference architecture with no standing privileged access anywhere in the design. Audit trail is queryable in real time. Five ADRs document the decisions, including one reversed in the open. Implementation is partial and the gaps are listed on the project page, not glossed.
+**Outcome:** Reference architecture with no standing privileged access anywhere in the design. Every request, denial, and expiry flag is designed to land in an append-only BigQuery ledger. Six ADRs document the decisions, two of them reversed in the open. Implementation is partial — nothing is deployed — and the gaps are listed on the project page, not glossed.
 
 [View on GitHub](https://github.com/Bigbadlonewolf/bankvault)
 
 ### SecureVault: GCP Security Command Center alerting
 
-**Problem:** Security Command Center findings were sitting unread. The client had no automated alerting for high-risk misconfigurations like public buckets or open firewalls.
+**Problem:** The scenario: Security Command Center findings sit unread. There is no automated alerting for high-risk misconfigurations like public buckets or open firewalls.
 
-**Solution:** I built a lightweight pipeline: SCC SHA findings → Pub/Sub → Cloud Function → email alerts. Targeted specific high-severity findings. Kept costs under $5/month using free tiers.
+**Solution:** I built a lightweight pipeline: SCC SHA findings → Pub/Sub → Cloud Function → email alerts. It targets specific high-severity findings and is designed to stay under $5/month on free tiers.
 
-**Outcome:** Automated alerting for PUBLIC_BUCKET_ACL, OPEN_FIREWALL, and OVER_PRIVILEGED_SERVICE_ACCOUNT. Zero manual monitoring overhead. CI/CD green.
+**Outcome:** Designed to alert on PUBLIC_BUCKET_ACL, OPEN_FIREWALL, and OVER_PRIVILEGED_SERVICE_ACCOUNT findings, and to auto-remediate the first two. The pipeline is built and CI is green, but it is not deployed yet — so removing manual monitoring is the design goal, not a measured result.
 
 [View on GitHub](https://github.com/Bigbadlonewolf/SecureVault)
 
