@@ -24,7 +24,7 @@ This lifecycle governs how long a loan underwriter's access to GLBA-regulated NP
 
 ## Decision
 
-GCP Privileged Access Manager (GA) issues the grant via a project-level entitlement, `maxRequestDuration = 1800s` (30 minutes). The role binding carries a static IAM Condition scoping access to the one credit-report object from ADR-003, evaluated on every access attempt for the life of the grant. The broker's dedicated service account (sole eligible requester on this entitlement, no exportable keys once org policy is applied) calls PAM's grant API after the ADR-004 check passes.
+GCP Privileged Access Manager (GA) issues the grant via a project-level entitlement, `maxRequestDuration = 1800s` (30 minutes). The role binding carries a static IAM Condition scoping access to the one credit-report object from ADR-003, evaluated on every access attempt for the life of the grant. The underwriter group is the eligible requester on this entitlement, and the underwriter calls PAM's grant API themselves. An earlier version of this ADR had the broker's service account as sole eligible requester; that was corrected by [ADR-006](/posts/adr-006-who-requests-the-grant/) once it was confirmed that PAM grants privileges to the calling principal.
 
 ```
 resource.type == "storage.googleapis.com/Object" &&
@@ -61,7 +61,7 @@ This is a detection bound, not an exposure bound. If PAM's expiry silently fails
 
 - `verify_mfa_freshness` reads `auth_time` but does not yet verify the token signature against the live IdP JWKS.
 - Automatic-revoke (containment) is deliberately not built: it needs its own alerting and rollback story before running unattended against the access plane.
-- PAM grant-request API semantics (grantee when a broker service account requests on an underwriter's behalf) to be confirmed against the live API before deploy.
+- ~~PAM grant-request API semantics (grantee when a broker service account requests on an underwriter's behalf) to be confirmed against the live API before deploy.~~ **Closed 2026-07-20.** Confirmed: only the account that requests a grant receives the privileges, and `CreateGrant` has no grantee parameter. The broker-mediated design would have elevated the broker's own service account, so it was removed. See [ADR-006](/posts/adr-006-who-requests-the-grant/).
 - `iam.disableServiceAccountKeyCreation` org policy not yet applied or confirmed.
 
 ## Prerequisites / Assumptions Requiring Verification
