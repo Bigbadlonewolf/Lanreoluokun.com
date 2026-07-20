@@ -75,7 +75,7 @@ These are scenario-based training projects and independent portfolio work, not c
 
 **Solution:** I architected an OPA/Rego policy repository with automated control mapping. I defined which controls were machine-enforceable, wrote the policy logic, and set up a GitHub Actions CI pipeline with Conftest to block non-compliant infrastructure before it merged.
 
-**Outcome:** 113/113 passing OPA unit tests. All five CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
+**Outcome:** 116/116 passing OPA unit tests. All five CI jobs green. Four rounds of adversarial review caught 27+ defects before release. The pipeline became the audit evidence, not a spreadsheet.
 
 [View on GitHub](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE)
 
