@@ -3,20 +3,20 @@ title: "About"
 recordID: "REC-000"
 status: "Accepted"
 date: 2026-07-03
-summary: "Cloud Security Architect. One year in an architecture-titled role at ATBOD, ongoing scenario-based architecture training, plus a decade in retail banking and a logistics business in Lagos."
+summary: "Cloud Security Engineer, architecture-led. One year in an architecture-titled role at ATBOD, ongoing scenario-based architecture training, plus a decade in retail banking and a logistics business in Lagos."
 ---
 
-**Security Architect · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
+**Cloud Security Engineer · Architecture-led · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
 
 New York, NY · Open to Remote
 
-Targeting Security Architect and Enterprise Security Architect roles at banks, fintechs, and regulated financial institutions.
+Targeting Cloud Security Engineer and Security Engineer roles at banks, fintechs, and regulated financial institutions.
 
 [LinkedIn](https://linkedin.com/in/lanre-oluokun-04256040) · [GitHub](https://github.com/Bigbadlonewolf) · [Email](mailto:lanreolu88@googlemail.com)
 
-I design cloud security architecture for regulated industries, mostly financial services, with GCP, Zero Trust, and compliance-as-code. My architecture-titled experience is one year as a Cloud Security Architect at ATBOD (Sep 2022 – Aug 2023), and since September 2024 I have been in the Go Cloud Careers Executive Architect Program, a scenario-based architecture training program. Alongside that: a decade in retail banking and a few years running my own logistics business in Lagos.
+I build cloud security controls for regulated industries, mostly financial services, with GCP, Zero Trust, and compliance-as-code, and I write down the architecture reasoning behind each one. My architecture-titled experience is one year as a Cloud Security Architect at ATBOD (Sep 2022 – Aug 2023), and since September 2024 I have been in the Go Cloud Careers Executive Architect Program, a scenario-based architecture training program. Alongside that: a decade in retail banking and a few years running my own logistics business in Lagos.
 
-I own architecture decisions, map controls to PCI DSS, SOC 2, and NIST 800-53, and run adversarial review cycles. I do not write every line of code, but I direct the build, catch the gaps, and sign off on what ships.
+I write the policy logic, wire the pipelines, map controls to PCI DSS, SOC 2, and NIST 800-53, and run adversarial review cycles on my own decisions. Every project ships with the architecture decision record behind it, including the reversals.
 
 ## What I do
 
