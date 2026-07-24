@@ -1,0 +1,13 @@
+{{- /* Root-absolute markdown links (/adrs/..., /notes/...) must carry the
+       baseURL path segment (e.g. /Lanreoluokun.com/) or they 404 on GitHub
+       Pages. Inside a render hook, relURL/absURL treat a leading "/" as
+       host-absolute and drop that segment, so prefix it manually. Falls back
+       cleanly to "" when the site is served from a domain root (post DNS
+       cutover). External (http), protocol-relative (//), mailto, and in-page
+       anchor (#) links are left untouched. */ -}}
+{{- $dest := .Destination -}}
+{{- if and (hasPrefix $dest "/") (not (hasPrefix $dest "//")) -}}
+  {{- $basePath := (urls.Parse site.BaseURL).Path -}}
+  {{- $dest = printf "%s%s" (strings.TrimSuffix "/" $basePath) $dest -}}
+{{- end -}}
+<a href="{{ $dest }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if or (hasPrefix .Destination "http") (hasPrefix .Destination "//") }} target="_blank" rel="noopener"{{ end }}>{{ .Text | safeHTML }}</a>
