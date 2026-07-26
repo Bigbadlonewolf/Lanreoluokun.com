@@ -76,4 +76,4 @@ No customer testimonials exist (this is a portfolio, not a SaaS product) — the
 ---
 
 ## Next step
-Run `/website-builder build` against this brief to implement directly into `hugo.toml`, `layouts/`, and `static/css/main.css` in `projects/HUGO FILE/lanre-site/`. No new content files needed — this is a layout/CSS/JS pass only.
+Run `/website-builder build` against this brief to implement directly into `hugo.toml`, `layouts/`, and `static/css/main.css` in `projects/hugo-site/lanre-site/`. No new content files needed — this is a layout/CSS/JS pass only.
