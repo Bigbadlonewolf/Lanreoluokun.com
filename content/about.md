@@ -16,13 +16,13 @@ Targeting Security Architect and Cloud Security Architect roles at banks, fintec
 
 I design cloud security controls for regulated industries, mostly financial services, on GCP, Zero Trust, and compliance-as-code. Then I write down the reasoning: the options I rejected, the trade-offs I accepted, and the assumptions I have not verified. My architecture-titled experience is one year as a Cloud Security Architect at ATBOD (Sep 2022 – Aug 2023), and since September 2024 I have been in the Go Cloud Careers Executive Architect Program, a scenario-based architecture training program. Alongside that: a decade in retail banking and a few years running my own logistics business in Lagos.
 
-I write the policy logic, wire the pipelines, map controls to PCI DSS, SOC 2, and NIST 800-53, and run adversarial review cycles on my own decisions. Every project ships with the architecture decision record behind it, including the reversals.
+I write the policy logic, wire the pipelines, map controls to PCI DSS, SOC 2, and NIST 800-53, and run adversarial review cycles on my own decisions. Every project carries a written record of the reasoning behind it, reversals included.
 
 ## How I decide
 
-An architect is judged on decisions, not deliverables. Three habits, each with published evidence:
+An architect is judged on decisions, not deliverables. Three habits:
 
-**I name the condition that would kill my own decision.** ADR-001 for BankVault chose a custom just-in-time access broker over Google's Privileged Access Manager, then in Preview. It recorded one exit condition: re-evaluate at general availability. PAM reached GA, the re-evaluation told me to delete code I had just written, and ADR-005 replaced the grant-issuance mechanism. ADR-001 carries a supersession note and a table of which sections stand and which fell.
+**I name the condition that would kill my own decision.** For BankVault I chose a custom just-in-time access broker over Google's Privileged Access Manager, then in Preview, and wrote down one exit condition: re-evaluate at general availability. PAM reached GA, the re-evaluation told me to delete code I had just written, and the managed service replaced the grant-issuance mechanism. The original decision carries a supersession note and a table of which sections stand and which fell.
 
 **I put designs under adversarial review and publish what it finds.** The compliance-as-code audit log records three external review rounds and 37 documented findings. One round found an encryption check that passed when the field was `null`. Another found a bug I introduced myself while fixing a different one, written up rather than quietly reverted.
 
@@ -31,7 +31,7 @@ An architect is judged on decisions, not deliverables. Three habits, each with p
 ## What I do
 
 - Security architecture on GCP: identity, trust boundaries, Zero Trust access design, policy enforcement
-- Architecture decision records: documenting why, not just what
+- Design documentation: the why behind a control, not just the what
 - GRC: PCI DSS, SOC 2, NIST 800-53 mapped to technical controls
 - Policy-as-code with OPA/Rego, enforced in CI
 - Compliance automation in GitHub Actions and CI pipelines

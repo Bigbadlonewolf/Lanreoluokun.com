@@ -59,12 +59,6 @@ AI vendor deployment in lending isn't a procurement decision wearing technical l
 
 ---
 
-### For Technical Readers
-
-The full trade-off analysis, including the alternatives table and consequence mapping, is documented in ADR-001.
-
----
-
 Lanre Oluokun  
 Cloud Security Architect · CISSP · CCSP · CISM · ISSAP · GCP-PCA  
 New York, NY
