@@ -3,7 +3,8 @@ title: "Three Design Cases: Showing the Decisions, Not Just the Artifacts"
 date: 2026-08-06
 draft: true
 tags: ["security-architecture", "gcp", "pci-dss", "zero-trust", "vendor-risk", "decision-making"]
-categories: ["essays"]
+categories: ["essays", "design-cases"]
+series: ["Security Architecture Design Cases"]
 description: "A portfolio of repos shows what I built. It can't show how I decide. So I wrote three banking design cases — payment migration, an AI vendor for KYC, zero trust after an acquisition — worked end to end as decisions with rejected alternatives."
 ---
 
@@ -61,27 +62,28 @@ minimization applies to what the vendor sees, not to what the bank must hold.
 And the board gets offered *reasonable* assurance, never full — the difference
 between those two phrases is whether a risk statement means anything.
 
-## The three cases
+## The series
 
-| Case | What it exercises | Grounded in |
-|------|-------------------|-------------|
-| Payment API migration in 90 days, regulator watching | Segmentation by scope elimination, JIT privileged access | [JIT Access Broker](https://github.com/Bigbadlonewolf/JIT-ACCESS-BROKER), [BankVault](/projects/bankvault/), [Compliance-as-Code](/projects/compliance-as-code/) |
-| Third-party AI vendor for KYC | Contractual control planes, model governance, saying yes safely | Compliance-as-Code, ADR practice |
-| Zero trust mandated by a board, after an acquisition | Translating a framework mandate into testable properties, phased migration | Zero Trust reference architecture, BankVault |
+Each case gets its own page, worked end to end with every rejected alternative
+and its reasoning:
 
-The third case is my favorite, because "the board wants zero trust" is the most
-dangerous prompt format there is. Repeat the buzzword back and you've failed.
-The case translates it into four testable properties — no implicit trust from
-network location; every access authenticated, authorized, encrypted, logged —
-and then phases the migration so a breach at month four hits a smaller target
-each month. Progress gets reported to the board as exposure reduced in money,
-never as "percent zero trust complete," a number that means nothing and can only
-disappoint.
+1. **[Design Case 1: Migrate the Payment API in 90 Days, Regulator
+   Watching](/posts/design-case-1-payment-api-migration/)** — segmentation by
+   scope elimination, just-in-time privileged access, evidence as a design
+   output. Grounded in the [JIT Access
+   Broker](https://github.com/Bigbadlonewolf/JIT-ACCESS-BROKER),
+   [BankVault](/projects/bankvault/), and the [Compliance-as-Code
+   Pipeline](/projects/compliance-as-code/).
+2. **[Design Case 2: Approving an AI Vendor for KYC Without Losing the
+   PII](/posts/design-case-2-ai-vendor-kyc/)** — contractual control planes,
+   model governance, and saying yes safely.
+3. **[Design Case 3: The Board Wants Zero Trust — Translating a Mandate into
+   Architecture](/posts/design-case-3-zero-trust-acquisition/)** — four testable
+   properties instead of a product shortlist, and a migration phased so a
+   breach at month four hits a smaller target each month.
 
-## Where the full text lives
-
-The complete document — all three cases, every rejected alternative with its
-reasoning, the risk statements in money — is in the
+The canonical full text — all three cases, the framework, the distilled
+principles — lives in the
 [security-architecture-design-cases](https://github.com/Bigbadlonewolf/security-architecture-design-cases)
 repo. It connects to the same discipline as the ADR trail: [the build-vs-buy
 decision for the broker](/posts/adr-001-build-vs-buy-jit-broker/) and [the
