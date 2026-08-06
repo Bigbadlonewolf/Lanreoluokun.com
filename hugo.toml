@@ -21,6 +21,11 @@ title = "Enterprise Security Architect"
   lineNos = false
 
 [[menu.main]]
+  name = "Design Cases"
+  url = "/design-cases/"
+  weight = 2
+
+[[menu.main]]
   name = "About"
   url = "/about/"
   weight = 3
