@@ -78,4 +78,4 @@ The fail-closed call follows the same logic. A system whose availability is boun
 
 ---
 
-View the raw ADR on GitHub → [docs/adr/004-mfa-freshness-zero-trust-signal.md](https://github.com/Bigbadlonewolf/bankvault/blob/main/docs/adr/004-mfa-freshness-zero-trust-signal.md)
+The raw ADR lives in the BankVault repository, which is private. This post is the full text.

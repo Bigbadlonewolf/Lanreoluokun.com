@@ -7,7 +7,7 @@ weight: 3
 summary: "Security Command Center flags misconfigurations every day and the alerts pile up unread. SecureVault reads each finding, auto-remediates public buckets and open firewalls, escalates the rest to a human, and refuses to act on any finding it does not recognize."
 ---
 
-**Repo:** [github.com/Bigbadlonewolf/SecureVault](https://github.com/Bigbadlonewolf/SecureVault) · **CI:** ![CI](https://github.com/Bigbadlonewolf/SecureVault/actions/workflows/ci.yml/badge.svg)
+**Source:** private repository — available on request.
 
 Google Cloud's Security Command Center flags misconfigurations every day, and in many environments the alerts pile up unread. Public storage buckets, firewall rules open to the internet, and over-privileged service accounts are the kind of findings that should be fixed immediately, yet they often wait for a manual review that never comes.
 
@@ -93,8 +93,6 @@ The decisions behind SecureVault are written down before they're defended out lo
 - [ADR-007: Threat model and trust boundaries](/adrs/adr-007-threat-model-and-trust-boundaries/)
 - [ADR-008: Cost strategy for continuous operation under $20/month](/adrs/adr-008-cost-strategy-under-20-usd/)
 
-## Explore the code
+## Source
 
-The full source, Terraform, tests, and documentation are on GitHub:
-
-**[github.com/Bigbadlonewolf/SecureVault](https://github.com/Bigbadlonewolf/SecureVault)**
+The repository is private. The full source, Terraform, tests, and documentation are available on request.

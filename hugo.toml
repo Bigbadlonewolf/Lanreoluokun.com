@@ -4,11 +4,11 @@ title = "Lanre Oluokun - Cloud Security Engineer"
 
 [params]
   name = "Lanre Oluokun"
-  role = "Cloud Security Engineer · Architecture-led · GCP & GRC"
+  role = "Enterprise Security Architect"
   tagline = "I design security controls that fail closed. In banking, a control that fails open under stress is a control with a documented bypass, so I write down every assumption before I defend it out loud."
   github = "https://github.com/Bigbadlonewolf"
   linkedin = "https://linkedin.com/in/lanre-oluokun-04256040"
-  email = "lanreolu88@googlemail.com"
+  email = "lanreolu88@gmail.com"
   location = "New York, NY"
   certifications = ["CISSP", "CCSP", "CISM", "ISSAP", "GCP Professional Cloud Architect", "CHCSS 310"]
   employers = ["LOG(N) Pacific", "ATBOD", "First Bank of Nigeria Ltd", "British American Tobacco"]

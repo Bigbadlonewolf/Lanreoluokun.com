@@ -68,4 +68,4 @@ The argument itself didn't change. A quarterly review cycle means a reassigned l
 
 ---
 
-View the raw ADR on GitHub → [docs/adr/001-build-vs-buy-jit-access.md](https://github.com/Bigbadlonewolf/bankvault/blob/main/docs/adr/001-build-vs-buy-jit-access.md)
+The raw ADR lives in the BankVault repository, which is private. This post is the full text.

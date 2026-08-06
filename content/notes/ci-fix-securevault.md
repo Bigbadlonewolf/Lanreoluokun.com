@@ -26,4 +26,4 @@ The Terraform plan job was only running on `pull_request`, which meant every `pu
 - The Terraform Plan job shows real runtime and real output.
 - No `terraform apply` was added. This stays plan-only in CI.
 
-Commit: [`5d76298`](https://github.com/Bigbadlonewolf/SecureVault/commit/5d76298)
+Commit: `5d76298` (SecureVault, private repository)

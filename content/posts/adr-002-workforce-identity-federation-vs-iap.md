@@ -68,4 +68,4 @@ A production deployment of the approval UI this system will eventually grow shou
 
 ---
 
-View the raw ADR on GitHub → [docs/adr/002-workforce-identity-federation-vs-iap.md](https://github.com/Bigbadlonewolf/bankvault/blob/main/docs/adr/002-workforce-identity-federation-vs-iap.md)
+The raw ADR lives in the BankVault repository, which is private. This post is the full text.

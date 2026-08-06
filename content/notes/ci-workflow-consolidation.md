@@ -32,4 +32,4 @@ The old `verify` job printed a reminder and exited cleanly no matter what CI act
 
 Consolidation removes duplicate CI runs and conflicting status checks. Pinning tools prevents surprise breakages from `@master`/`@main` drift. A real deployment gate means the pipeline enforces safety instead of relying on a human remembering to check CI first.
 
-Commit: [`4de87ee`](https://github.com/Bigbadlonewolf/SecureVault/commit/4de87ee)
+Commit: `4de87ee` (SecureVault, private repository)

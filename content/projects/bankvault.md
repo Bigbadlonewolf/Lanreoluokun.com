@@ -7,7 +7,7 @@ weight: 2
 summary: "A just-in-time privilege elevation broker for a mortgage lender's loan pipeline, built on Google Cloud Privileged Access Manager. An underwriter gets 30 minutes of access to exactly one credit report, gated on a fresh login, with every request, grant, denial, and expiry flag written to an append-only ledger."
 ---
 
-**Repo:** [github.com/Bigbadlonewolf/bankvault](https://github.com/Bigbadlonewolf/bankvault) · **CI:** ![Pytest](https://github.com/Bigbadlonewolf/bankvault/actions/workflows/pytest.yml/badge.svg) ![Terraform Validate](https://github.com/Bigbadlonewolf/bankvault/actions/workflows/terraform-validate.yml/badge.svg)
+**Source:** private repository — available on request.
 
 Ask a lender who can read a borrower's credit file today and you will usually get a list of roles rather than a list of people. Standing access is the default almost everywhere, and it survives quarterly review cycles that were never designed to catch a reassignment made in week two.
 
@@ -72,6 +72,6 @@ The grant-request question that used to sit here as an open assumption is now cl
 
 None of it is deployed: this is Terraform, Python, and docs, verified but not run against a live project.
 
-## Explore the code
+## Source
 
-**[github.com/Bigbadlonewolf/bankvault](https://github.com/Bigbadlonewolf/bankvault)**
+The repository is private. The Terraform, Python, tests, and the full ADR set are available on request.

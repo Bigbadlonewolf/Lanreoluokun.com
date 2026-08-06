@@ -73,4 +73,4 @@ Verified against 16 CFR 314.4, not assumed.
 
 ---
 
-View the raw ADR on GitHub → [docs/adr/003-scope-and-actor-definition.md](https://github.com/Bigbadlonewolf/bankvault/blob/main/docs/adr/003-scope-and-actor-definition.md)
+The raw ADR lives in the BankVault repository, which is private. This post is the full text.

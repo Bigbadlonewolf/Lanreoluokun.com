@@ -73,4 +73,4 @@ This is a detection bound, not an exposure bound. If PAM's expiry silently fails
 
 ---
 
-View the raw ADR on GitHub → [docs/adr/005-pam-grant-revocation-lifecycle.md](https://github.com/Bigbadlonewolf/bankvault/blob/main/docs/adr/005-pam-grant-revocation-lifecycle.md)
+The raw ADR lives in the BankVault repository, which is private. This post is the full text.

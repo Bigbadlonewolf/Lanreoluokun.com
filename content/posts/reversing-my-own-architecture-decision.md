@@ -61,4 +61,4 @@ A decision log where nothing ever gets reversed isn't evidence of good judgment.
 
 ---
 
-The full trail: [ADR-001 with its supersession note](/posts/adr-001-build-vs-buy-jit-broker/) and [ADR-005, the decision that replaced it](/posts/adr-005-pam-grant-revocation-lifecycle/). Raw versions live in [the BankVault repo](https://github.com/Bigbadlonewolf/bankvault/tree/main/docs/adr).
+The full trail: [ADR-001 with its supersession note](/posts/adr-001-build-vs-buy-jit-broker/) and [ADR-005, the decision that replaced it](/posts/adr-005-pam-grant-revocation-lifecycle/).

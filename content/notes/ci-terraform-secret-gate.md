@@ -24,4 +24,4 @@ This turns a confusing failure into a clean, documented success with partial out
 
 In a portfolio repo, not every fork or scratch branch has the live GCP credential configured. Failing the whole job discards useful signal and trains people to ignore CI. Running `fmt`, `init`, and `validate` everywhere while gating only `plan` keeps the feedback loop tight and the blast radius small.
 
-Commit: [`b788f47`](https://github.com/Bigbadlonewolf/SecureVault/commit/b788f47)
+Commit: `b788f47` (SecureVault, private repository)
