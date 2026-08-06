@@ -22,7 +22,7 @@ I write the policy logic, wire the pipelines, map controls to PCI DSS, SOC 2, an
 
 An architect is judged on decisions, not deliverables. Three habits, each with published evidence:
 
-**I name the condition that would kill my own decision.** ADR-001 for BankVault chose a custom just-in-time access broker over Google's Privileged Access Manager, then in Preview. It recorded one exit condition: re-evaluate at general availability. PAM reached GA, the re-evaluation told me to delete code I had just written, and [ADR-005](/posts/adr-005-pam-grant-revocation-lifecycle/) replaced the grant-issuance mechanism. ADR-001 carries a supersession note and a table of which sections stand and which fell.
+**I name the condition that would kill my own decision.** ADR-001 for BankVault chose a custom just-in-time access broker over Google's Privileged Access Manager, then in Preview. It recorded one exit condition: re-evaluate at general availability. PAM reached GA, the re-evaluation told me to delete code I had just written, and ADR-005 replaced the grant-issuance mechanism. ADR-001 carries a supersession note and a table of which sections stand and which fell.
 
 **I put designs under adversarial review and publish what it finds.** The compliance-as-code audit log records three external review rounds and 37 documented findings. One round found an encryption check that passed when the field was `null`. Another found a bug I introduced myself while fixing a different one, written up rather than quietly reverted.
 
@@ -96,8 +96,6 @@ These are scenario-based training projects and independent portfolio work, not c
 **Solution:** I designed a GCP-native JIT access broker using Cloud Functions, IAM conditional bindings, and audit logging. Access requests route through an approval workflow; grants expire automatically; every action is logged to BigQuery for audit.
 
 **Outcome:** Reference architecture with no standing privileged access anywhere in the design. Every request, denial, and expiry flag is designed to land in an append-only BigQuery ledger. Six ADRs document the decisions, two of them reversed in the open. Implementation is partial (nothing is deployed), and the gaps are listed in the records themselves, not glossed.
-
-[Read the six ADRs, starting with the one I reversed](/posts/adr-001-build-vs-buy-jit-broker/)
 
 ### SecureVault: GCP Security Command Center alerting
 
