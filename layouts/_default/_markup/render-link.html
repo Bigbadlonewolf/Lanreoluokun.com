@@ -1,4 +1,5 @@
-{{- /* Root-absolute markdown links (/notes/..., /about/) must carry the
+{{- /* Root-absolute markdown links (/about/, and any section added later)
+       must carry the
        baseURL path segment (e.g. /Lanreoluokun.com/) or they 404 on GitHub
        Pages. Inside a render hook, relURL/absURL treat a leading "/" as
        host-absolute and drop that segment, so prefix it manually. Falls back
