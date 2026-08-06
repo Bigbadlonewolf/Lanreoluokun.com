@@ -97,9 +97,8 @@ revocation written to an immutable audit log. Break-glass access exists for
 genuine emergencies, is dual authorized, alarms on use, and is reviewed the next
 morning.
 
-This is the pattern implemented across the [JIT Access
-Broker](https://github.com/Bigbadlonewolf/JIT-ACCESS-BROKER) and its successor
-[BankVault](/projects/bankvault/) — where grant issuance moved from a custom
+This is the pattern implemented across the JIT Access Broker and its successor
+[BankVault](/posts/adr-001-build-vs-buy-jit-broker/) — where grant issuance moved from a custom
 lifecycle to GCP Privileged Access Manager after [a documented
 re-evaluation](/posts/reversing-my-own-architecture-decision/) when the managed
 service reached general availability. The defining property holds either way:
@@ -111,7 +110,7 @@ privilege that fails the second regulatory requirement by design.
 
 **4. Continuous compliance evidence.** Infrastructure changes pass through
 policy-as-code evaluation in CI before merge — the pattern implemented in the
-[Compliance-as-Code Pipeline](/projects/compliance-as-code/) (PCI DSS v4.0,
+[Compliance-as-Code Pipeline](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE) (PCI DSS v4.0,
 SOC 2, NIST 800-53 mappings; gated checks; blocking on violation). Compliance
 posture becomes continuous and version-controlled rather than annual and
 screenshot-based.

@@ -70,10 +70,9 @@ and its reasoning:
 1. **[Design Case 1: Migrate the Payment API in 90 Days, Regulator
    Watching](/posts/design-case-1-payment-api-migration/)** — segmentation by
    scope elimination, just-in-time privileged access, evidence as a design
-   output. Grounded in the [JIT Access
-   Broker](https://github.com/Bigbadlonewolf/JIT-ACCESS-BROKER),
-   [BankVault](/projects/bankvault/), and the [Compliance-as-Code
-   Pipeline](/projects/compliance-as-code/).
+   output. Grounded in the JIT Access Broker,
+   [BankVault](/posts/adr-001-build-vs-buy-jit-broker/), and the [Compliance-as-Code
+   Pipeline](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE).
 2. **[Design Case 2: Approving an AI Vendor for KYC Without Losing the
    PII](/posts/design-case-2-ai-vendor-kyc/)** — contractual control planes,
    model governance, and saying yes safely.

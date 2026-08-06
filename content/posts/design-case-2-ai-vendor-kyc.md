@@ -106,7 +106,7 @@ exposure analysis — fair-lending risk, adverse-action reasoning, model risk
 management expectations — is maintained as an architecture decision record,
 which serves as the starting artifact for compliance review rather than a
 promise to produce one. The policy-as-code patterns from the
-[Compliance-as-Code Pipeline](/projects/compliance-as-code/) supply the
+[Compliance-as-Code Pipeline](https://github.com/Bigbadlonewolf/COMPLIANCE_AS_CODE) supply the
 continuous evidence model this governance posture is reported through.
 
 *Rejected:* building document processing in-house — in 60 days the bank would

@@ -95,9 +95,9 @@ These are scenario-based training projects and independent portfolio work, not c
 
 **Solution:** I designed a GCP-native JIT access broker using Cloud Functions, IAM conditional bindings, and audit logging. Access requests route through an approval workflow; grants expire automatically; every action is logged to BigQuery for audit.
 
-**Outcome:** Reference architecture with no standing privileged access anywhere in the design. Every request, denial, and expiry flag is designed to land in an append-only BigQuery ledger. Six ADRs document the decisions, two of them reversed in the open. Implementation is partial (nothing is deployed), and the gaps are listed on the project page, not glossed.
+**Outcome:** Reference architecture with no standing privileged access anywhere in the design. Every request, denial, and expiry flag is designed to land in an append-only BigQuery ledger. Six ADRs document the decisions, two of them reversed in the open. Implementation is partial (nothing is deployed), and the gaps are listed in the records themselves, not glossed.
 
-[Read the project write-up](/projects/bankvault/)
+[Read the six ADRs, starting with the one I reversed](/posts/adr-001-build-vs-buy-jit-broker/)
 
 ### SecureVault: GCP Security Command Center alerting
 
@@ -107,7 +107,7 @@ These are scenario-based training projects and independent portfolio work, not c
 
 **Outcome:** Designed to alert on PUBLIC_BUCKET_ACL, OPEN_FIREWALL, and OVER_PRIVILEGED_SERVICE_ACCOUNT findings, and to auto-remediate the first two. The pipeline is built and CI is green, but it is not deployed yet, so removing manual monitoring is the design goal, not a measured result.
 
-[Read the project write-up](/projects/securevault/)
+[Read the eight ADRs](/adrs/)
 
 ## Selected writing
 
