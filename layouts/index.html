@@ -13,32 +13,6 @@
 
 {{ partial "credibility.html" . }}
 
-{{ $adrs := where .Site.RegularPages "Section" "adrs" }}
-
-{{ if $adrs }}
-<span class="eyebrow">Architecture Decision Records</span>
-<div class="register">
-  {{ range $i, $a := $adrs.ByTitle }}
-    {{ $status := $a.Params.status | default "Accepted" }}
-    {{ $statusLower := lower $status }}
-    {{ $statusClass := "" }}
-    {{ if or (in $statusLower "proposed") (in $statusLower "draft") }}{{ $statusClass = "status-proposed" }}{{ end }}
-    {{ if or (in $statusLower "review") (in $statusLower "pending") }}{{ $statusClass = "status-review" }}{{ end }}
-    {{ if or (in $statusLower "accepted") (in $statusLower "shipped") (in $statusLower "complete") }}{{ $statusClass = "status-accepted" }}{{ end }}
-    <div class="register-entry js-anim" data-anim="card">
-      <div class="entry-meta">
-        <span class="entry-id">{{ $a.Params.recordID | default "-" }}</span>
-        <span class="status-badge {{ $statusClass }}">{{ $status }}</span>
-      </div>
-      <span class="entry-title">
-        <a href="{{ $a.RelPermalink }}">{{ $a.Title }}</a>
-        {{ with $a.Params.summary }}<span class="entry-desc">{{ . }}</span>{{ end }}
-      </span>
-    </div>
-  {{ end }}
-</div>
-{{ end }}
-
 <section class="engage-card js-anim" data-anim="fade">
   <h2>Hiring a cloud security engineer for a regulated shop?</h2>
   <p>You need someone who can build the control and then defend it to an auditor and a skeptical engineer in the same meeting. That is the job I want, at banks, fintechs, and other regulated financial institutions. GCP security engineering, policy-as-code, privileged access, GRC mapping. Start a conversation and I will walk you through any decision on this site.</p>

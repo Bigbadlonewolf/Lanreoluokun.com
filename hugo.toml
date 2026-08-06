@@ -1,6 +1,6 @@
 baseURL = "https://bigbadlonewolf.github.io/Lanreoluokun.com/"
 locale = "en-us"
-title = "Lanre Oluokun - Cloud Security Engineer"
+title = "Enterprise Security Architect"
 
 [params]
   name = "Lanre Oluokun"
@@ -19,11 +19,6 @@ title = "Lanre Oluokun - Cloud Security Engineer"
 [markup.highlight]
   style = "monokai"
   lineNos = false
-
-[[menu.main]]
-  name = "Records"
-  url = "/adrs/"
-  weight = 1
 
 [[menu.main]]
   name = "About"

@@ -107,8 +107,6 @@ These are scenario-based training projects and independent portfolio work, not c
 
 **Outcome:** Designed to alert on PUBLIC_BUCKET_ACL, OPEN_FIREWALL, and OVER_PRIVILEGED_SERVICE_ACCOUNT findings, and to auto-remediate the first two. The pipeline is built and CI is green, but it is not deployed yet, so removing manual monitoring is the design goal, not a measured result.
 
-[Read the eight ADRs](/adrs/)
-
 ## Selected writing
 
 - "Why Cloud Security Architects Still Need to Understand Banking Risk." On the gap between technical controls and business context in regulated environments. (Draft, Q3 2026)
