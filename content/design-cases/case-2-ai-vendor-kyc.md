@@ -38,6 +38,8 @@ If the vendor will not sign those, the recommendation flips to reject. A conditi
 3. **Vendor to its subprocessors.** If the service wraps a third-party foundation model, customer PII may reach a fourth party the bank never assessed. Subprocessor disclosure and approval rights are not boilerplate here. They are a trust boundary made visible.
 4. **The decision path.** Where does the model's output land? If it influences an onboarding accept or decline, fair-lending and adverse-action obligations attach to a model nobody can fully explain. This boundary sets the bank's regulatory exposure more than any technical one does.
 
+{{< diagram src="dc2-control-plane-boundaries" caption="Read the two panels rather than the boxes. **Everything on the left of boundary two is something the bank can enforce; everything on the right is something it can only agree.** That is why the paperwork is the primary control here and not an administrative step that happens after the architecture is finished." >}}
+
 ## Assumptions
 
 1. **The vendor will sign the data-handling commitments.** If false, the recommendation flips to reject, and leadership hears it in those words.
@@ -52,6 +54,8 @@ This is the uncomfortable part of the design, and it is where the real work sits
 **2. Technical minimization, carrying what it can.** Transmit the minimum image set the check requires, not documents plus metadata plus account context, over TLS, to a regional processing endpoint, with customer-managed encryption keys where the vendor supports them. Log every document transmitted so the bank can prove exactly what crossed boundary two. Retain in the bank's own environment whatever AML record-keeping rules require.
 
 A correction worth stating plainly, because the instinct runs the other way: **KYC data is not anonymized.** Customer identification programs exist to verify identity, and the underlying records must be retained by law. Anonymizing KYC data would be a compliance violation wearing the costume of a control. Minimization governs what the vendor sees and keeps. Retention obligations govern what the bank must hold. Confusing the two fails in both directions at once.
+
+{{< diagram src="dc2-minimization-vs-retention" caption="Two rules pointing away from each other, applied to one document. The failure this diagram exists to prevent is the reflex answer in an interview, where **anonymise the data** sounds like the responsible thing to say right up until someone asks how an identity check works on a record that no longer identifies anyone." >}}
 
 **3. Model governance.** The vendor's model gets the same discipline regulators apply to any consequential model: documented validation, ongoing monitoring for drift, and a challenger comparison on a sample of decisions. The exposure analysis, covering fair-lending risk, adverse-action reasoning and model risk management expectations, is written up as a decision record before the vendor goes live, so compliance review starts from an artifact rather than a promise to produce one.
 

@@ -51,6 +51,8 @@ DLP then moves to its correct job. It is not there to block exfiltration. It is 
 
 *Rejected:* running an in-house token vault. Full control and no provider dependency, at the cost of owning a regulated CDE with its own segmentation, monitoring and assessment scope. A three-person team cannot carry that in 90 days.
 
+{{< diagram src="dc1-tokenized-data-path" caption="The whole argument is the horizontal line. **The card number never crosses it**, so the cardholder data environment sits inside the provider's compliance scope and the bank's segmentation obligation is met by the shape of the design rather than by compartmentalising a problem it chose to keep." >}}
+
 **3. Zero standing privileged access, with elevation that expires on its own.** Engineers hold read-only roles by default. Elevation runs through a tracked workflow: a request, a recorded approval from a second person, a time-boxed grant scoped by IAM Condition to the one resource in question, and every request, approval, grant and expiry written to an append-only ledger. Break-glass exists for real emergencies, needs two people, alarms on use, and gets reviewed the next morning.
 
 One detail here is worth more than the rest of the design, because it is the part I got wrong first.
@@ -60,6 +62,8 @@ The reference build originally carried its own revocation function. I deleted it
 That job detects an overrun. It does not contain one. Nothing is revoked automatically, and that is a decision rather than a gap. Automated revocation is an action taken against a production access-control plane, and an action needs an alerting and rollback story before it runs unattended. So the claim I can defend to a regulator is "detected inside roughly one sweep," not "contained in fifteen minutes." Two different sentences, and only one of them is true.
 
 What survives is the useful part: the audit log of the grant lifecycle *is* the regulator's evidence. The control and the proof are the same artifact, which is the strongest available answer to "time-bound and auditable."
+
+{{< diagram src="dc1-grant-lifecycle" caption="The struck-through box is the part worth defending in an interview. Two enforcement paths that can disagree is how you get an incident where each one assumes the other handled it, so the second path was deleted rather than kept for having already been written. What replaced it **detects and does not contain**, which is a narrower claim and a true one." >}}
 
 *Rejected:* bastion hosts with standing SSH access. Unauditable standing privilege, which fails the second regulatory requirement by design.
 

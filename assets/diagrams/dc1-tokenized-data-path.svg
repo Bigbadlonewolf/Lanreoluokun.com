@@ -1,0 +1,86 @@
+<svg viewBox="0 0 820 540" role="img" aria-labelledby="dc1a-title dc1a-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc1a-title">The tokenised payment data path</title>
+  <desc id="dc1a-desc">The card number travels from the customer's device straight into the payment service provider's vault and never enters bank infrastructure. A token comes back to the client, and every bank-side component on GCP — Cloud Armor, the managed API gateway, the service tier, the store and its logs — sees only tokens. The cardholder data environment therefore sits inside the provider's compliance scope rather than the bank's.</desc>
+
+  <defs>
+    <marker id="dc1a-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+    <marker id="dc1a-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow-accent" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+  </defs>
+
+  <!-- PSP scope -->
+  <rect class="d-zone" x="250" y="28" width="430" height="118" rx="12"/>
+  <text class="d-label" x="266" y="50">PSP COMPLIANCE SCOPE — THE CDE</text>
+
+  <rect class="d-box" x="272" y="68" width="158" height="58" rx="10"/>
+  <text class="d-t" x="351" y="94" text-anchor="middle">PSP hosted fields</text>
+  <text class="d-t-sm" x="351" y="112" text-anchor="middle">served by the PSP</text>
+
+  <rect class="d-box" x="476" y="68" width="180" height="58" rx="10"/>
+  <text class="d-t" x="566" y="94" text-anchor="middle">PSP token vault</text>
+  <text class="d-t-sm" x="566" y="112" text-anchor="middle">de-tokenises for settlement</text>
+
+  <!-- Customer device -->
+  <rect class="d-box" x="28" y="118" width="134" height="64" rx="10"/>
+  <text class="d-t" x="95" y="146" text-anchor="middle">Customer device</text>
+  <text class="d-t-sm" x="95" y="164" text-anchor="middle">assumed hostile</text>
+
+  <!-- PAN out, token back -->
+  <path class="d-edge-accent" d="M162 140 C210 140, 226 96, 266 96" marker-end="url(#dc1a-aa)"/>
+  <text class="d-t-sm" x="172" y="110">PAN over TLS</text>
+
+  <path class="d-edge-accent" d="M430 97 L468 97" marker-end="url(#dc1a-aa)"/>
+
+  <path class="d-edge-dash" d="M566 126 C566 204, 340 218, 170 176" marker-end="url(#dc1a-a)"/>
+  <text class="d-t-sm" x="300" y="182" text-anchor="middle">token returned to the client</text>
+
+  <!-- The line -->
+  <line class="d-rule" x1="20" y1="236" x2="800" y2="236"/>
+  <text class="d-emph" x="410" y="228" text-anchor="middle">PAN never crosses this line into bank infrastructure</text>
+
+  <!-- Bank on GCP -->
+  <rect class="d-zone" x="186" y="262" width="614" height="152" rx="12"/>
+  <text class="d-label" x="202" y="284">BANK ON GCP — TOKENS ONLY</text>
+
+  <rect class="d-box" x="196" y="302" width="126" height="58" rx="10"/>
+  <text class="d-t" x="259" y="326" text-anchor="middle">Cloud Armor</text>
+  <text class="d-t-sm" x="259" y="345" text-anchor="middle">edge, L7 filtering</text>
+
+  <rect class="d-box" x="342" y="302" width="150" height="58" rx="10"/>
+  <text class="d-t" x="417" y="326" text-anchor="middle">Managed API gateway</text>
+  <text class="d-t-sm" x="417" y="345" text-anchor="middle">the single ingress</text>
+
+  <rect class="d-box" x="512" y="302" width="126" height="58" rx="10"/>
+  <text class="d-t" x="575" y="326" text-anchor="middle">Service tier</text>
+  <text class="d-t-sm" x="575" y="345" text-anchor="middle">tokens only</text>
+
+  <rect class="d-box" x="658" y="302" width="132" height="58" rx="10"/>
+  <text class="d-t" x="724" y="326" text-anchor="middle">Store and logs</text>
+  <text class="d-t-sm" x="724" y="345" text-anchor="middle">tokens only</text>
+
+  <text class="d-t-sm" x="196" y="392">DLP scans these continuously for card-number patterns. It proves the negative; it is not the blocker.</text>
+
+  <path class="d-edge" d="M95 182 C95 300, 130 331, 188 331" marker-end="url(#dc1a-a)"/>
+  <text class="d-t-sm" x="104" y="266">token</text>
+
+  <path class="d-edge" d="M322 331 L338 331" marker-end="url(#dc1a-a)"/>
+  <path class="d-edge" d="M492 331 L508 331" marker-end="url(#dc1a-a)"/>
+  <path class="d-edge" d="M638 331 L654 331" marker-end="url(#dc1a-a)"/>
+
+  <!-- On-premises core -->
+  <path class="d-edge-dash" d="M575 360 V424 H601 V444" marker-end="url(#dc1a-a)"/>
+  <text class="d-t-sm" x="566" y="430" text-anchor="end">retained dependency</text>
+
+  <rect class="d-box-muted" x="496" y="452" width="210" height="52" rx="10"/>
+  <text class="d-t" x="601" y="476" text-anchor="middle">Core banking</text>
+  <text class="d-t-sm" x="601" y="493" text-anchor="middle">on-premises, out of scope</text>
+
+  <!-- Legend -->
+  <line class="d-edge-accent" x1="28" y1="466" x2="66" y2="466"/>
+  <text class="d-t-sm" x="74" y="470">card number</text>
+  <line class="d-edge" x1="28" y1="492" x2="66" y2="492"/>
+  <text class="d-t-sm" x="74" y="496">token</text>
+</svg>

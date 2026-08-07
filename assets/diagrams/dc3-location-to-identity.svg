@@ -1,0 +1,78 @@
+<svg viewBox="0 0 820 460" role="img" aria-labelledby="dc3a-title dc3a-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc3a-title">Moving the trust decision from network location to identity</title>
+  <desc id="dc3a-desc">On the left, the acquired fintech's flat network: one foothold reaches every application, database and store, because being inside is the whole authorisation. On the right, the same estate with an identity-aware proxy deciding per request on user and device, mutual TLS between workloads, policy-as-code authorisation, and legacy applications wrapped or segmented where the proxy cannot reach them. Underneath, the four testable properties the board's mandate has to become before it can be given a budget.</desc>
+
+  <defs>
+    <marker id="dc3a-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+    <marker id="dc3a-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow-accent" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+  </defs>
+
+  <!-- Before -->
+  <rect class="d-zone" x="28" y="60" width="364" height="250" rx="12"/>
+  <text class="d-label" x="46" y="84">BEFORE — TRUST FROM NETWORK LOCATION</text>
+
+  <rect class="d-box-accent" x="46" y="104" width="112" height="48" rx="8"/>
+  <text class="d-t-on-accent" x="102" y="133" text-anchor="middle">One foothold</text>
+
+  <rect class="d-box" x="190" y="104" width="80" height="40" rx="8"/>
+  <text class="d-t-sm" x="230" y="129" text-anchor="middle">App A</text>
+  <rect class="d-box" x="282" y="104" width="80" height="40" rx="8"/>
+  <text class="d-t-sm" x="322" y="129" text-anchor="middle">App B</text>
+  <rect class="d-box" x="190" y="156" width="80" height="40" rx="8"/>
+  <text class="d-t-sm" x="230" y="181" text-anchor="middle">Database</text>
+  <rect class="d-box" x="282" y="156" width="80" height="40" rx="8"/>
+  <text class="d-t-sm" x="322" y="181" text-anchor="middle">Payments</text>
+  <rect class="d-box" x="190" y="208" width="80" height="40" rx="8"/>
+  <text class="d-t-sm" x="230" y="233" text-anchor="middle">Admin</text>
+  <rect class="d-box" x="282" y="208" width="80" height="40" rx="8"/>
+  <text class="d-t-sm" x="322" y="233" text-anchor="middle">PII store</text>
+
+  <path class="d-edge-accent" d="M158 124 L186 124" marker-end="url(#dc3a-aa)"/>
+  <path class="d-edge-accent" d="M158 132 C172 160, 172 168, 186 176" marker-end="url(#dc3a-aa)"/>
+  <path class="d-edge-accent" d="M158 140 C172 200, 172 214, 186 228" marker-end="url(#dc3a-aa)"/>
+  <path class="d-edge" d="M270 124 L278 124" marker-end="url(#dc3a-a)"/>
+  <path class="d-edge" d="M270 176 L278 176" marker-end="url(#dc3a-a)"/>
+  <path class="d-edge" d="M270 228 L278 228" marker-end="url(#dc3a-a)"/>
+
+  <text class="d-t-sm" x="46" y="288">Once you are inside, everything is reachable.</text>
+
+  <!-- After -->
+  <rect class="d-zone" x="428" y="60" width="364" height="250" rx="12"/>
+  <text class="d-label" x="446" y="84">AFTER — IDENTITY, EVALUATED PER REQUEST</text>
+
+  <rect class="d-box" x="446" y="100" width="140" height="44" rx="8"/>
+  <text class="d-t" x="516" y="127" text-anchor="middle">User and device</text>
+  <path class="d-edge" d="M516 144 V164" marker-end="url(#dc3a-a)"/>
+
+  <rect class="d-box-accent" x="446" y="168" width="200" height="52" rx="10"/>
+  <text class="d-t-on-accent" x="546" y="190" text-anchor="middle">Identity-aware proxy</text>
+  <text class="d-t-on-accent-sm" x="546" y="208" text-anchor="middle">decides on every request</text>
+
+  <rect class="d-box-muted" x="666" y="164" width="112" height="60" rx="10"/>
+  <text class="d-t" x="722" y="186" text-anchor="middle">Legacy app</text>
+  <text class="d-t-sm" x="722" y="203" text-anchor="middle">wrapped, or</text>
+  <text class="d-t-sm" x="722" y="217" text-anchor="middle">segmented</text>
+  <path class="d-edge" d="M646 194 L662 194" marker-end="url(#dc3a-a)"/>
+
+  <path class="d-edge" d="M501 220 V240" marker-end="url(#dc3a-a)"/>
+  <rect class="d-box" x="446" y="244" width="110" height="44" rx="8"/>
+  <text class="d-t" x="501" y="271" text-anchor="middle">Workload</text>
+  <rect class="d-box" x="596" y="244" width="110" height="44" rx="8"/>
+  <text class="d-t" x="651" y="271" text-anchor="middle">Workload</text>
+  <path class="d-edge" d="M556 266 L592 266" marker-end="url(#dc3a-a)"/>
+  <text class="d-t-sm" x="576" y="252" text-anchor="middle">mTLS</text>
+
+  <text class="d-t-sm" x="446" y="302">Policy-as-code authorisation on every call.</text>
+
+  <!-- The four properties -->
+  <rect class="d-box-muted" x="28" y="340" width="764" height="94" rx="12"/>
+  <text class="d-label" x="48" y="366">THE FOUR TESTABLE PROPERTIES — ANYTHING ELSE DOES NOT GET BUDGET</text>
+  <text class="d-t-body" x="48" y="394">1 &#160;No implicit trust from network location</text>
+  <text class="d-t-body" x="48" y="416">2 &#160;Every access authenticated</text>
+  <text class="d-t-body" x="440" y="394">3 &#160;Every access authorised and encrypted</text>
+  <text class="d-t-body" x="440" y="416">4 &#160;Every access logged</text>
+</svg>

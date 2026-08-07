@@ -1,0 +1,43 @@
+<svg viewBox="0 0 820 450" role="img" aria-labelledby="dc2b-title dc2b-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc2b-title">Minimisation and retention pull in opposite directions</title>
+  <desc id="dc2b-desc">One KYC document, two different rules. Minimisation governs what crosses to the vendor: the minimum image set the check requires, without account context, metadata or unrelated documents. Retention governs what the bank must hold: identity records kept for as long as the rules require, and not anonymised, because customer identification programmes exist to verify identity.</desc>
+
+  <defs>
+    <marker id="dc2b-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+    <marker id="dc2b-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow-accent" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+  </defs>
+
+  <rect class="d-box-accent" x="340" y="60" width="140" height="76" rx="10"/>
+  <text class="d-t-on-accent" x="410" y="94" text-anchor="middle">KYC document</text>
+  <text class="d-t-on-accent-sm" x="410" y="114" text-anchor="middle">passport, proof of address</text>
+
+  <path class="d-edge-accent" d="M340 112 C280 112, 236 150, 208 184" marker-end="url(#dc2b-aa)"/>
+  <text class="d-t-sm" x="232" y="128" text-anchor="end">minimisation governs</text>
+  <text class="d-t-sm" x="232" y="145" text-anchor="end">what leaves</text>
+
+  <path class="d-edge" d="M480 112 C540 112, 584 150, 612 184" marker-end="url(#dc2b-a)"/>
+  <text class="d-t-sm" x="596" y="128">retention governs</text>
+  <text class="d-t-sm" x="596" y="145">what is kept</text>
+
+  <rect class="d-zone" x="28" y="190" width="352" height="150" rx="12"/>
+  <text class="d-label" x="48" y="214">WHAT CROSSES TO THE VENDOR</text>
+  <rect class="d-box" x="48" y="228" width="312" height="42" rx="8"/>
+  <text class="d-t-body" x="64" y="254">The minimum image set the check requires</text>
+  <text class="d-label" x="48" y="294">NOT SENT</text>
+  <text class="d-t-body" x="48" y="316">Account context · metadata · unrelated documents</text>
+
+  <rect class="d-zone" x="440" y="190" width="352" height="150" rx="12"/>
+  <text class="d-label" x="460" y="214">WHAT THE BANK MUST RETAIN</text>
+  <rect class="d-box" x="460" y="228" width="312" height="42" rx="8"/>
+  <text class="d-t-body" x="476" y="254">Identity records, for as long as the rules require</text>
+  <text class="d-label" x="460" y="294">AND NOT ANONYMISED</text>
+  <text class="d-t-body" x="460" y="316">Identification programmes exist to verify identity</text>
+
+  <rect class="d-box-accent" x="28" y="372" width="764" height="56" rx="10"/>
+  <text class="d-t-on-accent" x="410" y="396" text-anchor="middle">Anonymising KYC data would be a compliance violation wearing the costume of a control.</text>
+  <text class="d-t-on-accent-sm" x="410" y="416" text-anchor="middle">Minimisation governs what the vendor sees. Retention governs what the bank holds. Confusing them fails in both directions.</text>
+</svg>

@@ -1,0 +1,20 @@
+{{- /* Inlines a hand-authored SVG from assets/diagrams/ so it inherits the
+       page's theme tokens. An <img> would not: the diagrams colour themselves
+       from the CSS custom properties that data-theme flips, and an external
+       document cannot see them.
+
+       Usage: {{< diagram src="dc1-tokenized-data-path" caption="..." >}}
+       A missing file is a build error, not a silent gap. */ -}}
+{{- $src := .Get "src" -}}
+{{- $caption := .Get "caption" -}}
+{{- $path := printf "diagrams/%s.svg" $src -}}
+{{- $res := resources.Get $path -}}
+{{- if not $res -}}
+  {{- errorf "diagram shortcode: no asset at assets/%s (%s)" $path .Position -}}
+{{- end -}}
+<figure class="diagram">
+  <div class="diagram-frame">{{ $res.Content | safeHTML }}</div>
+  {{- with $caption }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>

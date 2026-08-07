@@ -1,0 +1,47 @@
+<svg viewBox="0 0 820 420" role="img" aria-labelledby="dc3b-title dc3b-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc3b-title">Phasing order, and the blast radius it buys down</title>
+  <desc id="dc3b-desc">Twelve months in four phases. Phase zero, the first sixty days, builds the asset inventory, federates the identity provider and reconciles privileged accounts, before any tooling is bought. Phase one wraps the crown jewels, meaning payment flows and customer PII stores. Phase two broadens identity-aware ingress in order of data sensitivity. Phase three contains the legacy applications as a written compensating control with an expiry review. The bar underneath shows the exposure a breach would carry, falling each quarter rather than only at the end.</desc>
+
+  <!-- Phases -->
+  <rect class="d-box-accent" x="28" y="60" width="170" height="102" rx="10"/>
+  <text class="d-t-on-accent" x="44" y="86">Phase 0 · days 0–60</text>
+  <text class="d-t-on-accent-sm" x="44" y="108">Asset inventory</text>
+  <text class="d-t-on-accent-sm" x="44" y="126">IdP federation</text>
+  <text class="d-t-on-accent-sm" x="44" y="144">Privileged accounts</text>
+
+  <rect class="d-box" x="206" y="60" width="190" height="102" rx="10"/>
+  <text class="d-t" x="222" y="86">Phase 1</text>
+  <text class="d-t-sm" x="222" y="108">Crown jewels wrapped</text>
+  <text class="d-t-sm" x="222" y="126">Payment flows, PII stores</text>
+  <text class="d-t-sm" x="222" y="144">Proxied, egress tightened</text>
+
+  <rect class="d-box" x="404" y="60" width="186" height="102" rx="10"/>
+  <text class="d-t" x="420" y="86">Phase 2</text>
+  <text class="d-t-sm" x="420" y="108">Identity-aware ingress</text>
+  <text class="d-t-sm" x="420" y="126">broadened in order of</text>
+  <text class="d-t-sm" x="420" y="144">data sensitivity</text>
+
+  <rect class="d-box" x="598" y="60" width="194" height="102" rx="10"/>
+  <text class="d-t" x="614" y="86">Phase 3</text>
+  <text class="d-t-sm" x="614" y="108">Legacy containment</text>
+  <text class="d-t-sm" x="614" y="126">Compensating control,</text>
+  <text class="d-t-sm" x="614" y="144">with an expiry review</text>
+
+  <!-- Blast radius -->
+  <text class="d-label" x="28" y="204">BLAST RADIUS OF A BREACH</text>
+
+  <rect class="d-bar" x="28" y="228" width="170" height="72" opacity="0.92"/>
+  <rect class="d-bar" x="206" y="248" width="190" height="52" opacity="0.64"/>
+  <rect class="d-bar" x="404" y="266" width="186" height="34" opacity="0.40"/>
+  <rect class="d-bar" x="598" y="280" width="194" height="20" opacity="0.22"/>
+  <line class="d-edge" x1="28" y1="300" x2="792" y2="300"/>
+
+  <text class="d-t-sm" x="113" y="320" text-anchor="middle">Quarter 1</text>
+  <text class="d-t-sm" x="301" y="320" text-anchor="middle">Quarter 2</text>
+  <text class="d-t-sm" x="497" y="320" text-anchor="middle">Quarter 3</text>
+  <text class="d-t-sm" x="695" y="320" text-anchor="middle">Quarter 4</text>
+
+  <rect class="d-box-accent" x="28" y="344" width="764" height="56" rx="10"/>
+  <text class="d-t-on-accent" x="410" y="368" text-anchor="middle">A breach at month four hits a smaller target than it would have at month one.</text>
+  <text class="d-t-on-accent-sm" x="410" y="388" text-anchor="middle">Smaller again by month seven. Reported to the board as exposure reduced in money, never as percent complete.</text>
+</svg>

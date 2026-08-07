@@ -1,0 +1,95 @@
+<svg viewBox="0 0 820 520" role="img" aria-labelledby="dc2a-title dc2a-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc2a-title">The four trust boundaries, and where the control plane changes type</title>
+  <desc id="dc2a-desc">Four numbered boundaries. Boundary one sits inside the bank, between the capture channel and bank systems. Boundary two is the decisive one: the vendor has to read cleartext documents in order to process them, so from that line onward the controls stop being technical and become contractual and procedural. Boundary three is the vendor's own subprocessor, potentially a foundation model the bank never assessed. Boundary four is the decision path, where the model's advisory output reaches a human or a deterministic rule, and where fair lending and adverse action obligations attach.</desc>
+
+  <defs>
+    <marker id="dc2a-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+    <marker id="dc2a-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow-accent" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+  </defs>
+
+  <text class="d-emph" x="352" y="38" text-anchor="middle">Boundary 2 — technical controls end, contractual controls begin</text>
+  <line class="d-rule" x1="352" y1="56" x2="352" y2="362"/>
+
+  <!-- Bank -->
+  <rect class="d-zone" x="28" y="64" width="300" height="140" rx="12"/>
+  <rect class="d-box" x="46" y="104" width="124" height="62" rx="10"/>
+  <text class="d-t" x="108" y="130" text-anchor="middle">Capture channel</text>
+  <text class="d-t-sm" x="108" y="148" text-anchor="middle">the bank controls it</text>
+
+  <rect class="d-box" x="190" y="104" width="120" height="62" rx="10"/>
+  <text class="d-t" x="250" y="130" text-anchor="middle">Bank systems</text>
+  <text class="d-t-sm" x="250" y="148" text-anchor="middle">minimum image set</text>
+  <text class="d-label" x="46" y="192">BANK ENVIRONMENT</text>
+
+  <!-- Vendor -->
+  <rect class="d-zone" x="376" y="64" width="240" height="140" rx="12"/>
+  <rect class="d-box-accent" x="394" y="104" width="204" height="62" rx="10"/>
+  <text class="d-t-on-accent" x="496" y="130" text-anchor="middle">AI document processing</text>
+  <text class="d-t-on-accent-sm" x="496" y="148" text-anchor="middle">reads cleartext to work</text>
+  <text class="d-label" x="394" y="192">VENDOR</text>
+
+  <!-- Subprocessor -->
+  <rect class="d-zone" x="640" y="64" width="152" height="140" rx="12"/>
+  <rect class="d-box-muted" x="656" y="104" width="120" height="62" rx="10"/>
+  <text class="d-t" x="716" y="130" text-anchor="middle">Foundation model</text>
+  <text class="d-t-sm" x="716" y="148" text-anchor="middle">a possible 4th party</text>
+  <text class="d-label" x="656" y="192">SUBPROCESSOR</text>
+
+  <path class="d-edge" d="M170 135 L186 135" marker-end="url(#dc2a-a)"/>
+  <path class="d-edge-accent" d="M310 135 L390 135" marker-end="url(#dc2a-aa)"/>
+  <path class="d-edge" d="M598 135 L652 135" marker-end="url(#dc2a-a)"/>
+
+  <circle class="d-box-accent" cx="180" cy="90" r="12"/>
+  <text class="d-t-on-accent" x="180" y="95" text-anchor="middle">1</text>
+  <circle class="d-box-accent" cx="352" cy="90" r="12"/>
+  <text class="d-t-on-accent" x="352" y="95" text-anchor="middle">2</text>
+  <circle class="d-box-accent" cx="628" cy="90" r="12"/>
+  <text class="d-t-on-accent" x="628" y="95" text-anchor="middle">3</text>
+
+  <!-- What each side of the line can actually do -->
+  <rect class="d-box-muted" x="28" y="232" width="300" height="118" rx="12"/>
+  <text class="d-label" x="48" y="256">TECHNICAL CONTROLS</text>
+  <text class="d-t-body" x="48" y="280">TLS in transit</text>
+  <text class="d-t-body" x="48" y="298">Customer-managed keys</text>
+  <text class="d-t-body" x="48" y="316">Minimum image set only</text>
+  <text class="d-t-body" x="48" y="334">Every transmission logged</text>
+
+  <rect class="d-box-muted" x="376" y="232" width="416" height="118" rx="12"/>
+  <text class="d-label" x="396" y="256">CONTRACTUAL AND PROCEDURAL CONTROLS</text>
+  <text class="d-t-body" x="396" y="280">Retention and deletion SLA</text>
+  <text class="d-t-body" x="396" y="298">No training on bank data</text>
+  <text class="d-t-body" x="396" y="316">Subprocessor approval rights</text>
+  <text class="d-t-body" x="600" y="280">Breach notification window</text>
+  <text class="d-t-body" x="600" y="298">Audit rights, or SOC 2 Type II</text>
+  <text class="d-t-body" x="600" y="316">Penetration-test attestation</text>
+
+  <!-- The decision path -->
+  <rect class="d-zone" x="28" y="384" width="764" height="110" rx="12"/>
+  <circle class="d-box-accent" cx="50" cy="406" r="12"/>
+  <text class="d-t-on-accent" x="50" y="411" text-anchor="middle">4</text>
+  <text class="d-label" x="70" y="411">THE DECISION PATH</text>
+
+  <rect class="d-box" x="48" y="422" width="132" height="52" rx="10"/>
+  <text class="d-t" x="114" y="444" text-anchor="middle">Model output</text>
+  <text class="d-t-sm" x="114" y="462" text-anchor="middle">advisory only</text>
+
+  <path class="d-edge" d="M180 448 L196 448" marker-end="url(#dc2a-a)"/>
+
+  <rect class="d-box" x="204" y="422" width="150" height="52" rx="10"/>
+  <text class="d-t" x="279" y="444" text-anchor="middle">Human decision</text>
+  <text class="d-t-sm" x="279" y="462" text-anchor="middle">or a deterministic rule</text>
+
+  <path class="d-edge" d="M354 448 L374 448" marker-end="url(#dc2a-a)"/>
+
+  <rect class="d-box" x="382" y="422" width="170" height="52" rx="10"/>
+  <text class="d-t" x="467" y="444" text-anchor="middle">Onboarding decision</text>
+  <text class="d-t-sm" x="467" y="462" text-anchor="middle">accept or decline</text>
+
+  <rect class="d-box-accent" x="576" y="422" width="216" height="52" rx="10"/>
+  <text class="d-t-on-accent" x="684" y="443" text-anchor="middle">Fair lending and adverse</text>
+  <text class="d-t-on-accent-sm" x="684" y="461" text-anchor="middle">action obligations attach here</text>
+</svg>
