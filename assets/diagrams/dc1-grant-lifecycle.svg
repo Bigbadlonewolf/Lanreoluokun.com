@@ -1,6 +1,6 @@
 <svg viewBox="0 0 820 440" role="img" aria-labelledby="dc1b-title dc1b-desc" xmlns="http://www.w3.org/2000/svg">
   <title id="dc1b-title">The privileged access grant lifecycle</title>
-  <desc id="dc1b-desc">An engineer holding read-only access by default raises a request, a second person records an approval, and Privileged Access Manager creates a grant scoped by IAM Condition to one resource. PAM expires the grant on its own; the reference build's own revocation function was deleted rather than kept as a second path. A read-only reconciliation sweep runs every fifteen minutes and writes a flag when a grant outlives its window. It detects an overrun; it does not contain one. Every event lands in an append-only ledger, which is both the control record and the regulator's evidence.</desc>
+  <desc id="dc1b-desc">An engineer holding read-only access by default raises a request, a second person records an approval, and Privileged Access Manager creates a grant scoped by IAM Condition to one resource. PAM expires the grant on its own; the reference build's own revocation function was deleted rather than kept as a second path. A read-only reconciliation sweep runs on a schedule and writes a flag to the ledger when a grant outlives its window, so an overrun is detected inside roughly one sweep. It detects an overrun; it does not contain one. Every event lands in an append-only ledger, which is both the control record and the regulator's evidence.</desc>
 
   <defs>
     <marker id="dc1b-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
@@ -17,7 +17,7 @@
 
   <rect class="d-box" x="178" y="56" width="118" height="58" rx="10"/>
   <text class="d-t" x="237" y="82" text-anchor="middle">Request</text>
-  <text class="d-t-sm" x="237" y="100" text-anchor="middle">with justification</text>
+  <text class="d-t-sm" x="237" y="100" text-anchor="middle">a tracked workflow</text>
 
   <path class="d-edge" d="M296 85 L322 85" marker-end="url(#dc1b-a)"/>
 
@@ -57,8 +57,8 @@
   <path class="d-edge-dash" d="M571 142 V166" marker-end="url(#dc1b-a)"/>
   <rect class="d-box" x="430" y="170" width="190" height="76" rx="10"/>
   <text class="d-t" x="525" y="194" text-anchor="middle">Reconcile sweep</text>
-  <text class="d-t-sm" x="525" y="212" text-anchor="middle">every 15 minutes</text>
-  <text class="d-t-sm" x="525" y="230" text-anchor="middle">read-only on PAM</text>
+  <text class="d-t-sm" x="525" y="212" text-anchor="middle">read-only, on a schedule</text>
+  <text class="d-t-sm" x="525" y="230" text-anchor="middle">detected inside one sweep</text>
 
   <!-- The path that was deleted -->
   <rect class="d-box-muted" x="650" y="170" width="142" height="76" rx="10"/>
@@ -72,7 +72,7 @@
   <text class="d-t-on-accent" x="631" y="291" text-anchor="middle">Detects an overrun. Does not contain one.</text>
 
   <path class="d-edge" d="M525 308 V338" marker-end="url(#dc1b-a)"/>
-  <text class="d-t-sm" x="536" y="330">EXPIRE_FLAG row</text>
+  <text class="d-t-sm" x="536" y="330">a flag on the ledger</text>
 
   <!-- The ledger -->
   <rect class="d-box-muted" x="28" y="344" width="764" height="68" rx="12"/>
