@@ -1,0 +1,104 @@
+<svg viewBox="0 0 820 500" role="img" aria-labelledby="dc4a-title dc4a-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc4a-title">One credential issuance plane across both estates</title>
+  <desc id="dc4a-desc">The credential broker is anchored on-premises, with its root and unseal material held behind an HSM boundary under a two-of-three human quorum. A read replica serves latency and a DR replica can be promoted against a four-hour recovery target. GCP workloads reach the plane through workload identity federation, exchanging an on-premises assertion for a short-lived token, with exported service account keys blocked by organisation policy. The mainframe sits deliberately outside the issuance plane, because the secured signon key used to derive PassTickets never leaves the LPAR. Five credential classes consume from the one plane: Oracle dynamic credentials, Kubernetes sidecar injection, GCP federated tokens, mainframe PassTickets and custodied third-party API keys. Every issuance, renewal and revocation streams to an immutable SIEM on seven-year retention, carrying lease identifiers and workload identity only.</desc>
+
+  <defs>
+    <marker id="dc4a-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+    <marker id="dc4a-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="d-arrow-accent" d="M0 0 L10 5 L0 10 z"/>
+    </marker>
+  </defs>
+
+  <text class="d-emph" x="410" y="32" text-anchor="middle">One issuance plane, both estates, every non-human identity</text>
+
+  <!-- On-premises: the anchored control plane -->
+  <rect class="d-zone" x="28" y="56" width="420" height="214" rx="12"/>
+
+  <rect class="d-box-accent" x="46" y="92" width="142" height="88" rx="10"/>
+  <text class="d-t-on-accent" x="117" y="120" text-anchor="middle">HSM boundary</text>
+  <text class="d-t-on-accent-sm" x="117" y="140" text-anchor="middle">root + unseal keys</text>
+  <text class="d-t-on-accent-sm" x="117" y="158" text-anchor="middle">human quorum, 2 of 3</text>
+
+  <path class="d-edge-accent" d="M188 136 L202 136" marker-end="url(#dc4a-aa)"/>
+
+  <rect class="d-box" x="206" y="92" width="224" height="88" rx="10"/>
+  <text class="d-t" x="318" y="120" text-anchor="middle">Credential broker</text>
+  <text class="d-t-sm" x="318" y="140" text-anchor="middle">primary · HSM auto-unseal</text>
+  <text class="d-t-sm" x="318" y="158" text-anchor="middle">dynamic secret engines</text>
+
+  <path class="d-edge-dash" d="M260 180 L260 190"/>
+  <path class="d-edge-dash" d="M378 180 L378 190"/>
+
+  <rect class="d-box-muted" x="206" y="192" width="106" height="54" rx="10"/>
+  <text class="d-t-sm" x="259" y="214" text-anchor="middle">Read replica</text>
+  <text class="d-t-sm" x="259" y="232" text-anchor="middle">latency</text>
+
+  <rect class="d-box-muted" x="324" y="192" width="106" height="54" rx="10"/>
+  <text class="d-t-sm" x="377" y="214" text-anchor="middle">DR replica</text>
+  <text class="d-t-sm" x="377" y="232" text-anchor="middle">RTO 4h, target</text>
+
+  <text class="d-label" x="46" y="260">ON-PREMISES, ANCHORED</text>
+
+  <!-- GCP: federated, no exported keys -->
+  <path class="d-edge-accent" d="M430 110 L484 110" marker-end="url(#dc4a-aa)"/>
+
+  <rect class="d-zone" x="470" y="56" width="322" height="100" rx="12"/>
+  <rect class="d-box" x="488" y="76" width="286" height="54" rx="10"/>
+  <text class="d-t" x="631" y="98" text-anchor="middle">Workload identity federation</text>
+  <text class="d-t-sm" x="631" y="116" text-anchor="middle">short-lived token, no exported keys</text>
+  <text class="d-label" x="488" y="146">GCP</text>
+
+  <!-- Mainframe: deliberately outside the plane -->
+  <path class="d-edge-dash" d="M448 216 L484 216" marker-end="url(#dc4a-a)"/>
+
+  <rect class="d-zone" x="470" y="172" width="322" height="98" rx="12"/>
+  <rect class="d-box-muted" x="488" y="190" width="286" height="54" rx="10"/>
+  <text class="d-t" x="631" y="212" text-anchor="middle">RACF PassTickets</text>
+  <text class="d-t-sm" x="631" y="230" text-anchor="middle">secured signon key never leaves the LPAR</text>
+  <text class="d-label" x="488" y="260">OUTSIDE THE PLANE, ON PURPOSE</text>
+
+  <!-- Distribution bus -->
+  <path class="d-edge" d="M318 270 L318 290"/>
+  <line class="d-edge" x1="100" y1="290" x2="720" y2="290"/>
+  <path class="d-edge" d="M100 290 L100 312" marker-end="url(#dc4a-a)"/>
+  <path class="d-edge" d="M255 290 L255 312" marker-end="url(#dc4a-a)"/>
+  <path class="d-edge" d="M410 290 L410 312" marker-end="url(#dc4a-a)"/>
+  <path class="d-edge" d="M565 290 L565 312" marker-end="url(#dc4a-a)"/>
+  <path class="d-edge" d="M720 290 L720 312" marker-end="url(#dc4a-a)"/>
+
+  <!-- Five credential classes -->
+  <rect class="d-box" x="28" y="316" width="144" height="76" rx="10"/>
+  <text class="d-t" x="100" y="340" text-anchor="middle">Oracle</text>
+  <text class="d-t-sm" x="100" y="360" text-anchor="middle">dynamic credentials</text>
+  <text class="d-t-sm" x="100" y="378" text-anchor="middle">gradual rollover</text>
+
+  <rect class="d-box" x="183" y="316" width="144" height="76" rx="10"/>
+  <text class="d-t" x="255" y="340" text-anchor="middle">Kubernetes</text>
+  <text class="d-t-sm" x="255" y="360" text-anchor="middle">agent sidecar</text>
+  <text class="d-t-sm" x="255" y="378" text-anchor="middle">memory mount only</text>
+
+  <rect class="d-box" x="338" y="316" width="144" height="76" rx="10"/>
+  <text class="d-t" x="410" y="340" text-anchor="middle">GCP native</text>
+  <text class="d-t-sm" x="410" y="360" text-anchor="middle">federated token</text>
+  <text class="d-t-sm" x="410" y="378" text-anchor="middle">1h default TTL</text>
+
+  <rect class="d-box" x="493" y="316" width="144" height="76" rx="10"/>
+  <text class="d-t" x="565" y="340" text-anchor="middle">Mainframe</text>
+  <text class="d-t-sm" x="565" y="360" text-anchor="middle">PassTicket</text>
+  <text class="d-t-sm" x="565" y="378" text-anchor="middle">single-use</text>
+
+  <rect class="d-box" x="648" y="316" width="144" height="76" rx="10"/>
+  <text class="d-t" x="720" y="340" text-anchor="middle">Third-party key</text>
+  <text class="d-t-sm" x="720" y="360" text-anchor="middle">custody + rotate</text>
+  <text class="d-t-sm" x="720" y="378" text-anchor="middle">exception register</text>
+
+  <text class="d-label" x="28" y="412">FIVE CREDENTIAL CLASSES, ONE ISSUANCE PLANE</text>
+
+  <!-- Audit -->
+  <path class="d-edge-accent" d="M410 392 L410 426" marker-end="url(#dc4a-aa)"/>
+  <rect class="d-box-accent" x="28" y="430" width="764" height="58" rx="10"/>
+  <text class="d-t-on-accent" x="410" y="454" text-anchor="middle">Every issuance, renewal and revocation → immutable SIEM, 7-year WORM</text>
+  <text class="d-t-on-accent-sm" x="410" y="474" text-anchor="middle">lease ID and workload identity only — credential material is never written to an audit log</text>
+</svg>

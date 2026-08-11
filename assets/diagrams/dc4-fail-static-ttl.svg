@@ -1,0 +1,63 @@
+<svg viewBox="0 0 820 470" role="img" aria-labelledby="dc4b-title dc4b-desc" xmlns="http://www.w3.org/2000/svg">
+  <title id="dc4b-title">Why the payment path fails static rather than closed</title>
+  <desc id="dc4b-desc">A timeline in hours. The payment-path credential holds an eight-hour lease. The broker outage it has to survive is the four-hour recovery target, which is unvalidated until the disaster recovery drill measures it. The four hours between them are margin for detecting a renewal failure and getting a human to it. A dashed ceiling stands at twenty-four hours: if a measured recovery time ever required a longer lease than that, the recovery time gets fixed rather than the lease extended. Below the timeline, the current state is a hardcoded, shared, unrotated password with no attribution and no revocation path, against a brokered credential that is unique per workload, tied to a lease identifier, attributable and revocable. Two kill paths exist that do not transit the broker: a dual-authorised out-of-band DBA runbook, and a sealed break-glass credential under a two-of-three quorum with regulator notification inside four hours.</desc>
+
+  <text class="d-emph" x="28" y="30">Payments fail static, not closed — the lease outlives the outage</text>
+  <text class="d-t-sm" x="792" y="30" text-anchor="end">hours from last successful renewal</text>
+
+  <!-- 24h ceiling -->
+  <line class="d-rule" x1="738" y1="52" x2="738" y2="222"/>
+  <text class="d-emph" x="734" y="46" text-anchor="end">24h ceiling — above this, fix the RTO instead</text>
+
+  <!-- Credential lease -->
+  <text class="d-t" x="90" y="78">Payment-path credential · 8h TTL · renewed every 30 minutes</text>
+  <rect class="d-bar" x="90" y="86" width="216" height="28" rx="4"/>
+
+  <!-- Outage -->
+  <rect class="d-box-muted" x="90" y="130" width="108" height="28" rx="4"/>
+  <text class="d-t-sm" x="206" y="149">Broker outage it has to survive · 4h RTO — target, unvalidated until the DR drill</text>
+
+  <!-- Margin -->
+  <path class="d-edge-dash" d="M198 178 L306 178"/>
+  <line class="d-edge" x1="198" y1="170" x2="198" y2="186"/>
+  <line class="d-edge" x1="306" y1="170" x2="306" y2="186"/>
+  <text class="d-t-sm" x="314" y="182">4h margin — detect the renewal failure, get a human to it</text>
+
+  <!-- Axis -->
+  <line class="d-edge" x1="90" y1="212" x2="756" y2="212"/>
+  <line class="d-edge" x1="90" y1="212" x2="90" y2="218"/>
+  <line class="d-edge" x1="198" y1="212" x2="198" y2="218"/>
+  <line class="d-edge" x1="306" y1="212" x2="306" y2="218"/>
+  <line class="d-edge" x1="414" y1="212" x2="414" y2="218"/>
+  <line class="d-edge" x1="522" y1="212" x2="522" y2="218"/>
+  <line class="d-edge" x1="630" y1="212" x2="630" y2="218"/>
+  <line class="d-edge" x1="738" y1="212" x2="738" y2="218"/>
+  <text class="d-t-sm" x="90" y="234" text-anchor="middle">0h</text>
+  <text class="d-t-sm" x="198" y="234" text-anchor="middle">4h</text>
+  <text class="d-t-sm" x="306" y="234" text-anchor="middle">8h</text>
+  <text class="d-t-sm" x="414" y="234" text-anchor="middle">12h</text>
+  <text class="d-t-sm" x="522" y="234" text-anchor="middle">16h</text>
+  <text class="d-t-sm" x="630" y="234" text-anchor="middle">20h</text>
+  <text class="d-t-sm" x="738" y="234" text-anchor="middle">24h</text>
+
+  <!-- What the asymmetry is measured against -->
+  <rect class="d-box-muted" x="28" y="258" width="376" height="92" rx="12"/>
+  <text class="d-label" x="48" y="282">WHAT PAYMENTS HAS TODAY</text>
+  <text class="d-t-body" x="48" y="306">Hardcoded password, shared, unrotated</text>
+  <text class="d-t-body" x="48" y="326">Unattributed in any log, in a file on a server</text>
+
+  <rect class="d-box" x="416" y="258" width="376" height="92" rx="12"/>
+  <text class="d-label" x="436" y="282">WHAT THE 8-HOUR LEASE IS</text>
+  <text class="d-t-body" x="436" y="306">Unique per workload, tied to a lease ID</text>
+  <text class="d-t-body" x="436" y="326">Attributable, revocable, expires on its own</text>
+
+  <!-- Kill paths -->
+  <text class="d-label" x="28" y="378">KILL CAPABILITY THAT DOES NOT TRANSIT THE BROKER</text>
+  <rect class="d-box-accent" x="28" y="388" width="376" height="62" rx="10"/>
+  <text class="d-t-on-accent" x="48" y="412">Out-of-band DBA runbook</text>
+  <text class="d-t-on-accent-sm" x="48" y="432">two authorised DBAs · SIEM alarm · quarterly attestation</text>
+
+  <rect class="d-box-accent" x="416" y="388" width="376" height="62" rx="10"/>
+  <text class="d-t-on-accent" x="436" y="412">Sealed break-glass credential</text>
+  <text class="d-t-on-accent-sm" x="436" y="432">two of three quorum · regulator notified inside 4h</text>
+</svg>
