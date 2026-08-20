@@ -26,6 +26,11 @@ title = "Enterprise Security Architect"
   weight = 2
 
 [[menu.main]]
+  name = "ADRs"
+  url = "/posts/"
+  weight = 3
+
+[[menu.main]]
   name = "About"
   url = "/about/"
-  weight = 3
+  weight = 4
