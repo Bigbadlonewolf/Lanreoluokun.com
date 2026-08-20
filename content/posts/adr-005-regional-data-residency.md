@@ -1,12 +1,11 @@
 ---
-title: "Architecture Decision Records: Multi-Jurisdictional Data Residency & Retail Loyalty Security"
+title: "ADR-005: Regional Data Residency and Hierarchical Encryption"
 author: "Lanre — Cloud Security / Enterprise Architect"
 date: "2026-08-20"
-tags: ["architecture", "security", "cloud", "compliance", "ADR", "data-residency", "PCI-DSS", "loyalty-platform", "zero-trust"]
-description: "Two exercise Architecture Decision Records covering regional data residency with hierarchical encryption for a multi-jurisdictional claims portal, and a Zero Trust security approach for a cloud-native retail loyalty platform — with full critique, fixes, and validation."
+tags: ["architecture", "security", "cloud", "compliance", "ADR", "data-residency"]
+description: "Regional data residency with hierarchical customer-managed encryption keys for a multi-jurisdictional claims portal, with the critique, fixes, and validation that followed."
+aliases: ["/posts/adr-data-residency-and-loyalty-security/"]
 ---
-
-# Architecture Decision Records: Multi-Jurisdictional Data Residency & Retail Loyalty Security
 
 > **Author:** Lanre — Cloud Security / Enterprise Architect  
 > **Certifications:** CISSP, CCSP, CISM, ISSAP, GCP-PCA  
@@ -14,47 +13,29 @@ description: "Two exercise Architecture Decision Records covering regional data 
 
 ---
 
-## Table of Contents
-
-- [Overview](#overview)
-- [ADR-005: Regional Data Residency & Hierarchical Encryption](#adr-005-regional-data-residency--hierarchical-encryption)
-  - [Context](#context)
-  - [Decision](#decision)
-  - [Consequences](#consequences)
-  - [Compliance & Control Mapping](#compliance--control-mapping)
-  - [Verification & Evidence](#verification--evidence)
-  - [Architecture Overview](#architecture-overview)
-  - [Traceability to Requirement Baseline](#traceability-to-requirement-baseline)
-  - [Implementation Roadmap](#implementation-roadmap)
-  - [Risk Register](#risk-register)
-  - [References](#references)
-- [ADR-006: Security Architecture — Retail Loyalty Platform](#adr-006-security-architecture--retail-loyalty-platform)
-  - [Context](#context-1)
-  - [Decision](#decision-1)
-  - [Threat-to-Control Mapping](#threat-to-control-mapping)
-  - [PCI-DSS Scope Decision](#pci-dss-scope-decision)
-  - [Trust Boundary Controls](#trust-boundary-controls)
-  - [Compliance Mapping](#compliance-mapping)
-  - [Consequences](#consequences-1)
-  - [Related Decisions](#related-decisions)
-  - [References](#references-1)
-- [Fix Log: Validation & Critique Response](#fix-log-validation--critique-response)
-
----
-
 ## Overview
-
-This post contains two Architecture Decision Records (ADRs), written as exercises in applying enterprise security architecture principles to realistic scenarios. An adversarial review challenged every claim in both documents. The fixes are inline.
 
 **ADR-005** addresses a multinational insurer launching a claims portal across GDPR, UK GDPR, HIPAA, and APAC privacy regimes. It decides on regional data residency, with customer-managed encryption keys bound to jurisdictional boundaries.
 
-**ADR-006** addresses a retailer building a cloud-native loyalty platform. It decides on Zero Trust architecture, SAQ-A PCI scope minimization via a hosted payment page, and loyalty-specific fraud controls.
-
-Neither ADR contains fictional cross-references or unflagged gaps.
+The companion record is [ADR-006: Security Architecture for a Retail Loyalty Platform](../adr-006-retail-loyalty-security/).
 
 ---
 
-## ADR-005: Regional Data Residency and Hierarchical Encryption Strategy for Multi-Jurisdictional Claims Portal
+## Contents
+
+- [1. Context](#1-context)
+- [2. Decision](#2-decision)
+- [3. Consequences](#3-consequences)
+- [4. Compliance & Control Mapping](#4-compliance--control-mapping)
+- [5. Verification & Evidence](#5-verification--evidence)
+- [6. Architecture Overview](#6-architecture-overview)
+- [7. Traceability to Requirement Baseline](#7-traceability-to-requirement-baseline)
+- [8. Implementation Roadmap](#8-implementation-roadmap)
+- [9. Risk Register](#9-risk-register)
+- [10. References](#10-references)
+- [Fix Log: Validation & Critique Response](#fix-log-validation--critique-response)
+
+---
 
 | Field | Value |
 |-------|-------|
@@ -65,9 +46,9 @@ Neither ADR contains fictional cross-references or unflagged gaps.
 
 
 
-### 1. Context
+## 1. Context
 
-#### 1.1 Scenario Overview
+### 1.1 Scenario Overview
 
 A multinational insurer is launching a **customer-facing claims portal** on a **public-cloud IaaS platform**. The portal processes **personal and health-related data** for policyholders across multiple jurisdictions:
 
@@ -91,9 +72,9 @@ A multinational insurer is launching a **customer-facing claims portal** on a **
 
 The architect must **establish the requirement baseline before design begins**. This ADR covers the data architecture decisions that constrain later security, availability, and compliance choices.
 
-#### 1.2 Constraints & Forces
+### 1.2 Constraints & Forces
 
-##### 1.2.1 Privacy Regime Collision
+#### 1.2.1 Privacy Regime Collision
 
 The multi-jurisdictional spread triggers the **"deconfliction discipline."** The applicable privacy regimes differ in:
 
@@ -110,7 +91,7 @@ The multi-jurisdictional spread triggers the **"deconfliction discipline."** The
 
 **China Exclusion Note:** Phase 1 excludes mainland China. GCP has no mainland China region, and PIPL requires in-country infrastructure and a security assessment for cross-border transfer of important data. China needs its own deployment through a local partner or a compliant in-country cloud provider. ADR-007 (China Market Entry) covers it. The "APAC region" in this ADR means Singapore, Japan, India, and other non-China markets.
 
-##### 1.2.2 IaaS Shared Responsibility Split
+#### 1.2.2 IaaS Shared Responsibility Split
 
 Under an IaaS model, the responsibility boundary is well-defined:
 
@@ -134,7 +115,7 @@ Under an IaaS model, the responsibility boundary is well-defined:
   - Sub-processor disclosure and consent
   - Data deletion on exit with evidence
 
-##### 1.2.3 High-Sensitivity Data Classification
+#### 1.2.3 High-Sensitivity Data Classification
 
 **Health-related data** raises the classification to the **highest sensitivity tier**. This triggers:
 
@@ -144,7 +125,7 @@ Under an IaaS model, the responsibility boundary is well-defined:
 - Shorter retention periods (where regulation permits)
 - Mandatory privacy impact assessments (DPIA / PIA)
 
-##### 1.2.4 Availability Context — The Four-Hour MTD
+#### 1.2.4 Availability Context — The Four-Hour MTD
 
 The business has stated that a claims outage longer than four hours would cause **unacceptable reputational and regulatory harm**. This is an **MTD (Maximum Tolerable Downtime) signal**.
 
@@ -159,7 +140,7 @@ The business has stated that a claims outage longer than four hours would cause 
 
 With those numbers, the likely shape is a **multi-availability-zone active design** on the cloud platform. It pairs **continuous replication for a tight RPO** with an **isolated, immutable backup**. The backup guards against ransomware that replication would otherwise propagate. Derive this shape from the objectives rather than assuming it.
 
-##### 1.2.5 Privacy Management System Standards
+#### 1.2.5 Privacy Management System Standards
 
 The health data and privacy exposure point toward:
 
@@ -168,7 +149,7 @@ The health data and privacy exposure point toward:
 - Layered over a **27001 ISMS** (Information Security Management System)
 - **CSA CCM (Cloud Controls Matrix)** as the cloud control reference
 
-#### 1.3 Problem Statement
+### 1.3 Problem Statement
 
 How do we store, encrypt, and manage claims data across multiple jurisdictions such that:
 
@@ -181,13 +162,13 @@ How do we store, encrypt, and manage claims data across multiple jurisdictions s
 
 
 
-### 2. Decision
+## 2. Decision
 
-#### 2.1 Selected Approach
+### 2.1 Selected Approach
 
 We will adopt a **Regional Data Residency model with Hierarchical Customer-Managed Encryption Keys (CMEK)**.
 
-##### 2.1.1 Regional Deployment Model
+#### 2.1.1 Regional Deployment Model
 
 | Layer | Decision | Rationale |
 |-------|----------|-----------|
@@ -199,7 +180,7 @@ We will adopt a **Regional Data Residency model with Hierarchical Customer-Manag
 | **Global Control Plane** | Restricted to IAM, API Gateway routing logic, and operational metadata. The Jurisdiction Router processes transient personal data (user ID, jurisdiction mapping) for routing decisions but does not persist health data, claims data, or PII in durable storage. | Enables unified operations without violating data residency. |
 | **Backup & DR** | Regional continuous replication to a secondary zone within the same region for RPO targets. **Isolated, immutable backups** (WORM / object-lock) in a separate project/VPC within the same region. | Satisfies ransomware resilience without violating residency. |
 
-##### 2.1.2 Data Classification and Routing Logic
+#### 2.1.2 Data Classification and Routing Logic
 
 At ingestion, the portal applies **jurisdictional tagging** based on:
 
@@ -230,7 +211,7 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 └─────────────────────────────────────────────────────────────────────┘
 ```
 
-##### 2.1.3 Encryption Key Hierarchy
+#### 2.1.3 Encryption Key Hierarchy
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -332,9 +313,9 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 | **Rotation** | Automatic rotation every 90 days for DEKs; annual rotation for KEKs; re-wrap of existing objects within 30 days of DEK rotation |
 | **Dual Control** | Key ceremonies require two authorized personnel with split knowledge |
 
-#### 2.2 Rejected Alternatives
+### 2.2 Rejected Alternatives
 
-##### Alternative A: Single Global Data Store with Unified Encryption
+#### Alternative A: Single Global Data Store with Unified Encryption
 
 | Aspect | Assessment |
 |--------|------------|
@@ -342,7 +323,7 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 | **Why Rejected** | Fails PIPL data-localization implications. Violates GDPR transfer-restriction rigor for health data. Creates a single breach surface where one compromise exposes all jurisdictions. Violates deconfliction discipline. |
 | **Residual Use** | May be acceptable for non-PII operational metadata only (e.g., IAM policies, routing tables) |
 
-##### Alternative B: Fully Siloed Per-Country Deployments with Zero Shared Control Plane
+#### Alternative B: Fully Siloed Per-Country Deployments with Zero Shared Control Plane
 
 | Aspect | Assessment |
 |--------|------------|
@@ -350,7 +331,7 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 | **Why Rejected** | Maximizes compliance but fragments operations, duplicates cost (5-10x infrastructure), prevents unified claims analytics, and creates an inconsistent customer experience. The business requires a single customer-facing portal. |
 | **Residual Use** | Required for mainland China if PIPL security assessment thresholds are met and no adequate transfer mechanism exists; scoped to ADR-007 |
 
-##### Alternative C: Global Active-Active Database with Geo-Partitioning
+#### Alternative C: Global Active-Active Database with Geo-Partitioning
 
 | Aspect | Assessment |
 |--------|------------|
@@ -360,9 +341,9 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 
 
 
-### 3. Consequences
+## 3. Consequences
 
-#### 3.1 Positive
+### 3.1 Positive
 
 | # | Benefit | Explanation |
 |---|---------|-------------|
@@ -373,7 +354,7 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 | 5 | **Audit simplicity** | Regulators can be shown a clear boundary: "EU data in EU, encrypted by EU keys, managed under EU ISMS scope." |
 | 6 | **Ransomware resilience** | Immutable, isolated backups within each region protect against ransomware propagation without creating cross-border data flows. |
 
-#### 3.2 Negative / Risks
+### 3.2 Negative / Risks
 
 | # | Risk | Severity | Mitigation |
 |---|------|----------|------------|
@@ -386,9 +367,9 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 
 
 
-### 4. Compliance & Control Mapping
+## 4. Compliance & Control Mapping
 
-#### 4.1 Regulatory Framework Mapping
+### 4.1 Regulatory Framework Mapping
 
 | Requirement | Standard / Regulation | Architectural Element | Evidence Artifact |
 |-------------|----------------------|----------------------|-------------------|
@@ -405,7 +386,7 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 | Individual Erasure (Art. 17) | GDPR Art. 17 | Record-level deletion API + metadata purge | Deletion verification audit per request |
 | Encryption Standards | NIST SP 800-57, FIPS 140-3 | AES-256-GCM for data at rest, TLS 1.3 for data in transit | Cryptographic module validation certificates |
 
-#### 4.2 Control Implementation Matrix
+### 4.2 Control Implementation Matrix
 
 | Control ID | Control Name | Implementation | Test Method | Frequency |
 |------------|-------------|----------------|-------------|-----------|
@@ -424,11 +405,11 @@ At ingestion, the portal applies **jurisdictional tagging** based on:
 
 
 
-### 5. Verification & Evidence
+## 5. Verification & Evidence
 
 The following must exist in the **requirement baseline** before design proceeds to implementation:
 
-#### 5.1 Provider Assurance
+### 5.1 Provider Assurance
 
 - [ ] **SOC 2 Type II report** covering the specific regional services in scope (not a generic corporate report)
   - Must include operating effectiveness over a minimum 6-month period
@@ -439,7 +420,7 @@ The following must exist in the **requirement baseline** before design proceeds 
   - Prefer Level 2 (STAR Certification) or Level 3 (STAR Continuous)
   - Must include CCM v4 control mappings
 
-#### 5.2 Contractual Obligations (Per Region)
+### 5.2 Contractual Obligations (Per Region)
 
 - [ ] **Data Processing Agreement (DPA)** executed with the cloud provider
 - [ ] **Contractual annex** specifying:
@@ -450,7 +431,7 @@ The following must exist in the **requirement baseline** before design proceeds 
   - Audit rights (right to audit provider controls, or reliance on third-party reports)
   - Data localization commitment (provider will not move data outside specified regions without consent)
 
-#### 5.3 Key Management
+### 5.3 Key Management
 
 - [ ] **HSM key-ceremony documentation** with:
   - Dual-control procedures
@@ -460,7 +441,7 @@ The following must exist in the **requirement baseline** before design proceeds 
 - [ ] **Key recovery and break-glass procedures** documented and tested
 - [ ] **Key rotation schedule** approved by CISO and DPO, including re-wrap procedure for existing objects
 
-#### 5.4 Business Impact Analysis
+### 5.4 Business Impact Analysis
 
 - [ ] **BIA commissioning record** confirming:
   - The four-hour MTD figure (validated, not assumed)
@@ -471,7 +452,7 @@ The following must exist in the **requirement baseline** before design proceeds 
 
 > **Note:** BIA output does **not** block the data-residency decision in this ADR. The availability architecture (DR, backup frequency, replication topology) **is** dependent on validated BIA results. ADR-006 (Availability and Disaster Recovery Architecture) follows BIA completion.
 
-#### 5.5 Privacy Impact Assessment
+### 5.5 Privacy Impact Assessment
 
 - [ ] **DPIA (Data Protection Impact Assessment)** per GDPR Article 35
 - [ ] **PIA (Privacy Impact Assessment)** per HIPAA (if applicable)
@@ -479,9 +460,9 @@ The following must exist in the **requirement baseline** before design proceeds 
 
 
 
-### 6. Architecture Overview
+## 6. Architecture Overview
 
-#### 6.1 Regional Deployment Model
+### 6.1 Regional Deployment Model
 
 {{< diagram src="adr5-regional-deployment" caption="Four regional stacks under one control plane that persists nothing. **The Cloud HSM in each column is what makes the residency claim enforceable**, because a region's key material never leaves its geographic boundary and no key from one region wraps a key from another. The Jurisdiction Router reads a transient routing identifier to pick the column and stores none of it." >}}
 
@@ -495,9 +476,9 @@ The following must exist in the **requirement baseline** before design proceeds 
 
 **Control Plane PII Clarification:** The Jurisdiction Router and IAM components process transient personal data (user ID, jurisdiction mapping) to route and authenticate requests. The service needs this processing, and the DPA governs it. The global control plane does **not persist** health data, claims data, or PII in durable storage. Durable PII storage stays within regional boundaries.
 
-#### 6.2 Data Flow Diagrams
+### 6.2 Data Flow Diagrams
 
-##### 6.2.1 Claims Submission Flow
+#### 6.2.1 Claims Submission Flow
 
 ```
 ┌──────────┐     ┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────┐
@@ -516,7 +497,7 @@ The following must exist in the **requirement baseline** before design proceeds 
                                                                             └─────────────┘
 ```
 
-##### 6.2.2 Document Upload Flow
+#### 6.2.2 Document Upload Flow
 
 ```
 ┌──────────┐     ┌─────────────┐     ┌──────────────┐     ┌─────────────┐     ┌──────────┐
@@ -535,7 +516,7 @@ The following must exist in the **requirement baseline** before design proceeds 
                                                                             └─────────────┘
 ```
 
-##### 6.2.3 Cross-Border Analytics Flow (Anonymized Only)
+#### 6.2.3 Cross-Border Analytics Flow (Anonymized Only)
 
 ```
 ┌──────────┐     ┌─────────────┐     ┌─────────────────────┐     ┌──────────────┐
@@ -554,7 +535,7 @@ The following must exist in the **requirement baseline** before design proceeds 
      └──────────────────────────────────────────────────────────────┘
 ```
 
-#### 6.3 Encryption Key Hierarchy (Detailed)
+### 6.3 Encryption Key Hierarchy (Detailed)
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -653,7 +634,7 @@ The following must exist in the **requirement baseline** before design proceeds 
 
 
 
-### 7. Traceability to Requirement Baseline
+## 7. Traceability to Requirement Baseline
 
 The **requirement baseline** is the deliverable that ends this phase. It records each obligation with its source, the data and systems it touches, and the objective it implies. It also names the accountable owner and a placeholder traceability link to the architectural element that will satisfy it.
 
@@ -682,9 +663,9 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 
 
 
-### 8. Implementation Roadmap
+## 8. Implementation Roadmap
 
-#### Phase 1: Foundation (Weeks 1-4)
+### Phase 1: Foundation (Weeks 1-4)
 
 | Week | Activity | Deliverable | Owner |
 |------|----------|-------------|-------|
@@ -695,7 +676,7 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 | 2-3 | Key ceremony design | HSM architecture, dual-control procedures | Cloud Security Architect |
 | 3-4 | Infrastructure-as-code baseline | Terraform modules for regional deployment | Cloud Engineering |
 
-#### Phase 2: Regional Deployment (Weeks 5-12)
+### Phase 2: Regional Deployment (Weeks 5-12)
 
 | Week | Activity | Deliverable | Owner |
 |------|----------|-------------|-------|
@@ -708,7 +689,7 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 | 11 | Backup and immutability | WORM buckets, replication tested | SRE Lead |
 | 12 | Integration testing | End-to-end cross-region routing | QA Lead |
 
-#### Phase 3: Validation (Weeks 13-16)
+### Phase 3: Validation (Weeks 13-16)
 
 | Week | Activity | Deliverable | Owner |
 |------|----------|-------------|-------|
@@ -718,7 +699,7 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 | 15 | Key recovery drill | Break-glass procedure test | CISO |
 | 16 | Go-live readiness | Sign-off from DPO, Legal, CISO | Enterprise Architect |
 
-#### Phase 4: Operationalize (Week 17+)
+### Phase 4: Operationalize (Week 17+)
 
 | Activity | Frequency | Owner |
 |----------|-----------|-------|
@@ -731,7 +712,7 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 
 
 
-### 9. Risk Register
+## 9. Risk Register
 
 **Risk Scoring:** Likelihood (1=Rare, 2=Unlikely, 3=Possible, 4=Likely, 5=Almost Certain) × Impact (1=Negligible, 2=Minor, 3=Moderate, 4=Major, 5=Catastrophic)
 
@@ -750,9 +731,9 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 
 
 
-### 10. References
+## 10. References
 
-#### 10.1 Standards and Frameworks
+### 10.1 Standards and Frameworks
 
 1. (ISC)² **ISSAP CBK**, Domain 2 — Security Architecture Modeling
 2. **GDPR** Regulation (EU) 2016/679
@@ -770,7 +751,7 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 11. **HIPAA Security Rule** — 45 CFR Parts 160, 162, and 164
 12. **FIPS 140-3** — Security Requirements for Cryptographic Modules
 
-#### 10.2 Cloud Provider Documentation
+### 10.2 Cloud Provider Documentation
 
 13. **Google Cloud**
     - Assured Workloads — [cloud.google.com/assured-workloads](https://cloud.google.com/assured-workloads)
@@ -788,7 +769,7 @@ The **requirement baseline** is the deliverable that ends this phase. It records
     - Azure Policy Engine
     - Customer-managed keys for Storage and SQL
 
-#### 10.3 Additional Reading
+### 10.3 Additional Reading
 
 16. **ENISA** — Cloud Security Guide for SMEs
 17. **ICO (UK)** — International transfers guidance
@@ -801,250 +782,13 @@ The **requirement baseline** is the deliverable that ends this phase. It records
 
 *This ADR is an exercise in applying enterprise security architecture principles to a realistic multinational insurer scenario.*
 
-
 ---
-
-## ADR-006: Security Architecture Approach — Retail Customer Loyalty Platform
-
-| Field | Value |
-|---|---|
-| **Title** | Security Architecture Approach for Cloud-Native Retail Loyalty Platform |
-| **Status** | Proposed |
-| **Date** | 2026-08-19 |
-| **Author** | Lanre |
-| **Stakeholders** | CISO, Enterprise Architecture, Platform Engineering, Compliance (PCI-DSS), Privacy Officer, Fraud Operations |
-
-
-
-### 1. Context
-
-A retailer is building a new customer loyalty platform on public cloud with the following components:
-
-- Public web and mobile front end
-- API gateway / layer
-- Microservices back end
-- Customer-profile data store (personal data)
-- Third-party payment processor integration
-- Third-party email provider integration
-
-The architect must establish the security architecture approach **before** detailed design begins. This ADR records the decision on frameworks, threat-modeling methodology, and control strategy.
-
-**Business Context:** Loyalty points are a stored-value currency inside the retailer's ecosystem. Points balances, earn/burn transactions, referral bonuses, and promotional credits are direct financial liability and fraud targets. The primary loyalty-specific threat vectors are account takeover for points theft, points laundering across accounts, insider point issuance, and business-logic manipulation of earn/burn rules.
-
-
-
-### 2. Decision
-
-We will adopt a **defense-in-depth, Zero Trust security architecture** grounded in inherited enterprise frameworks, not greenfield invention.
-
-#### 2.1 Framework Inheritance
-| Layer | Framework / Standard | Role |
-|---|---|---|
-| Enterprise Architecture | TOGAF ADM | Security work woven into relevant ADM phases |
-| Risk & Traceability | SABSA | Map every control to a business driver and documented requirement |
-| Cloud Security | CSA Enterprise Architecture | Cloud-native reference architecture |
-| Design Principle | Zero Trust | No implicit trust; authenticate/authorize every inter-service call; microsegmentation; pervasive monitoring |
-
-#### 2.2 Threat-Modeling Stack
-| Method | Purpose | Scope |
-|---|---|---|
-| **STRIDE** | Systematic per-element, per-boundary threat enumeration | Spoofing, Tampering, Repudiation, Information Disclosure, DoS, Elevation of Privilege |
-| **LINDDUN** | Privacy threat analysis | Linkability, Identifiability, Non-repudiation, Detectability, Disclosure of information, Unawareness, Non-compliance |
-| **MITRE ATT&CK** | Threat realism & prioritization | Retail-sector threat intelligence — **three techniques cited in §3.2** |
-
-**CVSS Exclusion:** CVSS scoring belongs to post-implementation vulnerability management (operational phase). It is out of scope for this pre-design architecture decision.
-
-#### 2.3 Trust Boundaries
-The data flow diagram establishes the following trust boundaries:
-
-1. Internet → Front End
-2. Front End → API Layer
-3. API Layer → Microservices
-4. Microservices → Customer-Profile Data Store
-5. Microservices → Third-Party Payment Processor
-6. Microservices → Third-Party Email Provider
-
-#### 2.4 Rejected Alternatives
-
-##### Alternative A: Greenfield Custom Security Framework
-
-| Aspect | Assessment |
-|--------|------------|
-| **Description** | Build a bespoke security framework and control taxonomy specific to the loyalty platform, without inheriting enterprise standards |
-| **Why Rejected** | Reinvents validated patterns; creates audit friction (auditors cannot map controls to recognized standards); no vendor or community support; knowledge walks out the door when architects leave. The enterprise has already invested in TOGAF, SABSA, and CSA — abandoning that investment for one platform is unjustified. |
-| **Residual Use** | None — all security work must inherit enterprise frameworks |
-
-##### Alternative B: Perimeter-Based (Castle-and-Moat) Architecture
-
-| Aspect | Assessment |
-|--------|------------|
-| **Description** | Implicit trust inside the network perimeter; strong border controls (firewall, WAF) with weak internal segmentation |
-| **Why Rejected** | Incompatible with microservices architecture — implicit trust between services allows lateral movement on compromise. The loyalty platform's microservices communicate east-west extensively; a perimeter model would leave the points-ledger service implicitly trusted by the profile service, creating a direct path from front-end compromise to balance manipulation. Also fails to address insider threat and supply-chain compromise. |
-| **Residual Use** | None — perimeter controls (WAF, DDoS protection) are layered *under* Zero Trust, not replacing it |
-
-##### Alternative C: Framework Inheritance Without Zero Trust Principles
-
-| Aspect | Assessment |
-|--------|------------|
-| **Description** | Use TOGAF + SABSA + CSA for structure and documentation, but do not enforce per-service authentication, microsegmentation, or least-privilege access |
-| **Why Rejected** | Frameworks provide governance and traceability, but without Zero Trust execution principles, the architecture retains implicit trust between services. The result is a well-documented design that still allows lateral movement and fails to limit blast radius. Zero Trust is the operational layer that makes the frameworks meaningful. |
-| **Residual Use** | None — Zero Trust principles are mandatory for this platform |
-
-
-
-### 3. Threat-to-Control Mapping
-
-#### 3.1 Security Controls (STRIDE)
-
-| STRIDE Category | Threat | Control | Requirement Traceability |
-|---|---|---|---|
-| **Spoofing** | User impersonation; service-to-service spoofing | Strong authentication (OAuth 2.0 / mTLS); mutual service authentication | REQ-001: Identity & Access Management |
-| **Tampering** | Profile data or API request modification; **loyalty points balance manipulation** | Input validation; integrity controls; request signing; **business-logic validation layer for earn/burn transactions with anomaly detection** | REQ-002: Data Integrity; REQ-010: Fraud Prevention |
-| **Repudiation** | Denial of profile changes or transactions | Immutable audit logging; non-repudiation mechanisms | REQ-003: Accountability |
-| **Information Disclosure** | Personal and payment data exposure in transit/rest | Encryption (TLS 1.3, AES-256-GCM); access control; tokenization of payment data | REQ-004: Confidentiality; REQ-005: PCI-DSS Scope Minimization |
-| **Denial of Service** | Public front-end overload | Rate limiting; WAF; auto-scaling; circuit breakers | REQ-006: Availability |
-| **Elevation of Privilege** | Lateral movement within microservices | Least privilege (RBAC/ABAC); authorization checks; workload isolation (containers / VPC-SC) | REQ-007: Authorization |
-
-#### 3.2 Loyalty-Specific Threats (Fraud & Abuse)
-
-| Threat | Attack Vector | Control | Requirement Traceability |
-|---|---|---|---|
-| **Points Theft via ATO** | Credential stuffing, password reuse, phishing → account takeover → points transfer or redemption | MFA on high-value actions; velocity checks on points transfers; device fingerprinting; account lockout after failed attempts | REQ-010: Fraud Prevention |
-| **Points Laundering** | Stolen points moved through mule accounts; secondary market resale | Transfer limits; cooling-off periods; recipient account age verification; machine-learning anomaly detection on transfer patterns | REQ-010: Fraud Prevention |
-| **Referral / Promo Abuse** | Synthetic account creation to harvest referral bonuses; repeated use of one-time promo codes | Identity verification (KYC-lite) for referral payouts; promo-code rate limiting; device/IP clustering | REQ-010: Fraud Prevention |
-| **Insider Point Issuance** | Authorized staff manually crediting points to colluding accounts | Dual-control for manual point adjustments; immutable audit trail with tamper-evident hashing; SOX-style segregation of duties | REQ-003: Accountability; REQ-011: Insider Threat |
-| **Earn/Burn Logic Manipulation** | API parameter tampering to inflate earn rates or bypass burn validation | Server-side validation of all earn/burn calculations; immutable transaction ledger; reconciliation engine comparing expected vs. actual points flow | REQ-002: Data Integrity; REQ-010: Fraud Prevention |
-
-#### 3.3 MITRE ATT&CK Mapping (Retail Sector)
-
-| Technique ID | Technique Name | Loyalty Platform Relevance |
-|---|---|---|
-| T1589 | Gather Victim Identity Information | Harvesting loyalty account credentials from breach dumps for account takeover |
-| T1110.004 | Credential Stuffing | Automated credential stuffing against loyalty login APIs |
-| T1078 | Valid Accounts | Abuse of compromised legitimate accounts to transfer or redeem stolen points |
-
-#### 3.4 Privacy Controls (LINDDUN)
-
-| LINDDUN Category | Privacy Threat | Control | STRIDE Collision Resolution |
-|---|---|---|---|
-| **Linkability** | Behavioral profiling across sessions | Data minimization; separate data stores for identity vs. behavioral data; session isolation | None — STRIDE does not address linkability |
-| **Identifiability** | Re-identification from pseudonymous data | Pseudonymization of customer profiles; k-anonymity checks on analytics exports | None — STRIDE information disclosure covers unauthorized access, not re-identification risk |
-| **Non-repudiation (Privacy)** | Data subject cannot prove privacy violation or incorrect processing | **Divergence from STRIDE:** STRIDE non-repudiation protects the *system* (user cannot deny a transaction). LINDDUN non-repudiation protects the *data subject* (user cannot prove a privacy breach). **Resolution:** Implement *both* — immutable audit logs for STRIDE (transaction non-repudiation) AND a data-subject access log / privacy dashboard for LINDDUN (privacy non-repudiation). | **Explicitly resolved in architecture** |
-| **Detectability** | Adversary can infer user membership in loyalty program | Minimize public profile enumeration; return generic errors; rate-limit lookup APIs | None |
-| **Disclosure of Information (Privacy)** | Unauthorized access to PII beyond loyalty data | Encryption at rest/transit; access control; DLP monitoring | Aligns with STRIDE Information Disclosure — unified control |
-| **Unawareness** | Customer unaware of profiling, data retention, or third-party sharing | Granular consent management; just-in-time disclosures at earn/burn; clear retention policies; privacy dashboard | None — STRIDE does not address awareness |
-| **Non-compliance** | Retention beyond legal limit; processing without legal basis | Automated data-retention enforcement; TTL on behavioral data; periodic compliance scans; consent expiry checks | None — STRIDE does not address compliance |
-
-
-
-### 4. PCI-DSS Scope Decision
-
-The most consequential security decision for this platform is the **payment integration architecture**, as it determines PCI-DSS scope and audit burden.
-
-#### 4.1 Selected Approach: Hosted Payment Page (SAQ A)
-
-| Aspect | Decision |
-|---|---|
-| **Integration Model** | Redirect to payment processor's hosted payment page (HPP) or embedded iframe (iframe-based SAQ A) |
-| **Mobile** | Processor's certified mobile SDK (SAQ A) |
-| **Tokenization** | Processor vaults card data; platform stores only non-sensitive tokens and last-4 digits |
-| **PCI Scope** | SAQ A — lowest scope; platform does not touch, process, or store CHD |
-| **Network Segmentation** | Payment token returned to platform; no CHD enters platform network boundary |
-
-#### 4.2 Rejected Alternative: Direct Post / API Integration (SAQ A-EP / SAQ D)
-
-| Aspect | Assessment |
-|---|---|
-| **Description** | Platform front end posts card data directly to platform API, which then forwards to processor; or platform API accepts card data directly |
-| **Why Rejected** | Expands PCI-DSS scope to the entire platform (SAQ D or A-EP), requiring network segmentation, ASV scans, penetration testing, and annual QSA audit of the full environment. **Rough order-of-magnitude cost increase: ~$150K–$300K/year** versus SAQ A, based on additional QSA hours, ASV scanning of platform infrastructure, and broader penetration-test scope. The business does not require direct card handling; tokenization via HPP satisfies all functional requirements. |
-| **Residual Use** | Only if processor HPP does not support required payment methods (e.g., certain BNPL providers); requires explicit CISO and QSA sign-off |
-
-
-
-### 5. Trust Boundary Controls
-
-#### 5.1 Boundaries 1–4 (Internet → Front End → API → Microservices → Data Store)
-
-Covered in §3.1 (STRIDE table) and §3.2 (loyalty-specific threats).
-
-#### 5.2 Boundary 5: Microservices → Third-Party Payment Processor
-
-| Threat | Control | Requirement Traceability |
-|---|---|---|
-| **Man-in-the-middle** | TLS 1.3 with certificate pinning; mutual TLS where supported by processor | REQ-004: Confidentiality |
-| **Token replay / substitution** | Token validation with processor on each transaction; token expiry; token-to-account binding | REQ-010: Fraud Prevention |
-| **Processor breach expanding platform liability** | Contractual BAA/processor DPA; right to audit; breach-notification SLA (24 hours); sub-processor disclosure | REQ-008: Third-Party Risk |
-| **Availability dependency** | Circuit breaker on payment API; graceful degradation (queue transactions for retry); multi-processor fallback | REQ-006: Availability |
-
-#### 5.3 Boundary 6: Microservices → Third-Party Email Provider
-
-| Threat | Control | Requirement Traceability |
-|---|---|---|
-| **Account takeover via email compromise** | Contractual MFA requirement on email provider admin accounts; monitor provider breach disclosures; disable password-reset-via-email for high-value actions; fallback to app-based recovery with velocity limits | REQ-001: Identity & Access Management |
-| **PII leakage in email content** | No PII in email templates beyond first name; all sensitive notifications require login to portal; suppress full statements | REQ-004: Confidentiality |
-| **Sub-processor compliance** | DPA with email provider; data residency commitment; no onward transfer; breach-notification SLA | REQ-008: Third-Party Risk |
-| **Phishing via spoofed provider domain** | SPF/DKIM/DMARC enforcement on provider-sending domain; brand monitoring | REQ-009: Brand Protection |
-| **Email enumeration** | Generic "check your email" responses; no confirmation of email existence in API responses | REQ-004: Confidentiality |
-
-
-
-### 6. Compliance Mapping
-
-| Regulation / Standard | Trigger | Control Implication |
-|---|---|---|
-| **PCI DSS** | Payment processor integration | Scope minimization via hosted payment page (SAQ A); tokenization; no CHD enters platform boundary |
-| **Privacy Regulations** (GDPR/CCPA) | Personal data in profile store | Privacy-by-design; data minimization; pseudonymization; consent logging; retention enforcement |
-| **Fraud / Financial Crime** | Loyalty points as stored value | Transaction monitoring; anomaly detection; velocity limits; insider controls; reconciliation engine |
-
-
-
-### 7. Consequences
-
-#### Positive
-- Inherits validated enterprise patterns (TOGAF, SABSA, CSA), which reduces design risk and audit friction.
-- Zero Trust architecture eliminates implicit trust and limits the blast radius of a compromise.
-- Dual threat-modeling (STRIDE + LINDDUN) covers security and privacy. §3.4 resolves the collision between STRIDE and LINDDUN non-repudiation.
-- Loyalty-specific fraud controls (§3.2) address the primary business risk that generic web-app security misses.
-- PCI scope minimization via SAQ A avoids ~$150K–$300K/year in additional audit overhead.
-- Traceability to documented requirements (REQ-001 … REQ-011) enables verification and validation in later phases.
-
-#### Negative / Risks
-- **Complexity**: Mutual TLS and per-service authorization increase operational overhead.
-- **Latency**: Additional authentication/authorization hops may increase API response times. Requires a performance baseline.
-- **Third-party dependency**: Payment processor and email provider security postures sit outside direct control. Requires contractual SLAs and continuous monitoring.
-- **Fraud false positives**: Anomaly detection on points transfers may flag legitimate behavior. Requires tuning and customer communication.
-- **PCI residual risk**: Any misconfiguration in tokenization or segmentation could expand audit scope. Quarterly self-assessment required.
-
-
-
-### 8. Related Decisions
-- ADR-001: Platform-Wide Identity Federation Strategy (OAuth 2.0 / OIDC)
-- ADR-002: API Gateway Selection and Rate-Limiting Policy
-- ADR-003: Microservices Service Mesh and mTLS Configuration
-- ADR-004: Customer Profile Data Store Encryption and Retention
-
-
-
-### 9. References
-- TOGAF Standard, Version 9.2 — ADM Security Architecture
-- SABSA — Sherwood Applied Business Security Architecture
-- CSA Enterprise Architecture v4
-- NIST SP 800-207 — Zero Trust Architecture
-- OWASP Threat Modeling Cheat Sheet (STRIDE)
-- LINDDUN Privacy Threat Modeling Framework
-- MITRE ATT&CK for Enterprise
-- PCI DSS v4.0 Requirements and Testing Procedures
-- SAQ A and SAQ A-EP Eligibility Criteria (PCI SSC)
-
-
----
-
 
 ## Fix Log: Validation & Critique Response
 
-This section documents the defects found during adversarial review and the fixes applied to both ADRs.
+Defects found during adversarial review of this ADR, and the fixes applied.
 
-### ADR-005 (Residency / Claims Portal) — Fixes Applied
+## ADR-005 (Residency / Claims Portal) — Fixes Applied
 
 | # | Issue | Fix |
 |---|---|---|
@@ -1061,30 +805,10 @@ This section documents the defects found during adversarial review and the fixes
 | 11 | HIPAA asserted without scoping. Multinational insurer is only a covered entity for health plans, not auto/life/property. | **Added HIPAA Scoping Assumption:** assumes health plan operations; other lines out of scope. DPO must confirm. |
 | 12 | Study-guide leakage: blockquote attributed to "ISSAP Domain 2, Scenario Walkthrough" with page citation; footer cited (ISC)² guide. | **Removed all study-guide references.** Rewrote blockquote in own voice without attribution. Removed footer citation. Removed "Page 60" from metadata. |
 
-### ADR-006 (Retail Loyalty) — Fixes Applied
 
-| # | Issue | Fix |
-|---|---|---|
-| 1 | Nothing loyalty-specific. STRIDE table would fit any web app. Missing points theft, laundering, promo abuse, insider issuance, balance manipulation. | **Added §3.2 Loyalty-Specific Threats (Fraud & Abuse)** with five threat rows: Points Theft via ATO, Points Laundering, Referral/Promo Abuse, Insider Point Issuance, Earn/Burn Logic Manipulation. |
-| 2 | PCI decision not made. "Tokenization" and "scope minimization" are outcomes, not decisions. Missing SAQ A vs. A-EP vs. D choice. | **Added §4 PCI-DSS Scope Decision:** explicitly selected Hosted Payment Page (SAQ A). Rejected Direct Post (SAQ A-EP/D) with costed rationale. |
-| 3 | Two trust boundaries (5: payment processor, 6: email provider) had no controls mapped. Email provider is live ATO path and sub-processor. | **Added §5 Trust Boundary Controls** with dedicated subsections for Boundary 5 (payment processor) and Boundary 6 (email provider). |
-| 4 | LINDDUN covered only 2 of 7 categories. Unawareness and Non-compliance are live for loyalty. STRIDE non-repudiation collided with LINDDUN non-repudiation; claimed "without duplication" but they collide. | **Expanded LINDDUN to all 7 categories.** **Explicitly resolved collision:** STRIDE non-repudiation = system protection (immutable audit logs); LINDDUN non-repudiation = data-subject protection (privacy dashboard). Architecture implements both. |
-| 5 | MITRE ATT&CK and CVSS named but not used. No techniques cited. CVSS described as "post-implementation" which is out of scope for pre-design ADR. | **Added §3.3 MITRE ATT&CK Mapping** with three actual techniques (T1589, T1110.004, T1078). **Removed CVSS** from threat-modeling stack; added explicit exclusion note. |
-| 6 | "Domain 1 Traceability" leaked study origin. No CISO knows what it means. | **Replaced with real requirement IDs** (REQ-001 … REQ-011) with descriptive names. |
-| 7 | §6 referenced ADR-001 (AI vendor / ECOA / SR 11-7) and ADR-003 (PAM) — bank decisions in a retailer's ADR. | **Replaced cross-references** with retail-loyalty-appropriate ADRs (Identity Federation, API Gateway, Service Mesh, Data Store Encryption). |
-| 8 | ADR-006 had no rejected alternatives for its main security architecture decision. | **Added §2.4 Rejected Alternatives** for the overall approach: Greenfield Custom Framework, Perimeter-Based Architecture, and Frameworks Without Zero Trust. |
-| 9 | Boundary 6, first row: "Control" cell restated the threat instead of stating a control. | **Replaced with actual control:** contractual MFA on provider admin accounts, monitoring breach disclosures, disabling email-based password reset for high-value actions, app-based recovery with velocity limits. |
-| 10 | T1496 (Resource Hijacking) incorrectly mapped to loyalty points. T1496 refers to compute resource hijacking (cryptomining). | **Replaced with T1078 (Valid Accounts)** — abuse of compromised legitimate accounts for points transfer/redemption. Kept T1110.004 (Credential Stuffing) and T1589 (Gather Victim Identity Information). |
-| 11 | Unsourced dollar figures for PCI cost savings. | **Added rough order-of-magnitude label** with basis: QSA hours, ASV scanning, penetration-test scope. |
-
-### What Was Preserved from Original Drafts
+## What Was Preserved from Original Drafts
 
 - ADR-005 §5 (Verification & Evidence) — retained with additions
 - ADR-005 §7 (Requirement-baseline traceability) — retained with additions
 - ADR-005 §1.2.4 (BIA before hot site) — retained, blockquote rewritten in own voice
 - ADR-005 §2.2 (Rejected Alternatives A/B/C with residual-use notes) — retained with updates
-
-
----
-
-*End of consolidated Architecture Decision Records.*
