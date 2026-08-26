@@ -2,9 +2,11 @@
 title: "Design Cases"
 ---
 
-Four reference design scenarios for a regional banking context, worked end to end as architecture decisions rather than product selections. Each case demonstrates the same method: frame the problem before naming a component, attach a rejected alternative to every decision, and state risk in money rather than adjectives.
+Two sets of worked scenarios, both treated as architecture decisions rather than product selections. Neither set is client work. The organisations are illustrative, and where a reference build cannot do something, the case says so rather than rounding up.
 
-These are design scenarios, not client engagements. The organisations are illustrative. The reference builds behind them are real, and where a build cannot do something, the case says so rather than rounding up.
+**Cases 1 to 4** are reference design scenarios for a regional banking context, worked end to end against the seven-step framework below. Each one frames the problem before naming a component, attaches a rejected alternative to every decision, and states risk in money rather than adjectives.
+
+**ISSAP scenarios 1 to 5** are shorter. They come from ISSAP certification study material and are rewritten here as Architecture Decision Records, which is a harder format than it looks: you have to commit to one decision, name what you rejected, and own the consequences while you can still see them. Reading a scenario walkthrough, the right answer feels obvious because the walkthrough hands it to you. Writing the ADR, you have to generate it. These are study analysis, not engagements I delivered.
 
 ## The framework
 
@@ -26,9 +28,11 @@ Two checks run before any of it counts as finished.
 
 The mechanism test is the gate. A commitment that names a managed service with built-in enforcement needs less elaboration than one that names a custom process.
 
+The framework above governs cases 1 to 4. The ISSAP scenarios use the ADR shape instead (context, decision, alternatives, consequences), because that is the format the exercise was worth doing in.
+
 ## Bank profile
 
-All four cases concern the same illustrative regional US bank. One population, one jurisdiction, one derivation method, so the money figures can be compared across cases instead of each being invented locally.
+Cases 1 to 4 concern the same illustrative regional US bank. One population, one jurisdiction, one derivation method, so the money figures can be compared across cases instead of each being invented locally.
 
 - **Customer base:** ~250,000 retail customers
 - **Card portfolio:** ~150,000 active debit and credit cards
@@ -44,7 +48,7 @@ BankVault and the JIT Access Broker are private reference builds for privileged 
 
 ## Principles distilled
 
-What the four cases have in common, stated once so each case does not have to argue it again.
+What cases 1 to 4 have in common, stated once so each case does not have to argue it again.
 
 - **Frame before components.** The first product name appears only after scope, constraints, boundaries and assumptions are on the table.
 - **Decisions come with rejected alternatives attached.** An answer without a rejected alternative is a preference, not a decision.
@@ -58,3 +62,13 @@ What the four cases have in common, stated once so each case does not have to ar
 - **Define what invalidates the decision.** Reversal triggers that supersede rather than patch, each tied to a verifiable condition and a deadline.
 - **Define what proves it.** Acceptance criteria that test the degraded case, not the happy path: rotate-and-revoke, outage survival, recovery after intervention, DR promotion, load with a thundering herd.
 - **Know when to stop.** The one-pager is the real test of clarity.
+
+## What ran across the ISSAP five
+
+Three patterns showed up in all five, and they were not the patterns the walkthroughs advertised.
+
+The wrong answer in every scenario was a single thing asked to do a whole job. One firewall. One framework. One deletion command. One document. One procedure. The right answer was always a structure.
+
+Evidence kept turning out to be the real deliverable. Erasure you can prove. A plan you can demonstrate. A notification backed by logs you would stand behind. That is the difference between security and security theatre.
+
+Every scenario had a timing trap. Erasure has to be designed before the data lands. The DR plan has to be tested before the disaster. Detection has to exist before the clock starts. Architecture is mostly the discipline of doing things earlier than they feel necessary.
