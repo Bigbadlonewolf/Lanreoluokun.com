@@ -1,10 +1,10 @@
 baseURL = "https://bigbadlonewolf.github.io/Lanreoluokun.com/"
 locale = "en-us"
-title = "Enterprise Security Architect"
+title = "Cybersecurity Architect"
 
 [params]
   name = "Lanre Oluokun"
-  role = "Enterprise Security Architect"
+  role = "Cybersecurity Architect"
   tagline = "I design security controls that fail closed. In banking, a control that fails open under stress is a control with a documented bypass, so I write down every assumption before I defend it out loud."
   github = "https://github.com/Bigbadlonewolf"
   linkedin = "https://linkedin.com/in/lanre-oluokun-04256040"

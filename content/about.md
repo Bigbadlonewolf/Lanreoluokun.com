@@ -3,10 +3,10 @@ title: "About"
 recordID: "REC-000"
 status: "Accepted"
 date: 2026-07-03
-summary: "Enterprise Security Architect, regulated financial services. One year in an architecture-titled role at ATBOD, ongoing scenario-based architecture training, plus a decade in retail banking and a logistics business in Lagos."
+summary: "Cybersecurity Architect, regulated financial services. One year in an architecture-titled role at ATBOD, ongoing scenario-based architecture training, plus a decade in retail banking and a logistics business in Lagos."
 ---
 
-**Enterprise Security Architect · Regulated Financial Services · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
+**Cybersecurity Architect · Regulated Financial Services · CISSP, CCSP, CISM, ISSAP, GCP-PCA**
 
 New York, NY · Open to Remote
 
